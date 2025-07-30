@@ -2,18 +2,18 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
 
   const navigation = [
-    { name: 'Home', href: '/' },
     { name: 'Inventory', href: '/inventory' },
+    { name: 'About', href: '/about' },
     { name: 'Financing', href: '/financing' },
     { name: 'Trade-In', href: '/trade-in' },
-    { name: 'About', href: '/about' },
+    { name: 'Warranty', href: '/warranty' },
     { name: 'Contact', href: '/contact' },
-    { name: 'Blog', href: '/blog' },
   ]
 
   return (
@@ -23,14 +23,7 @@ export default function Header() {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center">
-              <div className="w-8 h-8 md:w-10 md:h-10 bg-primary rounded-lg flex items-center justify-center mr-3">
-                <svg className="w-5 h-5 md:w-6 md:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <span className="text-xl md:text-2xl font-heading font-bold text-primary">
-                SF Legacy Autos
-              </span>
+              <Image src="/logo.png" alt="SF Legacy Autos" width={100} height={100} />
             </Link>
           </div>
 
@@ -47,22 +40,22 @@ export default function Header() {
             ))}
           </nav>
 
-          {/* Phone Number & CTA */}
+          {/* Phone Number & Test Drive CTA */}
           <div className="hidden md:flex items-center space-x-4">
             <a 
-              href="tel:+14155550123" 
+              href="tel:+19057494061" 
               className="flex items-center text-primary font-semibold text-base hover:text-primary/80 transition-colors duration-200"
             >
               <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                 <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
               </svg>
-              (415) 555-0123
+              (905) 749-4061
             </a>
             <Link
-              href="#contact"
-              className="bg-accent text-white px-4 py-2 md:px-6 md:py-3 rounded-lg font-heading font-semibold text-sm md:text-base hover:bg-accent/90 transition-all duration-200 shadow-md hover:shadow-lg"
+              href="/book-test-drive"
+              className="bg-accent text-primary px-4 py-2 md:px-6 md:py-3 rounded-lg font-heading font-semibold text-sm md:text-base hover:bg-accent/90 transition-all duration-200 shadow-md hover:shadow-lg"
             >
-              Schedule Test Drive
+              Test Drive
             </Link>
           </div>
 
@@ -101,20 +94,20 @@ export default function Header() {
               ))}
               <div className="px-3 py-4 border-t border-gray-200 mt-4">
                 <a 
-                  href="tel:+14155550123" 
+                  href="tel:+19057494061" 
                   className="flex items-center text-primary font-semibold text-base mb-3"
                 >
                   <svg className="w-4 h-4 mr-2" fill="currentColor" viewBox="0 0 20 20">
                     <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                   </svg>
-                  (415) 555-0123
+                  (905) 749-4061
                 </a>
                 <Link
-                  href="#contact"
-                  className="block text-center bg-accent text-white px-4 py-3 rounded-lg font-heading font-semibold text-base hover:bg-accent/90 transition-all duration-200"
+                  href="/book-test-drive"
+                  className="block text-center bg-accent text-primary px-4 py-3 rounded-lg font-heading font-semibold text-base hover:bg-accent/90 transition-all duration-200"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Schedule Test Drive
+                  Test Drive
                 </Link>
               </div>
             </div>
