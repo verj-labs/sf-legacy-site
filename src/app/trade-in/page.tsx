@@ -1,9 +1,8 @@
 import Link from 'next/link'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import TradeInForm from '@/components/TradeInForm'
 import ScrollToFormButton from '@/components/ScrollToFormButton'
-import CTABanner from '@/components/CTABanner'
+import PageStartBanner from '@/components/PageStartBanner'
+import PageEndBanner from '@/components/PageEndBanner'
 
 export default function TradeInPage() {
   const benefits = [
@@ -47,76 +46,64 @@ export default function TradeInPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex items-center text-sm text-white/80 justify-center mb-4">
-              <Link href="/" className="hover:text-white">Home</Link>
-              <span className="mx-2">/</span>
-              <span>Trade-In</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              Get Your Trade-In Quote
-            </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8">
-              Turn your current vehicle into cash or credit toward your next purchase. 
-              Get an instant estimate with our easy online valuation tool.
-            </p>
-            <ScrollToFormButton />
-          </div>
-        </div>
-      </section>
+      {/* Page Start Banner */}
+      <PageStartBanner
+        title="Get Your Trade-In Quote"
+        description="Turn your current vehicle into cash or credit toward your next purchase. Get an instant estimate with our easy online valuation tool."
+      >
+        <ScrollToFormButton />
+      </PageStartBanner>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         {/* Benefits */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
+        <section className="mb-16">
+          <div className="text-center mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-3">
               Why Trade With Us?
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              We make trading in your vehicle simple, fast, and rewarding.
+            <p className="text-sm text-gray-600 max-w-2xl mx-auto">
+              Simple, fast, and rewarding vehicle trade-ins.
             </p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {benefits.map((benefit, index) => (
-              <div key={index} className="text-center">
-                <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 hover:shadow-lg transition-shadow">
-                  <div className="flex justify-center mb-4">
-                    {benefit.icon}
-                  </div>
-                  <h3 className="text-lg font-heading font-semibold text-gray-900 mb-2">
-                    {benefit.title}
-                  </h3>
-                  <p className="text-gray-600 text-sm">
-                    {benefit.description}
-                  </p>
-                </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3">
+            {benefits.map((benefit, idx) => (
+              <div
+                key={idx}
+                className="flex flex-col items-center bg-white rounded-lg border border-gray-200 p-4 text-center hover:border-gray-300 transition-colors"
+              >
+                <div className="mb-2">{benefit.icon}</div>
+                <div className="font-medium text-gray-900 text-sm mb-1">{benefit.title}</div>
+                <div className="text-gray-500 text-xs leading-relaxed">{benefit.description}</div>
               </div>
             ))}
           </div>
         </section>
 
         {/* Valuation Form */}
-        <section id="valuation-form" className="mb-20">
+        <section id="valuation-form" className="mb-16">
+          <div className="text-center mb-8">
+            <h2 className="!text-2xl md:text-4xl font-heading font-bold text-gray-900 mb-3">
+              Get Your Vehicle Quote
+            </h2>
+            <p className="text-md text-gray-600 max-w-2xl mx-auto">
+              Fill out our simple form to get an instant estimate of your vehicle's trade-in value.
+            </p>
+          </div>
           <TradeInForm />
         </section>
 
         {/* FAQ Section */}
         <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
+          <div className="text-center mb-8">
+            <h2 className="!text-2xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
               Trade-In FAQ
             </h2>
           </div>
 
           <div className="bg-white rounded-lg border border-gray-200 shadow-sm divide-y divide-gray-200">
             <details className="p-6">
-              <summary className="font-medium text-gray-900 cursor-pointer">
+              <summary className="font-medium text-gray-900 cursor-pointer hover:text-primary transition-colors">
                 How accurate is the online estimate?
               </summary>
               <p className="mt-3 text-gray-600">
@@ -126,7 +113,7 @@ export default function TradeInPage() {
             </details>
             
             <details className="p-6">
-              <summary className="font-medium text-gray-900 cursor-pointer">
+              <summary className="font-medium text-gray-900 cursor-pointer hover:text-primary transition-colors">
                 What documents do I need to bring?
               </summary>
               <p className="mt-3 text-gray-600">
@@ -136,7 +123,7 @@ export default function TradeInPage() {
             </details>
             
             <details className="p-6">
-              <summary className="font-medium text-gray-900 cursor-pointer">
+              <summary className="font-medium text-gray-900 cursor-pointer hover:text-primary transition-colors">
                 Do I have to buy a car to trade in my vehicle?
               </summary>
               <p className="mt-3 text-gray-600">
@@ -146,7 +133,7 @@ export default function TradeInPage() {
             </details>
             
             <details className="p-6">
-              <summary className="font-medium text-gray-900 cursor-pointer">
+              <summary className="font-medium text-gray-900 cursor-pointer hover:text-primary transition-colors">
                 How long does the trade-in process take?
               </summary>
               <p className="mt-3 text-gray-600">
@@ -157,14 +144,12 @@ export default function TradeInPage() {
           </div>
         </section>
 
-        {/* CTA Section */}
-        <CTABanner 
+        {/* Page End Banner */}
+        <PageEndBanner 
           title="Ready for Your Next Vehicle?"
-          description="Browse our inventory of quality vehicles or schedule a test drive today."
+          body="Browse our inventory of quality vehicles or schedule a test drive today."
         />
       </div>
-
-      <Footer />
     </div>
   )
 }

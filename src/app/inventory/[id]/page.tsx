@@ -3,8 +3,6 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
-import Header from "@/components/Header";
-import Footer from "@/components/Footer";
 import TestDriveModal from "@/components/TestDriveModal";
 import { VehicleCardSkeleton } from "@/components/Skeleton";
 import { Vehicle } from "@/types/vehicle";
@@ -82,7 +80,6 @@ export default function VehicleDetailPage() {
   if (loading) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="flex justify-center items-center h-64">
             <div className="text-center">
@@ -91,7 +88,6 @@ export default function VehicleDetailPage() {
             </div>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
@@ -100,7 +96,6 @@ export default function VehicleDetailPage() {
   if (!vehicle) {
     return (
       <div className="min-h-screen bg-gray-50">
-        <Header />
         <div className="container mx-auto px-4 py-8">
           <div className="text-center py-12">
             <h1 className="text-2xl font-bold text-gray-900 mb-4">
@@ -117,15 +112,12 @@ export default function VehicleDetailPage() {
             </Link>
           </div>
         </div>
-        <Footer />
       </div>
     );
   }
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Breadcrumb */}
         <div className="flex items-center text-sm text-gray-500 mb-6">
@@ -510,7 +502,7 @@ export default function VehicleDetailPage() {
                 </div>
 
                 <div className="space-y-3">
-                  <button 
+                  <button
                     onClick={() => setShowTestDriveModal(true)}
                     className="w-full bg-primary text-white py-3 px-4 rounded-lg font-medium hover:bg-primary/90 transition-colors"
                   >
@@ -679,8 +671,6 @@ export default function VehicleDetailPage() {
           </div>
         </div>
       </div>
-
-      <Footer />
 
       {/* Test Drive Modal */}
       <TestDriveModal

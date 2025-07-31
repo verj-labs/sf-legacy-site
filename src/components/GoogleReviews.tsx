@@ -1,6 +1,6 @@
 export default function GoogleReviews() {
   return (
-    <section className="py-16 bg-gray-50">
+    <section className="section-padding bg-muted">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
@@ -57,7 +57,7 @@ export default function GoogleReviews() {
         {/* View More Reviews Button */}
         <div className="text-center mt-8">
           <a
-            href="https://google.com/search?q=sf+legacy+motors+reviews"
+            href="https://www.google.com/search?q=sf+legacy+motors+reviews#lrd=0x882ca33cd7843359:0xb2180d8bddf3f791,1,,,,"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors"

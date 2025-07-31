@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Ubuntu, Nunito } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 const ubuntu = Ubuntu({
   variable: "--font-ubuntu",
@@ -31,7 +33,11 @@ export default function RootLayout({
       <body
         className={`${ubuntu.variable} ${nunito.variable} antialiased`}
       >
-        {children}
+        <Header />
+        <main className="min-h-screen">
+          {children}
+        </main>
+        <Footer />
       </body>
     </html>
   );

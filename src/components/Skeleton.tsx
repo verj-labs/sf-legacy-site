@@ -29,19 +29,33 @@ export default function Skeleton({
 // Specific skeleton components for common use cases
 export function VehicleCardSkeleton() {
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
-      {/* Image skeleton */}
-      <Skeleton height="h-48" className="rounded-none" />
+    <div className="card">
+      {/* Image skeleton - matching card__image aspect ratio */}
+      <div className="card__image bg-surface-muted animate-pulse rounded-t-lg" />
       
       {/* Content skeleton */}
-      <div className="p-4 space-y-3">
+      <div className="p-6 space-y-4">
         {/* Title */}
-        <Skeleton height="h-5" width="w-3/4" />
+        <Skeleton height="h-6" width="w-3/4" />
         
-        {/* Price and mileage */}
-        <div className="flex items-center justify-between">
-          <Skeleton height="h-6" width="w-20" />
-          <Skeleton height="h-4" width="w-24" />
+        {/* Meta line */}
+        <Skeleton height="h-4" width="w-1/2" />
+        
+        {/* Price */}
+        <Skeleton height="h-7" width="w-24" />
+        
+        {/* Chips */}
+        <div className="flex flex-wrap gap-2">
+          <Skeleton height="h-6" width="w-12" className="rounded-full" />
+          <Skeleton height="h-6" width="w-16" className="rounded-full" />
+          <Skeleton height="h-6" width="w-14" className="rounded-full" />
+          <Skeleton height="h-6" width="w-10" className="rounded-full" />
+        </div>
+        
+        {/* Buttons */}
+        <div className="grid grid-cols-2 gap-3">
+          <Skeleton height="h-10" className="rounded-md" />
+          <Skeleton height="h-10" className="rounded-md" />
         </div>
       </div>
     </div>

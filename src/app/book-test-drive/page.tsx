@@ -1,7 +1,8 @@
 import Link from 'next/link'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import PageStartBanner from '@/components/PageStartBanner'
+import PageEndBanner from '@/components/PageEndBanner'
 import TestDriveFlow from '@/components/TestDriveFlow'
+import Chip from '@/components/Chip'
 
 export const metadata = {
   title: 'Book a Test Drive - SF Legacy Autos',
@@ -11,32 +12,28 @@ export const metadata = {
 export default function BookTestDrive() {
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex items-center text-sm text-white/80 justify-center mb-4">
-              <Link href="/" className="hover:text-white">Home</Link>
-              <span className="mx-2">/</span>
-              <span>Test Drive</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              Book a Test Drive
-            </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              Experience your future car in person—schedule a test drive today. 
-              Nothing beats getting behind the wheel to see how a vehicle feels and performs.
-            </p>
-          </div>
+      {/* Page Start Banner */}
+      <PageStartBanner
+        title="Book a Test Drive"
+        description="Experience your future car in person—schedule a test drive today. Nothing beats getting behind the wheel to see how a vehicle feels and performs."
+      >
+        <div className="flex flex-wrap gap-3 justify-center">
+          <Chip variant="overlay">Free Test Drive</Chip>
+          <Chip variant="overlay">Expert Guidance</Chip>
+          <Chip variant="overlay">No Commitment</Chip>
         </div>
-      </section>
+      </PageStartBanner>
 
       {/* Test Drive Flow Component */}
       <TestDriveFlow />
 
-      <Footer />
+      {/* End Banner */}
+      <div className="section-padding bg-background-muted">
+        <PageEndBanner
+          title="Ready to Find Your Perfect Vehicle?"
+          body="Browse our inventory of quality used cars and schedule your test drive today. Our team is here to help you every step of the way."
+        />
+      </div>
     </div>
   )
 }

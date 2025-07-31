@@ -2,8 +2,6 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -128,8 +126,6 @@ export default function BlogPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-      
       {/* Hero Section */}
       <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -343,8 +339,6 @@ export default function BlogPage() {
           </div>
         </section>
       </div>
-
-      <Footer />
     </div>
   )
 }

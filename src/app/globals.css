@@ -4,17 +4,73 @@
 
 @layer base {
   :root {
-    /* SF Legacy Motors Color Palette */
-    --primary: #2F3C7E;        /* Deep royal blue */
-    --secondary: #F5F5F5;      /* Cool gray */
-    --accent: #F4A261;         /* Warm gold/amber */
-    --text-primary: #212529;   /* Dark slate */
-    --background: #FAFAFA;     /* Soft off-white */
-    --white: #ffffff;
-    
+    /* Design System Colors from STYLE.md */
+    --c-bg: #FFFFFF;
+    --c-bg-muted: #E2E8F0;
+    --c-surface: #FFFFFF;
+    --c-surface-muted: #CBD5E1;
+    --c-border: #E5E7EB;
+    --c-ink: #0B1020;
+    --c-body: #1F2937;
+
+    --c-primary: #2563EB;
+    --c-primary-600: #2563EB;
+    --c-primary-800: #1E40AF;
+
+    --c-accent: #FF6B2C;
+    --c-support: #14B8A6;
+
+    --c-success: #16A34A;
+    --c-warning: #F59E0B;
+    --c-error: #DC2626;
+    --c-info: #0EA5E9;
+
+    /* Gradients */
+    --g-brand: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
+    --g-perf: linear-gradient(135deg, #2563EB 0%, #22D3EE 100%);
+    --g-action: linear-gradient(135deg, #FF6B2C 0%, #F59E0B 100%);
+
+    /* Radii */
+    --r-sm: 8px; 
+    --r-md: 12px; 
+    --r-lg: 16px; 
+    --r-pill: 9999px;
+
+    /* Shadows */
+    --sh-xs: 0 1px 2px rgba(0,0,0,.06);
+    --sh-sm: 0 2px 6px rgba(0,0,0,.08);
+    --sh-md: 0 6px 18px rgba(0,0,0,.10);
+    --sh-lg: 0 12px 32px rgba(0,0,0,.12);
+
+    /* Spacing (4px base) */
+    --sp-1: 4px; --sp-2: 8px; --sp-3: 12px; --sp-4: 16px;
+    --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+    --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px; --sp-32: 128px;
+
     /* Typography */
-    --font-heading: var(--font-ubuntu);
-    --font-body: var(--font-nunito);
+    --font-heading: "Ubuntu", system-ui, sans-serif;
+    --font-body: "Nunito", system-ui, sans-serif;
+
+    --h1-size: 48px; --h1-lh: 56px; --h1-ls: -0.5px;
+    --h2-size: 36px; --h2-lh: 44px; --h2-ls: -0.25px;
+    --h3-size: 28px; --h3-lh: 36px;
+    --h4-size: 22px; --h4-lh: 30px;
+
+    --body-m-size: 16px; --body-m-lh: 26px;
+    --body-l-size: 18px; --body-l-lh: 28px;
+    --body-s-size: 14px; --body-s-lh: 22px;
+
+    /* Motion */
+    --easing-standard: cubic-bezier(.2,.8,.2,1);
+    --dur-fast: 150ms; --dur-med: 250ms; --dur-slow: 400ms;
+
+    /* Legacy variables for compatibility */
+    --primary: #2563EB;
+    --secondary: #F5F5F5;
+    --accent: #FF6B2C;
+    --text-primary: #0B1020;
+    --background: #FFFFFF;
+    --white: #ffffff;
   }
 
   * {
@@ -24,86 +80,61 @@
   }
 
   body {
-    background-color: #FAFAFA;
-    color: #212529;
-    font-family: var(--font-nunito), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    line-height: 1.6;
+    background-color: var(--c-bg);
+    color: var(--c-ink);
+    font-family: var(--font-body);
+    font-size: var(--body-m-size);
+    line-height: var(--body-m-lh);
     font-weight: 400;
   }
 
   h1, h2, h3, h4, h5, h6 {
-    font-family: var(--font-ubuntu), -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-    font-weight: 700;
-    line-height: 1.3;
+    font-family: var(--font-heading);
+    color: var(--c-ink);
     margin-bottom: 0.75rem;
-    letter-spacing: -0.025em;
-    color: #212529;
   }
-}
 
-h1 {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1.5rem;
-}
-
-h2 {
-  font-size: 2rem;
-  font-weight: 700;
-  margin-bottom: 1.25rem;
-}
-
-h3 {
-  font-size: 1.5rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-h4 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
-}
-
-h5 {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-h6 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-}
-
-p {
-  margin-bottom: 1rem;
-  line-height: 1.7;
-}
-
-/* Responsive typography */
-@media (min-width: 768px) {
   h1 {
-    font-size: 3rem;
+    font-size: var(--h1-size);
+    line-height: var(--h1-lh);
+    letter-spacing: var(--h1-ls);
+    font-weight: 700;
   }
-  h2 {
-    font-size: 2.25rem;
-  }
-  h3 {
-    font-size: 1.75rem;
-  }
-}
 
-@media (min-width: 1024px) {
-  h1 {
-    font-size: 3.75rem;
-  }
   h2 {
-    font-size: 2.75rem;
+    font-size: var(--h2-size);
+    line-height: var(--h2-lh);
+    letter-spacing: var(--h2-ls);
+    font-weight: 700;
   }
+
   h3 {
-    font-size: 2rem;
+    font-size: var(--h3-size);
+    line-height: var(--h3-lh);
+    font-weight: 700;
+  }
+
+  h4 {
+    font-size: var(--h4-size);
+    line-height: var(--h4-lh);
+    font-weight: 600;
+  }
+
+  p {
+    font-size: var(--body-m-size);
+    line-height: var(--body-m-lh);
+    color: var(--c-body);
+    margin-bottom: 1rem;
+  }
+
+  a {
+    color: var(--c-primary);
+    text-decoration: none;
+    transition: color var(--dur-fast) var(--easing-standard);
+  }
+
+  a:hover {
+    text-decoration: underline;
   }
 }
 
@@ -113,20 +144,217 @@ html {
 }
 
 /* Focus styles for accessibility */
-*:focus {
-  outline: 2px solid var(--accent);
+*:focus-visible {
+  outline: 2px solid var(--c-primary);
   outline-offset: 2px;
+  border-radius: 2px;
 }
 
 /* Container spacing utilities */
 .section-padding {
-  padding-top: 5rem;
-  padding-bottom: 5rem;
+  padding-top: var(--sp-20);
+  padding-bottom: var(--sp-20);
+  padding-left: var(--sp-4);
+  padding-right: var(--sp-4);
+}
+
+@media (min-width: 640px) {
+  .section-padding {
+    padding-left: var(--sp-6);
+    padding-right: var(--sp-6);
+  }
 }
 
 @media (min-width: 1024px) {
   .section-padding {
-    padding-top: 6rem;
-    padding-bottom: 6rem;
+    padding-top: var(--sp-32);
+    padding-bottom: var(--sp-32);
+    padding-left: var(--sp-8);
+    padding-right: var(--sp-8);
+  }
+}
+
+@layer components {
+  /* Primary Button - From Style Guide */
+  .btn-primary {
+    font: 600 var(--body-m-size)/var(--body-m-lh) var(--font-body);
+    color: #fff;
+    background: var(--c-primary);
+    padding: 12px 20px;
+    border-radius: var(--r-md);
+    box-shadow: var(--sh-sm);
+    border: none;
+    cursor: pointer;
+    transition: transform var(--dur-fast) var(--easing-standard),
+                box-shadow var(--dur-fast) var(--easing-standard),
+                background var(--dur-fast) var(--easing-standard);
+  }
+
+  .btn-primary:hover {
+    background: var(--c-primary-800);
+    box-shadow: var(--sh-md);
+    transform: translateY(-1px);
+  }
+
+  .btn-primary:active {
+    transform: translateY(0);
+    box-shadow: var(--sh-sm);
+  }
+
+  .btn-primary:focus-visible {
+    outline: 2px solid transparent;
+    box-shadow: 0 0 0 3px rgba(37,99,235,.35);
+  }
+
+  /* Secondary Button - Outline Style */
+  .btn-secondary {
+    font: 600 var(--body-m-size)/var(--body-m-lh) var(--font-body);
+    color: var(--c-primary);
+    background: transparent;
+    border: 2px solid var(--c-primary);
+    padding: 10px 18px;
+    border-radius: var(--r-md);
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--easing-standard),
+                color var(--dur-fast) var(--easing-standard);
+  }
+
+  .btn-secondary:hover {
+    background: rgba(37,99,235,0.05);
+  }
+
+  /* Tertiary Button - Ghost Style */
+  .btn-tertiary {
+    font: 600 var(--body-m-size)/var(--body-m-lh) var(--font-body);
+    color: var(--c-primary);
+    background: transparent;
+    border: none;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: text-decoration var(--dur-fast) var(--easing-standard);
+  }
+
+  .btn-tertiary:hover {
+    text-decoration: underline;
+  }
+
+  /* Card Component */
+  .card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    box-shadow: var(--sh-xs);
+    overflow: hidden;
+    transition: transform var(--dur-med) var(--easing-standard), 
+                box-shadow var(--dur-med) var(--easing-standard);
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sh-md);
+  }
+
+  .card__image {
+    display: block;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+    width: 100%;
+  }
+
+  .card__title {
+    font: 700 var(--h4-size)/var(--h4-lh) var(--font-heading);
+    color: var(--c-ink);
+  }
+
+  .card__meta {
+    font: 600 var(--body-s-size)/var(--body-s-lh) var(--font-body);
+    color: #6B7280;
+  }
+
+  .card__price {
+    font: 700 22px/30px var(--font-heading);
+    color: var(--c-ink);
+  }
+
+  /* Filter Chip */
+  .chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--c-surface-muted);
+    border: 1px solid var(--c-border);
+    padding: 8px 12px;
+    border-radius: var(--r-pill);
+    font: 600 var(--body-s-size)/var(--body-s-lh) var(--font-body);
+    color: var(--c-body);
+    cursor: pointer;
+    transition: all var(--dur-fast) var(--easing-standard);
+  }
+
+  .chip--active {
+    background: #EFF6FF;
+    border-color: var(--c-primary);
+    color: var(--c-primary);
+  }
+
+  /* Form Elements */
+  .input {
+    border-radius: var(--r-sm);
+    border: 1px solid var(--c-border);
+    padding: 12px 16px;
+    font: 400 var(--body-m-size)/var(--body-m-lh) var(--font-body);
+    transition: border-color var(--dur-fast) var(--easing-standard),
+                box-shadow var(--dur-fast) var(--easing-standard);
+  }
+
+  .input:focus {
+    outline: none;
+    border-color: var(--c-primary);
+    box-shadow: 0 0 0 2px rgba(37,99,235,0.2);
+  }
+
+  .label {
+    font: 600 var(--body-s-size)/var(--body-s-lh) var(--font-body);
+    color: #374151;
+    margin-bottom: 4px;
+    display: block;
+  }
+
+  /* Badges */
+  .badge-new {
+    background: rgba(255,107,44,0.1);
+    color: var(--c-accent);
+    padding: 4px 8px;
+    border-radius: var(--r-pill);
+    font: 600 var(--body-s-size)/var(--body-s-lh) var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-certified {
+    background: rgba(20,184,166,0.1);
+    color: var(--c-support);
+    padding: 4px 8px;
+    border-radius: var(--r-pill);
+    font: 600 var(--body-s-size)/var(--body-s-lh) var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  .badge-sold {
+    background: var(--c-surface-muted);
+    color: rgba(31,41,55,0.7);
+    padding: 4px 8px;
+    border-radius: var(--r-pill);
+    font: 600 var(--body-s-size)/var(--body-s-lh) var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+
+  /* Typography Utilities */
+  .text-ui-meta {
+    font: 600 12px/16px var(--font-body);
+    text-transform: uppercase;
+    letter-spacing: 0.6px;
   }
 }

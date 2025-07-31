@@ -1,8 +1,7 @@
 import Link from 'next/link'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
 import ContactForm from '@/components/ContactForm'
-import CTABanner from '@/components/CTABanner'
+import PageStartBanner from '@/components/PageStartBanner'
+import PageEndBanner from '@/components/PageEndBanner'
 
 export default function ContactPage() {
   const contactMethods = [
@@ -32,87 +31,78 @@ export default function ContactPage() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-      
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-primary to-primary/80 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <div className="flex items-center text-sm text-white/80 justify-center mb-4">
-              <Link href="/" className="hover:text-white">Home</Link>
-              <span className="mx-2">/</span>
-              <span>Contact</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-heading font-bold mb-6">
-              Get In Touch
-            </h1>
-            <p className="text-xl text-white/90 max-w-3xl mx-auto">
-              We're here to help you find your perfect vehicle. Contact us today to learn more 
-              about our inventory, financing options, or to schedule a test drive.
-            </p>
-          </div>
-        </div>
-      </section>
+      {/* Page Start Banner */}
+      <PageStartBanner
+        title="Get In Touch"
+        description="We're here to help you find your perfect vehicle. Contact us today to learn more about our inventory, financing options, or to schedule a test drive."
+      >
+        <a 
+          href="tel:+19057494061"
+          className="inline-flex items-center bg-white text-primary px-8 py-3 rounded-lg font-medium hover:bg-gray-100 transition-colors"
+        >
+          Call (905) 749-4061
+        </a>
+      </PageStartBanner>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Contact Methods */}
-        <section className="mb-20">
-          <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
-              How to Reach Us
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Choose the contact method that works best for you. We're always ready to help!
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {contactMethods.map((method, index) => (
-              <a
-                key={index}
-                href={method.action}
-                className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 text-center hover:shadow-lg transition-all duration-300 hover:border-primary group"
-              >
-                <div className="flex justify-center mb-4">
-                  <div className="p-3 bg-gray-50 rounded-full group-hover:bg-primary/10 transition-colors">
-                    {method.icon}
-                  </div>
-                </div>
-                <h3 className="text-lg font-heading font-semibold text-gray-900 mb-2">
-                  {method.title}
-                </h3>
-                <div className="text-primary font-medium mb-2">
-                  {method.detail}
-                </div>
-                <p className="text-gray-600 text-sm">
-                  {method.description}
-                </p>
-              </a>
-            ))}
-          </div>
-        </section>
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
-          {/* Contact Form */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          {/* Contact Form - Left Column */}
           <ContactForm />
 
-          {/* Contact Information & Map */}
-          <div className="space-y-8">
+          {/* Contact Information - Right Column */}
+          <div className="space-y-6">
+            {/* Contact Methods */}
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <div className="text-center mb-6">
+                <h2 className="text-lg font-semibold text-gray-900 mb-2">
+                  How to Reach Us
+                </h2>
+                <p className="text-sm text-gray-600">
+                  Choose the contact method that works best for you.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {contactMethods.map((method, index) => (
+                  <a
+                    key={index}
+                    href={method.action}
+                    className="border border-gray-200 rounded-lg p-4 text-center hover:border-gray-300 transition-colors group"
+                  >
+                    <div className="flex justify-center mb-2">
+                      <div className="p-2 bg-gray-50 rounded-full group-hover:bg-primary/10 transition-colors">
+                        {method.icon}
+                      </div>
+                    </div>
+                    <h3 className="text-sm font-semibold text-gray-900 mb-1">
+                      {method.title}
+                    </h3>
+                    <div className="text-primary font-medium mb-1 text-sm">
+                      {method.detail}
+                    </div>
+                    <p className="text-gray-600 text-xs">
+                      {method.description}
+                    </p>
+                  </a>
+                ))}
+              </div>
+            </div>
+
             {/* Location & Hours */}
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8">
-              <h3 className="text-2xl font-heading font-bold text-gray-900 mb-6">
+            <div className="bg-white rounded-lg border border-gray-200 p-6">
+              <h3 className="text-lg font-semibold text-gray-900 mb-4">
                 Visit Our Showroom
               </h3>
               
-              <div className="space-y-6">
+              <div className="space-y-4">
                 <div className="flex items-start">
-                  <svg className="w-6 h-6 text-primary mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                   </svg>
                   <div>
-                    <div className="font-medium text-gray-900 mb-1">Address</div>
-                    <div className="text-gray-600">
+                    <div className="font-medium text-gray-900 text-sm mb-1">Address</div>
+                    <div className="text-gray-600 text-sm">
                       350 Highway #8<br />
                       Stoney Creek, Ontario L8G 1E8
                     </div>
@@ -120,13 +110,13 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start">
-                  <svg className="w-6 h-6 text-primary mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
                   <div>
-                    <div className="font-medium text-gray-900 mb-1">Business Hours</div>
-                    <div className="text-gray-600 space-y-1">
-                      <div>Monday - Friday: 9:00 AM - 6:00 PM</div>
+                    <div className="font-medium text-gray-900 text-sm mb-1">Business Hours</div>
+                    <div className="text-gray-600 text-sm space-y-1">
+                      <div>Mon - Fri: 9:00 AM - 6:00 PM</div>
                       <div>Saturday: 10:00 AM - 5:00 PM</div>
                       <div>Sunday: Closed</div>
                     </div>
@@ -134,38 +124,21 @@ export default function ContactPage() {
                 </div>
 
                 <div className="flex items-start">
-                  <svg className="w-6 h-6 text-primary mr-4 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-5 h-5 text-primary mr-3 mt-1 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
                   </svg>
                   <div>
-                    <div className="font-medium text-gray-900 mb-1">Parking</div>
-                    <div className="text-gray-600">
-                      Free customer parking available on-site
+                    <div className="font-medium text-gray-900 text-sm mb-1">Parking</div>
+                    <div className="text-gray-600 text-sm">
+                      Free customer parking available
                     </div>
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Social Links Skeleton */}
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8">
-              <h3 className="text-2xl font-heading font-bold text-gray-900 mb-6">
-                Follow Us
-              </h3>
-              
-              <div className="flex space-x-4">
-                <div className="w-10 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
-                <div className="w-10 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
-                <div className="w-10 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
-                <div className="w-10 h-10 bg-gray-200 rounded-lg animate-pulse"></div>
-              </div>
-              <p className="text-sm text-gray-500 mt-4">
-                Social media links coming soon
-              </p>
-            </div>
-
             {/* Map */}
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+            <div className="bg-white rounded-lg border border-gray-200 overflow-hidden">
               <div className="aspect-video">
                 <iframe
                   className="w-full h-full"
@@ -180,11 +153,14 @@ export default function ContactPage() {
           </div>
         </div>
 
-        {/* CTA Section */}
-        <CTABanner />
+        {/* Page End Banner with top margin */}
+        <div className="mt-16">
+          <PageEndBanner 
+            title="Ready to Find Your Perfect Vehicle?"
+            body="Browse our inventory of quality vehicles or schedule a test drive today. We're here to help make your car buying experience seamless."
+          />
+        </div>
       </div>
-
-      <Footer />
     </div>
   )
 }
