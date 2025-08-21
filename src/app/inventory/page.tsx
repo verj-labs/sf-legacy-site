@@ -19,6 +19,7 @@ export default function InventoryPage() {
   const [availableMakes, setAvailableMakes] = useState<string[]>([]);
   const [availableBodyTypes, setAvailableBodyTypes] = useState<string[]>([]);
   const [loading, setLoading] = useState(true);
+  const [filtersOpen, setFiltersOpen] = useState(false);
 
   // Filter states
   const [selectedMake, setSelectedMake] = useState<string>("");
@@ -143,7 +144,7 @@ export default function InventoryPage() {
         title="Browse Our Inventory"
         description="Find your perfect vehicle from our extensive collection of quality used cars, trucks, and SUVs."
       >
-        <div className="flex flex-wrap gap-2">
+        <div className="hidden lg:flex flex-wrap gap-2">
           <Chip variant="overlay">
             {vehicles.length} Available
           </Chip>
@@ -157,12 +158,43 @@ export default function InventoryPage() {
       </PageStartBanner>
 
       {/* Main Content */}
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
-        <div className="flex flex-col xl:flex-row gap-8">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-10">
+        <div className="flex flex-col xl:flex-row gap-4 lg:gap-8">
           {/* Filters Sidebar */}
           <div className="xl:w-80 flex-shrink-0">
-            <div className="bg-surface rounded-xl shadow-xs border border-border p-5 sticky top-6">
-              <div className="flex items-center justify-between mb-5">
+            <div className="bg-surface rounded-xl shadow-xs border border-border sticky top-6">
+              {/* Mobile Filter Toggle */}
+              <button
+                onClick={() => setFiltersOpen(!filtersOpen)}
+                className="xl:hidden w-full flex items-center justify-between p-5 border-b border-border hover:bg-surface-muted transition-colors"
+              >
+                <div className="flex items-center gap-2">
+                  <HiAdjustmentsHorizontal className="w-4 h-4 text-brand" />
+                  <h2 className="text-base font-heading font-semibold text-neutral-800 m-0">
+                    Filters ({vehicles.length} vehicles)
+                  </h2>
+                </div>
+                <div className="flex items-center gap-3">
+                  {(selectedMake || selectedBodyType || priceRange[0] > 0 || priceRange[1] < 100000 || mileageRange[0] > 0 || mileageRange[1] < 400000) && (
+                    <span className="bg-brand text-white text-xs px-2 py-1 rounded-full">
+                      Active
+                    </span>
+                  )}
+                  <svg
+                    className={`w-5 h-5 text-body/60 transform transition-transform ${
+                      filtersOpen ? 'rotate-180' : ''
+                    }`}
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </div>
+              </button>
+
+              {/* Desktop Filter Header (Always Visible) */}
+              <div className="hidden xl:flex items-center justify-between p-5 border-b border-border">
                 <div className="flex items-center gap-2">
                   <HiAdjustmentsHorizontal className="w-4 h-4 text-brand" />
                   <h2 className="text-base font-heading font-semibold text-ink m-0">
@@ -178,7 +210,20 @@ export default function InventoryPage() {
                 </button>
               </div>
 
-              <div className="space-y-4">
+              {/* Filter Content - Collapsible on Mobile */}
+              <div className={`${filtersOpen ? 'block' : 'hidden'} xl:block`}>
+                {/* Mobile Clear Button */}
+                <div className="xl:hidden p-5 pb-3 border-b border-border">
+                  <button
+                    onClick={resetFilters}
+                    className="inline-flex items-center gap-1 text-body-sm text-body/70 hover:text-brand font-medium transition-colors"
+                  >
+                    <HiXMark className="w-3.5 h-3.5" />
+                    Clear All Filters
+                  </button>
+                </div>
+
+                <div className="p-5 space-y-4">
                 {/* Make Filter */}
                 <div>
                   <label
@@ -378,6 +423,7 @@ export default function InventoryPage() {
                     </select>
                   </div>
                 </div>
+                </div>
               </div>
             </div>
           </div>
@@ -385,27 +431,32 @@ export default function InventoryPage() {
           {/* Content Area */}
           <div className="flex-1 min-w-0">
             {/* Results Header */}
-            <div className="bg-surface rounded-xl shadow-xs border border-border p-5 mb-6">
-              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+            <div className="bg-surface rounded-xl shadow-xs border border-border p-3 sm:p-5 mb-4 sm:mb-6">
+              <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-0 sm:gap-4">
                 <div>
-                  <h3 className="text-lg font-heading font-semibold text-ink mb-1">
+                  <h3 className="text-base sm:text-lg font-heading font-semibold text-ink mb-0.5 sm:mb-1">
                     {filteredVehicles.length} Vehicle{filteredVehicles.length !== 1 ? "s" : ""} Found
                   </h3>
-                  <p className="text-body-sm text-body/70">
+                  <p className="text-xs sm:text-body-sm text-body/70 mb-2 lg:mb-4 lg:block hidden">
                     Showing {filteredVehicles.length > 0 ? "1" : "0"}–{filteredVehicles.length} of {vehicles.length} total
                   </p>
                 </div>
 
-                <div className="flex items-center gap-3">
-                  <label htmlFor="sort" className="text-body-sm font-medium text-ink">
+                <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+                  <label htmlFor="sort" className="text-xs sm:text-body-sm font-medium text-ink whitespace-nowrap">
                     Sort by:
                   </label>
                   <select
                     id="sort"
                     value={sortBy}
                     onChange={(e) => setSortBy(e.target.value)}
-                    className="border border-border rounded-lg px-3 py-2 text-body-sm bg-surface focus:ring-2 focus:ring-brand/20 focus:border-brand transition-colors"
+                    className="flex-1 sm:flex-none border border-border rounded-lg px-2 sm:px-3 py-1.5 sm:py-2 text-xs sm:text-body-sm bg-surface focus:ring-2 focus:ring-brand/20 focus:border-brand transition-colors"
                   >
+                    <option value="year-desc">Newest First</option>
+                    <option value="year-asc">Oldest First</option>
+                    <option value="price-asc">Price: Low to High</option>
+                    <option value="price-desc">Price: High to Low</option>
+                    <option value="mileage-asc">Lowest Mileage</option>
                     <option value="year-desc">Newest First</option>
                     <option value="year-asc">Oldest First</option>
                     <option value="price-asc">Price: Low to High</option>

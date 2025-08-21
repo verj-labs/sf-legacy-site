@@ -41,7 +41,7 @@ export default function SatisfactionGuarantee() {
   return (
     <section className="section-padding relative">
       <div className="pointer-events-none absolute inset-0 bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100" />
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
         <div className="text-center flex flex-col items-center gap-2">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand text-white text-xs font-medium tracking-wide shadow-sm">
             <HiUserGroup className="w-4 h-4" /> Trusted by Drivers

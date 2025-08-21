@@ -41,7 +41,7 @@ export default function AboutPage() {
         description="Premier auto dealership serving Ontario with transparency, quality vehicles, and unparalleled customer service."
       />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-16">
         {/* Company Story */}
         <section className="mb-20">
           <div className="bg-surface rounded-2xl shadow-xs border border-border p-8 md:p-12">

@@ -7,7 +7,7 @@ export default function GoogleReviews() {
   return (
     <section className="section-padding bg-gradient-to-br from-neutral-200 via-neutral-100 to-neutral-200">
       {/* <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 pointer-events-none" /> */}
-      <div className="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center mb-10">
           <div className="text-center flex flex-col items-center gap-2">

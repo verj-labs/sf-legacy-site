@@ -159,6 +159,10 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
     }
   };
 
+  const isStepComplete = () => {
+    return canProceedToNext()
+  }
+
   const makes = [
     "Toyota",
     "Honda",
@@ -179,10 +183,58 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
   );
 
   return (
-    <div className="max-w-6xl mx-auto px-4">
+    <div className="max-w-6xl mx-auto lg:px-4">
+      {/* Mobile Horizontal Stepper */}
+      <div className="lg:hidden mb-6">
+        <div className="bg-white rounded-xl border border-gray-200 p-4">
+          <div className="flex items-center justify-between mb-4">
+            {[1, 2, 3].map((step) => (
+              <div key={step} className="flex items-center">
+                <div className="flex items-center">
+                  <div
+                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
+                      currentStep === step
+                        ? 'bg-gray-900 text-white'
+                        : currentStep > step
+                        ? 'bg-green-500 text-white'
+                        : 'bg-gray-200 text-gray-600'
+                    }`}
+                  >
+                    {currentStep > step ? (
+                      <HiOutlineCheckCircle className="w-4 h-4" />
+                    ) : (
+                      step
+                    )}
+                  </div>
+                  <div className="ml-2 hidden sm:block">
+                    <p className={`text-xs font-medium ${currentStep >= step ? 'text-gray-900' : 'text-gray-500'}`}>
+                      {step === 1 && 'Vehicle'}
+                      {step === 2 && 'Contact'}
+                      {step === 3 && 'Quote'}
+                    </p>
+                  </div>
+                </div>
+                {step < 3 && (
+                  <div className={`w-8 sm:w-12 h-0.5 mx-2 ${currentStep > step ? 'bg-green-500' : 'bg-gray-200'}`} />
+                )}
+              </div>
+            ))}
+          </div>
+          <div className="bg-gray-200 rounded-full h-2">
+            <div
+              className="bg-gray-900 h-2 rounded-full transition-all duration-300"
+              style={{ width: `${(currentStep / 3) * 100}%` }}
+            />
+          </div>
+          <p className="text-xs text-gray-600 mt-2 text-center">
+            Step {currentStep} of 3
+          </p>
+        </div>
+      </div>
+
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        {/* Vertical Stepper Sidebar */}
-        <div className="lg:col-span-1">
+        {/* Desktop Vertical Stepper Sidebar */}
+        <div className="hidden lg:block lg:col-span-1">
           <div className="sticky top-8">
             <h2 className="text-xl font-heading font-bold text-ink mb-6">
               Trade-In Progress
@@ -338,18 +390,18 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
         </div>
 
         {/* Main Form Content */}
-        <div className="lg:col-span-3">
+        <div className="col-span-1 lg:col-span-3">
           <div className="bg-surface rounded-xl border border-border shadow-xs">
             {/* Form Header */}
-            <div className="px-6 py-4 border-b border-border bg-neutral-50 rounded-t-xl">
+            <div className="px-4 sm:px-6 py-4 border-b border-border bg-neutral-50 rounded-t-xl">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-lg font-heading font-semibold text-ink">
+                  <h1 className="text-base sm:text-lg font-heading font-semibold text-ink">
                     {currentStep === 1 && "Vehicle Information"}
-                    {currentStep === 2 && "Contact Information"}
+                    {currentStep === 2 && "Contact Information"}  
                     {currentStep === 3 && "Your Quote"}
                   </h1>
-                  <p className="text-sm text-body/80 mt-1">
+                  <p className="text-xs sm:text-sm text-body/80 mt-1">
                     {currentStep === 1 &&
                       "Tell us about your vehicle to get started"}
                     {currentStep === 2 &&
@@ -369,10 +421,10 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
             </div>
 
             {/* Form Content */}
-            <div className="p-6">
+            <div className="p-4 sm:p-6">
               {/* Step 1: Vehicle Information */}
               {currentStep === 1 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-body mb-2">
                       Year <span className="text-red-500">*</span>
@@ -382,7 +434,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("year", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm bg-white appearance-none cursor-pointer"
                       required
                     >
                       <option value="">Select Year</option>
@@ -403,7 +455,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("make", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm bg-white appearance-none cursor-pointer"
                       required
                     >
                       <option value="">Select Make</option>
@@ -425,7 +477,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("model", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       placeholder="e.g., Camry, Accord, F-150"
                       required
                     />
@@ -441,13 +493,13 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("mileage", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       placeholder="e.g., 50000"
                       required
                     />
                   </div>
 
-                  <div className="md:col-span-2">
+                  <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-body mb-2">
                       Overall Condition{" "}
                       <span className="text-red-500">*</span>
@@ -457,7 +509,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("condition", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm bg-white appearance-none cursor-pointer"
                       required
                     >
                       <option value="">Select Condition</option>
@@ -480,7 +532,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
 
               {/* Step 2: Contact Information */}
               {currentStep === 2 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-body mb-2">
                       First Name <span className="text-red-500">*</span>
@@ -491,7 +543,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("firstName", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       required
                     />
                   </div>
@@ -506,7 +558,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("lastName", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       required
                     />
                   </div>
@@ -521,7 +573,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("email", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       required
                     />
                   </div>
@@ -536,13 +588,13 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("phone", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       placeholder="(555) 123-4567"
                       required
                     />
                   </div>
 
-                  <div className="md:col-span-2">
+                  <div className="sm:col-span-2">
                     <label className="block text-sm font-medium text-body mb-2">
                       Additional Comments
                     </label>
@@ -551,7 +603,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("comments", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
+                      className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       rows={4}
                       placeholder="Any additional information about your vehicle or trade-in preferences..."
                     />
@@ -561,14 +613,14 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
 
               {/* Step 3: Review & Submit */}
               {currentStep === 3 && (
-                <div className="space-y-6">
+                <div className="space-y-4 sm:space-y-6">
                   {/* Vehicle Summary Card */}
                   <div className="bg-neutral-50 p-4 rounded-lg border border-border">
-                    <h3 className="text-lg font-heading font-medium text-ink mb-4 flex items-center">
-                      <HiOutlineTruck className="w-5 h-5 mr-2 text-body" />
+                    <h3 className="text-base sm:text-lg font-heading font-medium text-ink mb-4 flex items-center">
+                      <HiOutlineTruck className="w-4 h-4 sm:w-5 sm:h-5 mr-2 text-body" />
                       Vehicle Summary
                     </h3>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 text-sm">
                       <div>
                         <span className="font-medium text-body">
                           Vehicle:
@@ -586,7 +638,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                           {vehicleData.mileage} miles
                         </span>
                       </div>
-                      <div className="md:col-span-2">
+                      <div className="sm:col-span-2">
                         <span className="font-medium text-body">
                           Condition:
                         </span>
@@ -662,11 +714,11 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="px-6 py-4 bg-neutral-50 border-t border-border rounded-b-xl flex justify-between items-center">
+            <div className="px-4 sm:px-6 py-4 bg-neutral-50 border-t border-border rounded-b-xl flex justify-between items-center">
               <button
                 type="button"
                 onClick={prevStep}
-                className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                className={`px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                   currentStep === 1
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"
                     : "bg-white text-body border border-gray-300 hover:bg-gray-50"
@@ -679,16 +731,18 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
               <button
                 type="button"
                 onClick={currentStep === 3 ? handleSubmit : nextStep}
-                className={`px-6 py-2 text-sm font-medium text-white rounded-md transition-colors ${
+                className={`px-4 sm:px-6 py-2 text-sm font-medium rounded-md transition-all ${
                   isSubmitting
-                    ? "bg-gray-400 cursor-not-allowed"
+                    ? "bg-gray-400 cursor-not-allowed text-white"
                     : currentStep === 3
-                    ? "bg-green-600 hover:bg-green-700"
-                    : canProceedToNext() 
-                      ? "bg-gray-900 hover:bg-gray-800" 
-                      : "bg-gray-400 cursor-not-allowed"
+                    ? isStepComplete()
+                      ? "bg-green-600 hover:bg-green-700 text-white"
+                      : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                    : isStepComplete()
+                      ? "bg-neutral-800 hover:bg-neutral-700 text-white"
+                      : "bg-gray-200 text-gray-400 cursor-not-allowed"
                 }`}
-                disabled={isSubmitting || (currentStep < 3 && !canProceedToNext())}
+                disabled={isSubmitting || !isStepComplete()}
               >
                 {isSubmitting
                   ? "Submitting..."

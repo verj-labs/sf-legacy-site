@@ -68,14 +68,14 @@ export default function TestDriveFlow() {
   }, [selectedVehicle, step])
 
   const initializeCalendly = () => {
-    console.log('Initializing Calendly...', { selectedVehicle, windowCalendly: !!window.Calendly })
+    // console.log('Initializing Calendly...', { selectedVehicle, windowCalendly: !!window.Calendly })
     
     if (typeof window !== 'undefined' && window.Calendly && selectedVehicle) {
       const calendlyUrl = process.env.NEXT_PUBLIC_CALENDLY_URL || 'https://calendly.com/your-username/test-drive'
       const element = document.getElementById('calendly-inline-widget')
-      
-      console.log('Calendly elements found:', { calendlyUrl, element: !!element })
-      
+
+      // console.log('Calendly elements found:', { calendlyUrl, element: !!element })
+
       if (element) {
         // Clear any existing content
         element.innerHTML = ''
@@ -95,7 +95,7 @@ export default function TestDriveFlow() {
               }
             }
           })
-          console.log('Calendly initialized successfully')
+          // console.log('Calendly initialized successfully')
         } catch (error) {
           console.error('Error initializing Calendly:', error)
           // Fallback: show a message with link to Calendly

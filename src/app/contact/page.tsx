@@ -30,7 +30,7 @@ export default function ContactPage() {
   ]
 
   return (
-    <div className="min-h-screen bg-background.default">
+    <div className="min-h-screen bg-neutral-50">
       {/* Page Start Banner */}
       <PageStartBanner
         title="Get In Touch"
@@ -44,13 +44,13 @@ export default function ContactPage() {
         </a>
       </PageStartBanner>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 lg:py-16">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 lg:gap-8">
           {/* Contact Form - Left Column */}
           <ContactForm />
 
           {/* Contact Information - Right Column */}
-          <div className="space-y-6">
+          <div className="space-y-4 lg:space-y-6">
             {/* Contact Methods */}
             <div className="bg-surface.raised rounded-xl border border-border.default p-6">
               <div className="text-center mb-6">
@@ -154,7 +154,7 @@ export default function ContactPage() {
         </div>
 
         {/* Page End Banner with top margin */}
-        <div className="mt-16">
+        <div className="mt-4 lg:mt-8">
           <PageEndBanner 
             title="Ready to Find Your Perfect Vehicle?"
             body="Browse our inventory of quality vehicles or schedule a test drive today. We're here to help make your car buying experience seamless."

@@ -17,7 +17,7 @@ export default function WarrantyFinancingSection() {
   return (
     <section className="section-padding relative  bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100">
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="relative max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-14">
           {/* Warranty Card */}
             <div className="group relative bg-surface rounded-2xl p-8 md:p-10 border border-border shadow-xs hover:shadow-md hover:border-neutral-300 transition-all duration-300 overflow-hidden">

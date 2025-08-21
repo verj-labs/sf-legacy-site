@@ -152,11 +152,63 @@ export default function FinancingForm() {
     }
   }
 
+  const isStepComplete = () => {
+    return canProceedToNext()
+  }
+
   return (
-    <div className="py-12">
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        {/* Vertical Stepper Sidebar */}
-        <div className="lg:col-span-1">
+    <div className="p-0 lg:py-12">
+      <div className="grid grid-cols-1 lg:grid-cols-4 gap-0 lg:gap-8">
+        {/* Mobile Horizontal Stepper - Only visible on mobile */}
+        <div className="lg:hidden col-span-1">
+          <div className="bg-surface-raised rounded-xl p-4 mb-2">
+            {/* Mobile Progress Bar */}
+            <div className="flex items-center justify-between mb-4">
+              <span className="text-sm font-medium text-text-ink">Step {currentStep} of 4</span>
+              <div className="flex-1 mx-4 bg-surface-secondary rounded-full h-1">
+                <div 
+                  className="bg-gray-500 h-1 rounded-full transition-all duration-300"
+                  style={{ width: `${Math.min((currentStep / 4) * 100, 100)}%` }}
+                />
+              </div>
+              <span className="text-xs text-text-muted">{Math.round((currentStep / 4) * 100)}%</span>
+            </div>
+            
+            {/* Mobile Step Indicators */}
+            <div className="flex items-center justify-between">
+              {[
+                { num: 1, icon: HiOutlineCurrencyDollar, label: "Payment" },
+                { num: 2, icon: HiOutlineUser, label: "Personal" },
+                { num: 3, icon: HiOutlineBriefcase, label: "Employment" },
+                { num: 4, icon: HiOutlineClipboardDocumentCheck, label: "Final" }
+              ].map((step, index) => {
+                const Icon = step.icon;
+                return (
+                  <div key={step.num} className="flex flex-col items-center flex-1">
+                    <div className={`w-6 h-6 rounded-full flex items-center justify-center mb-1 transition-all duration-200 ${
+                      currentStep === step.num ? 'bg-gray-500 text-white' :
+                      currentStep > step.num ? 'bg-emerald-500 text-white' : 'bg-surface-tertiary text-text-muted'
+                    }`}>
+                      {currentStep > step.num ? (
+                        <HiOutlineCheckCircle className="w-3 h-3" />
+                      ) : (
+                        <Icon className="w-3 h-3" />
+                      )}
+                    </div>
+                    <span className={`text-xs font-medium ${
+                      currentStep >= step.num ? 'text-text-ink' : 'text-text-muted'
+                    }`}>
+                      {step.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+
+        {/* Desktop Vertical Stepper Sidebar - Hidden on mobile */}
+        <div className="hidden lg:block lg:col-span-1">
           <div className="sticky top-8">
             <h2 className="text-xl font-bold text-text-ink mb-6">Application Progress</h2>
             
@@ -327,7 +379,7 @@ export default function FinancingForm() {
         <div className="lg:col-span-3">
           <form onSubmit={handleSubmit} className="bg-surface-primary rounded-xl border border-border-primary shadow-sm">
             {/* Form Header */}
-            <div className="px-8 py-6 border-b border-border-subtle bg-surface-secondary rounded-t-xl">
+            <div className="px-4 py-4 lg:px-8 lg:py-6 border-b border-border-subtle bg-surface-secondary rounded-t-xl">
               <div className="flex items-center justify-between">
                 <div>
                   <h1 className="text-lg font-semibold text-text-ink">
@@ -356,10 +408,10 @@ export default function FinancingForm() {
             </div>
 
             {/* Form Content */}
-            <div className="p-8">
+            <div className="p-4 lg:p-8">
               {/* Step 1: Vehicle & Payment Info */}
               {currentStep === 1 && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-text-ink mb-2">
                       Price of the Car *
@@ -404,7 +456,7 @@ export default function FinancingForm() {
 
               {/* Step 2: Personal Information */}
               {currentStep === 2 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-text-ink mb-2">
                       Full Name *
@@ -524,7 +576,7 @@ export default function FinancingForm() {
 
               {/* Step 3: Employment Information */}
               {currentStep === 3 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-text-ink mb-2">
                       Employment Status *
@@ -769,7 +821,7 @@ export default function FinancingForm() {
 
             {/* Navigation Buttons */}
             {currentStep < 5 && (
-              <div className="px-8 py-6 bg-surface-secondary border-t border-border-subtle rounded-b-xl flex justify-between items-center">
+              <div className="px-4 py-4 lg:px-8 lg:py-6 bg-surface-secondary border-t border-border-subtle rounded-b-xl flex justify-between items-center">
                 <button
                   type="button"
                   onClick={prevStep}
@@ -787,24 +839,24 @@ export default function FinancingForm() {
                   <button
                     type="button"
                     onClick={nextStep}
-                    className={`px-6 py-3 text-sm font-medium text-white rounded-lg transition-all duration-200 ${
-                      canProceedToNext() 
-                        ? 'bg-gray-500 hover:bg-gray-800' 
-                        : 'bg-surface-tertiary text-text-muted cursor-not-allowed'
+                    className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                      isStepComplete() 
+                        ? 'bg-neutral-800 hover:bg-neutral-700 text-white' 
+                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                     }`}
-                    disabled={!canProceedToNext()}
+                    disabled={!isStepComplete()}
                   >
                     Next Step
                   </button>
                 ) : (
                   <button
                     type="submit"
-                    className={`px-6 py-3 text-sm font-medium text-white rounded-lg transition-all duration-200 ${
-                      canProceedToNext() 
-                        ? 'bg-emerald-600 hover:bg-emerald-700' 
-                        : 'bg-surface-tertiary text-text-muted cursor-not-allowed'
+                    className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
+                      isStepComplete() 
+                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white' 
+                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
                     }`}
-                    disabled={!canProceedToNext()}
+                    disabled={!isStepComplete()}
                   >
                     Submit Application
                   </button>

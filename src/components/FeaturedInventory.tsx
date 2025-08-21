@@ -43,7 +43,7 @@ export default function FeaturedInventory() {
       id="inventory"
       className="section-padding bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
         <div className="text-center flex flex-col items-center gap-2">
           <h2 className="text-h2 font-heading font-bold text-neutral-800">
             Featured Vehicles

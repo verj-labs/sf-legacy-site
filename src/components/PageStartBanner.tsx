@@ -8,7 +8,7 @@ interface PageStartBannerProps {
 
 export default function PageStartBanner({ title, description, children }: PageStartBannerProps) {
   return (
-    <section className="relative overflow-hidden py-8 md:py-12">
+    <section className="relative overflow-hidden py-6 sm:py-8 md:py-12">
       {/* Neutral background gradient */}
       <div className="absolute inset-0 bg-dark-carbon" />
       {/* Subtle texture / radial vignette */}
@@ -19,17 +19,16 @@ export default function PageStartBanner({ title, description, children }: PageSt
       <div className="absolute -top-24 -right-24 w-80 h-80 bg-brand/10 rounded-full blur-3xl" />
       <div className="absolute -bottom-32 -left-24 w-72 h-72 bg-ink/5 rounded-full blur-2xl" />
 
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-2">
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-1.5 sm:gap-2">
         <div className="max-w-4xl">
-          <h1 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-100">
+          <h1 className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-100">
               {title}
-
           </h1>
-          <p className="text-body-m text-neutral-300 max-w-2xl leading-relaxed ">
+          <p className="text-sm sm:text-body-m text-neutral-300 max-w-2xl leading-relaxed mt-1 sm:mt-0">
             {description}
           </p>
           {children && (
-            <div className="mt-2 flex flex-wrap gap-3">
+            <div className="mt-2 sm:mt-2 flex flex-wrap gap-2 sm:gap-3">
               {children}
             </div>
           )}

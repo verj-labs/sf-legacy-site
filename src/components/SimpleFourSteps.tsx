@@ -41,7 +41,7 @@ export default function SimpleFourSteps() {
 
   return (
     <section className="section-padding bg-gradient-to-br from-neutral-200 via-neutral-100 to-neutral-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto px-0 sm:px-6 lg:px-8">
         {/* Section Header */}
         <div className="text-center flex flex-col items-center gap-2">
           <h2 className="text-h2 font-heading font-bold text-neutral-800">

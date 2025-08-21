@@ -159,7 +159,7 @@ html {
 
 /* Container spacing utilities */
 .section-padding {
-  @apply py-10 px-4;
+  @apply p-4;
 }
 
 @media (min-width: 640px) {

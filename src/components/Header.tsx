@@ -96,6 +96,7 @@ export default function Header() {
             <button
               type="button"
               className="text-body hover:text-brand p-2 transition-colors duration-fast"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
               >
               <span className="sr-only">Open main menu</span>
               <svg

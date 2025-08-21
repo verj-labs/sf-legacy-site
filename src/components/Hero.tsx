@@ -3,35 +3,35 @@ import Image from "next/image";
 
 export default function Hero() {
   return (
-    <section className="relative bg-background overflow-hidden h-[75vh] flex items-center py-16">
+    <section className="relative bg-background overflow-hidden min-h-[60vh] sm:min-h-[70vh] lg:h-[75vh] flex items-center py-8 sm:py-12 lg:py-16">
       {/* Enhanced gradient background overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 via-neutral-200 to-neutral-300"></div>
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
-        <div className="flex items-center justify-between min-h-[75vh] ">
+        <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
           {/* Left: Text Stack with beautiful typography */}
-          <div className="flex-[0_0_55%] max-w-3xl">
+          <div className="flex-1 lg:flex-[0_0_55%] max-w-3xl text-center lg:text-left">
             {/* Main Heading with gradient text */}
-            <h1 className="text-h1 font-heading font-bold mb-6 leading-tight">
+            <h1 className="text-3xl sm:text-4xl lg:text-h1 font-heading font-bold mb-4 lg:mb-6 leading-tight">
               <span className="text-ink">Buy Used Cars.</span>
               <br />
               <span>
                 Shop With
-                <span className="ml-3 bg-gradient-to-r from-brand to-brand-800 bg-clip-text text-transparent">
+                <span className="ml-2 lg:ml-3 bg-gradient-to-r from-brand to-brand-800 bg-clip-text text-transparent">
                   Confidence
                 </span>
               </span>
             </h1>
 
             {/* Subcopy with enhanced typography */}
-            <p className="text-body-l text-body mb-8 max-w-lg leading-relaxed font-light">
+            <p className="text-base sm:text-lg lg:text-body-l text-body mb-6 lg:mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light">
               Your trusted dealership for quality pre-owned vehicles. Find your
               perfect car with our extensive inventory and exceptional service.
             </p>
 
             {/* Contact Info */}
-            <div className="flex items-center gap-2 mb-8 text-body-m text-body">
+            <div className="flex items-center justify-center lg:justify-start gap-2 mb-6 lg:mb-8 text-sm sm:text-base lg:text-body-m text-body">
               <div className="p-2 bg-ink/5 rounded-full">
                 <svg
                   className="w-4 h-4 text-ink"
@@ -50,30 +50,30 @@ export default function Hero() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-12">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 lg:mb-12 justify-center lg:justify-start">
               <Link
                 href="/book-test-drive"
-                className="btn-primary inline-flex items-center justify-center"
+                className="btn-primary inline-flex items-center justify-center w-full sm:w-auto"
               >
                 Schedule Test Drive
               </Link>
               <Link
                 href="/inventory"
-                className="btn-secondary inline-flex items-center justify-center"
+                className="btn-secondary inline-flex items-center justify-center w-full sm:w-auto"
               >
                 View Inventory
               </Link>
             </div>
 
             {/* Platform Links */}
-            <div className="border-t border-border pt-6">
-              <p className="text-ui-meta text-body/70 mb-4">We are on:</p>
-              <div className="flex items-center gap-4">
+            <div className="border-t border-border pt-4 lg:pt-6">
+              <p className="text-xs sm:text-ui-meta text-body/70 mb-3 lg:mb-4 text-center lg:text-left">We are on:</p>
+              <div className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4">
                 <a
                   href="https://www.cargurus.ca/Cars/m-SF-LEGACY-MOTORS-sp449799"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-28 h-14 bg-neutral-100 border border-border rounded-md hover:bg-neutral-200 hover:border-ink/40 shadow-xs hover:shadow-md transition-all duration-fast group"
+                  className="flex items-center justify-center w-24 sm:w-28 h-12 sm:h-14 bg-neutral-100 border border-border rounded-md hover:bg-neutral-200 hover:border-ink/40 shadow-xs hover:shadow-md transition-all duration-fast group"
                 >
                   <Image
                     src="/asset/hero-carguru.svg"
@@ -87,7 +87,7 @@ export default function Hero() {
                   href="https://www.kijiji.ca/b-cars-trucks/canada/c174l0"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-28 h-14 bg-neutral-100 border border-border rounded-md hover:bg-neutral-100 hover:border-ink/40 shadow-xs hover:shadow-md transition-all duration-fast group"
+                  className="flex items-center justify-center w-24 sm:w-28 h-12 sm:h-14 bg-neutral-100 border border-border rounded-md hover:bg-neutral-100 hover:border-ink/40 shadow-xs hover:shadow-md transition-all duration-fast group"
                 >
                   <Image
                     src="/asset/hero-kijiji.png"

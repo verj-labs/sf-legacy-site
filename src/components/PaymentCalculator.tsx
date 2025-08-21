@@ -129,34 +129,34 @@ export default function PaymentCalculator({
   };
 
   return (
-    <div className="flex gap-8">
+    <div className="flex flex-col lg:flex-row gap-4 lg:gap-8">
       <div
-        className={`bg-neutral-50 rounded-lg border border-gray-200  flex-[2] ${
-          compact ? "p-4" : "p-6"
+        className={`bg-surface.default rounded-lg border border-border.default flex-1 lg:flex-[2] ${
+          compact ? "p-4" : "p-4 sm:p-6"
         } ${className}`}
       >
         <h3
-          className={`font-heading font-bold text-gray-900 mb-6 ${
-            compact ? "text-lg" : "text-xl"
+          className={`font-heading font-bold text-text.primary mb-4 sm:mb-6 ${
+            compact ? "text-lg" : "text-lg sm:text-xl"
           }`}
         >
           Payment Calculator
         </h3>
 
-        <div className="space-y-4">
+        <div className="space-y-3 sm:space-y-4">
           {/* Payment Frequency */}
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-3">
+            <label className="block text-sm font-medium text-text.primary mb-2 sm:mb-3">
               Payment Frequency
             </label>
             <div className="flex gap-2">
               <button
                 type="button"
                 onClick={() => handleInputChange("paymentFreq", "monthly")}
-                className={`px-4 py-2 text-sm font-medium rounded-lg border transition-all ${
+                className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-lg border transition-all ${
                   calculatorValues.paymentFreq === "monthly"
-                    ? "bg-gray-900 text-white border-gray-900"
-                    : "bg-white text-gray-700 border-gray-300 hover:border-gray-400"
+                    ? "bg-text.primary text-surface.default border-text.primary"
+                    : "bg-surface.default text-text.muted border-border.default hover:border-border.muted"
                 }`}
               >
                 Monthly
@@ -164,10 +164,10 @@ export default function PaymentCalculator({
               <button
                 type="button"
                 onClick={() => handleInputChange("paymentFreq", "biweekly")}
-                className={`px-4 py-2 text-sm font-medium rounded-lg border transition-all ${
+                className={`flex-1 px-3 sm:px-4 py-2 text-sm font-medium rounded-lg border transition-all ${
                   calculatorValues.paymentFreq === "biweekly"
-                    ? "bg-gray-900 text-white border-gray-900"
-                    : "bg-white text-gray-700 border-gray-300 hover:border-gray-400"
+                    ? "bg-text.primary text-surface.default border-text.primary"
+                    : "bg-surface.default text-text.muted border-border.default hover:border-border.muted"
                 }`}
               >
                 Bi-weekly

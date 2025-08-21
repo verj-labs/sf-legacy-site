@@ -65,15 +65,15 @@ export default function ContactForm() {
   }
 
   return (
-    <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-8">
-      <h3 className="text-2xl font-heading font-bold text-gray-900 mb-6">
+    <div className="bg-surface.raised rounded-xl border border-border.default shadow-sm p-6 sm:p-8">
+      <h3 className="text-xl sm:text-2xl font-heading font-bold text-text.primary mb-4 sm:mb-6">
         Send Us a Message
       </h3>
       
-      <form onSubmit={handleSubmit} className="space-y-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-text.primary mb-2">
               Full Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -81,13 +81,13 @@ export default function ContactForm() {
               required
               value={formData.name}
               onChange={(e) => handleChange('name', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-border.default rounded-lg focus:ring-2 focus:ring-brand.primary focus:border-transparent bg-surface.default text-text.primary placeholder-text.muted"
               placeholder="Your full name"
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-text.primary mb-2">
               Email Address <span className="text-red-500">*</span>
             </label>
             <input
@@ -95,34 +95,34 @@ export default function ContactForm() {
               required
               value={formData.email}
               onChange={(e) => handleChange('email', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-border.default rounded-lg focus:ring-2 focus:ring-brand.primary focus:border-transparent bg-surface.default text-text.primary placeholder-text.muted"
               placeholder="your.email@example.com"
             />
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-text.primary mb-2">
               Phone Number
             </label>
             <input
               type="tel"
               value={formData.phone}
               onChange={(e) => handleChange('phone', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-border.default rounded-lg focus:ring-2 focus:ring-brand.primary focus:border-transparent bg-surface.default text-text.primary placeholder-text.muted"
               placeholder="(905) 749-4061"
             />
           </div>
           
           <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">
+            <label className="block text-sm font-medium text-text.primary mb-2">
               Preferred Contact Method
             </label>
             <select
               value={formData.preferredContact}
               onChange={(e) => handleChange('preferredContact', e.target.value)}
-              className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+              className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-border.default rounded-lg focus:ring-2 focus:ring-brand.primary focus:border-transparent bg-surface.default text-text.primary"
             >
               <option value="phone">Phone</option>
               <option value="text">Text Message</option>
@@ -131,14 +131,14 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-text.primary mb-2">
             Subject <span className="text-red-500">*</span>
           </label>
           <select
             required
             value={formData.subject}
             onChange={(e) => handleChange('subject', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-border.default rounded-lg focus:ring-2 focus:ring-brand.primary focus:border-transparent bg-surface.default text-text.primary"
           >
             <option value="">Select a subject</option>
             <option value="inventory">Inventory Question</option>
@@ -150,28 +150,28 @@ export default function ContactForm() {
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-text.primary mb-2">
             Interested Vehicle (Optional)
           </label>
           <input
             type="text"
             value={formData.interestedVehicle}
             onChange={(e) => handleChange('interestedVehicle', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-border.default rounded-lg focus:ring-2 focus:ring-brand.primary focus:border-transparent bg-surface.default text-text.primary placeholder-text.muted"
             placeholder="e.g., 2022 Toyota Camry or Stock #T24001"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
+          <label className="block text-sm font-medium text-text.primary mb-2">
             Message <span className="text-red-500">*</span>
           </label>
           <textarea
             required
-            rows={6}
+            rows={5}
             value={formData.message}
             onChange={(e) => handleChange('message', e.target.value)}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
+            className="w-full px-3 sm:px-4 py-2 sm:py-3 border border-border.default rounded-lg focus:ring-2 focus:ring-brand.primary focus:border-transparent bg-surface.default text-text.primary placeholder-text.muted resize-none sm:resize-y"
             placeholder="Please let us know how we can help you..."
           />
         </div>
@@ -179,12 +179,12 @@ export default function ContactForm() {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="w-full bg-primary text-white py-3 px-6 rounded-lg font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+          className="btn btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
         >
           {isSubmitting ? 'Sending...' : 'Send Message'}
         </button>
 
-        <p className="text-sm text-gray-500 text-center">
+        <p className="text-sm text-text.muted text-center">
           We typically respond to messages within 24 hours during business days.
         </p>
       </form>
