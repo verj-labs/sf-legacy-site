@@ -5,20 +5,21 @@
 @layer base {
   :root {
     /* Design System Colors from STYLE.md */
-    --c-bg: #FFFFFF;
-    --c-bg-muted: #E2E8F0;
-    --c-surface: #FFFFFF;
-    --c-surface-muted: #CBD5E1;
-    --c-border: #E5E7EB;
-    --c-ink: #0B1020;
-    --c-body: #1F2937;
+  /* Updated Professional Palette */
+  --c-bg: #F7F9FA; /* soft neutral rather than pure white */
+  --c-bg-muted: #EDF1F4;
+  --c-surface: #FAFBFC; /* off-white surface */
+  --c-surface-muted: #F7F9FA;
+  --c-border: #E1E6EB;
+  --c-ink: #14181D; /* off-black */
+  --c-body: #323942; /* body copy */
 
-    --c-primary: #2563EB;
-    --c-primary-600: #2563EB;
-    --c-primary-800: #1E40AF;
+  --c-primary: #1F60E8;
+  --c-primary-600: #1F60E8;
+  --c-primary-800: #143D9B;
 
-    --c-accent: #FF6B2C;
-    --c-support: #14B8A6;
+  --c-accent: #FF6B2C; /* keep existing accent if used */
+  --c-support: #14B8A6;
 
     --c-success: #16A34A;
     --c-warning: #F59E0B;
@@ -26,9 +27,15 @@
     --c-info: #0EA5E9;
 
     /* Gradients */
-    --g-brand: linear-gradient(135deg, #2563EB 0%, #7C3AED 100%);
-    --g-perf: linear-gradient(135deg, #2563EB 0%, #22D3EE 100%);
-    --g-action: linear-gradient(135deg, #FF6B2C 0%, #F59E0B 100%);
+  --g-brand: linear-gradient(135deg, #1F60E8 0%, #143D9B 100%);
+  --g-brand-bright: linear-gradient(135deg, #1F60E8 0%, #4F9BFF 55%, #1F60E8 100%);
+  --g-brand-radial: radial-gradient(circle at 30% 30%, #3570F6 0%, #1F60E8 50%, #143D9B 100%);
+  --g-perf: linear-gradient(135deg, #1F60E8 0%, #22D3EE 100%);
+  --g-action: linear-gradient(135deg, #FF6B2C 0%, #F59E0B 100%);
+  --g-gray-steel: linear-gradient(135deg, #F7F9FA 0%, #C9D0D6 45%, #4B5560 100%);
+  --g-gray-smoke: linear-gradient(135deg, #FFFFFF 0%, #E1E6EB 50%, #C9D0D6 100%);
+  --g-dark-carbon: linear-gradient(135deg, #1E242B 0%, #14181D 60%, #0D1013 100%);
+  --g-dark-vignette: radial-gradient(circle at 50% 40%, #323942 0%, #14181D 70%, #0D1013 100%);
 
     /* Radii */
     --r-sm: 8px; 
@@ -65,12 +72,12 @@
     --dur-fast: 150ms; --dur-med: 250ms; --dur-slow: 400ms;
 
     /* Legacy variables for compatibility */
-    --primary: #2563EB;
+  --primary: #1F60E8;
     --secondary: #F5F5F5;
     --accent: #FF6B2C;
-    --text-primary: #0B1020;
-    --background: #FFFFFF;
-    --white: #ffffff;
+  --text-primary: #14181D;
+  --background: #F7F9FA;
+  --white: #FAFBFC;
   }
 
   * {
@@ -152,91 +159,103 @@ html {
 
 /* Container spacing utilities */
 .section-padding {
-  padding-top: var(--sp-20);
-  padding-bottom: var(--sp-20);
-  padding-left: var(--sp-4);
-  padding-right: var(--sp-4);
+  @apply py-10 px-4;
 }
 
 @media (min-width: 640px) {
   .section-padding {
-    padding-left: var(--sp-6);
-    padding-right: var(--sp-6);
+    @apply px-8;
   }
 }
 
 @media (min-width: 1024px) {
   .section-padding {
-    padding-top: var(--sp-32);
-    padding-bottom: var(--sp-32);
-    padding-left: var(--sp-8);
-    padding-right: var(--sp-8);
+    @apply py-16 px-8;
   }
 }
 
 @layer components {
-  /* Primary Button - From Style Guide */
+  /* Primary Button - Neutral (Default) */
   .btn-primary {
     font: 600 var(--body-m-size)/var(--body-m-lh) var(--font-body);
-    color: #fff;
-    background: var(--c-primary);
-    padding: 12px 20px;
-    border-radius: var(--r-md);
+    color: #ffffff;
+    background: var(--c-ink);
+    padding: 8px 16px;
+    border-radius: var(--r-lg);
     box-shadow: var(--sh-sm);
-    border: none;
+    border: 1px solid rgba(0,0,0,0.6);
     cursor: pointer;
-    transition: transform var(--dur-fast) var(--easing-standard),
+    position: relative;
+    overflow: hidden;
+    transition: background var(--dur-fast) var(--easing-standard),
                 box-shadow var(--dur-fast) var(--easing-standard),
-                background var(--dur-fast) var(--easing-standard);
+                transform var(--dur-fast) var(--easing-standard);
   }
-
+  .btn-primary::after { /* subtle sheen */
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(255,255,255,0.08), rgba(255,255,255,0));
+    pointer-events: none;
+  }
   .btn-primary:hover {
-    background: var(--c-primary-800);
+    background: #1E242B; /* neutral 800 */
     box-shadow: var(--sh-md);
     transform: translateY(-1px);
   }
-
   .btn-primary:active {
     transform: translateY(0);
     box-shadow: var(--sh-sm);
   }
-
   .btn-primary:focus-visible {
     outline: 2px solid transparent;
-    box-shadow: 0 0 0 3px rgba(37,99,235,.35);
+    box-shadow: 0 0 0 3px rgba(31,96,232,.45);
   }
 
-  /* Secondary Button - Outline Style */
-  .btn-secondary {
+  /* Brand Button (Optional explicit blue variant) */
+  .btn-brand {
     font: 600 var(--body-m-size)/var(--body-m-lh) var(--font-body);
-    color: var(--c-primary);
-    background: transparent;
-    border: 2px solid var(--c-primary);
-    padding: 10px 18px;
-    border-radius: var(--r-md);
+    color: #fff;
+    background: var(--c-primary);
+    padding: 8px 16px;
+    border-radius: var(--r-lg);
+    box-shadow: var(--sh-sm);
+    border: none;
     cursor: pointer;
     transition: background var(--dur-fast) var(--easing-standard),
-                color var(--dur-fast) var(--easing-standard);
+                transform var(--dur-fast) var(--easing-standard),
+                box-shadow var(--dur-fast) var(--easing-standard);
   }
+  .btn-brand:hover { background: var(--c-primary-800); box-shadow: var(--sh-md); transform: translateY(-1px); }
+  .btn-brand:active { transform: translateY(0); box-shadow: var(--sh-sm); }
+  .btn-brand:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 3px rgba(31,96,232,.45); }
 
-  .btn-secondary:hover {
-    background: rgba(37,99,235,0.05);
+  /* Secondary Button - Neutral outline */
+  .btn-secondary {
+    font: 600 var(--body-m-size)/var(--body-m-lh) var(--font-body);
+    color: var(--c-ink);
+    background: transparent;
+    border: 2px solid var(--c-ink);
+    padding: 8px 16px;
+    border-radius: var(--r-lg);
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--easing-standard), color var(--dur-fast) var(--easing-standard), border-color var(--dur-fast) var(--easing-standard);
   }
+  .btn-secondary:hover { background: rgba(20,24,29,0.06); }
+  .btn-secondary:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 3px rgba(20,24,29,.4); }
 
-  /* Tertiary Button - Ghost Style */
+  /* Tertiary Button - Ghost */
   .btn-tertiary {
     font: 600 var(--body-m-size)/var(--body-m-lh) var(--font-body);
-    color: var(--c-primary);
+    color: var(--c-ink);
     background: transparent;
     border: none;
     padding: 12px 20px;
     cursor: pointer;
-    transition: text-decoration var(--dur-fast) var(--easing-standard);
+    transition: color var(--dur-fast) var(--easing-standard), text-decoration var(--dur-fast) var(--easing-standard);
   }
-
-  .btn-tertiary:hover {
-    text-decoration: underline;
-  }
+  .btn-tertiary:hover { color: var(--c-primary); }
+  .btn-tertiary:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 3px rgba(31,96,232,.35); }
 
   /* Card Component */
   .card {

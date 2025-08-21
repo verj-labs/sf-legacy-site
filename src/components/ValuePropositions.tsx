@@ -42,7 +42,7 @@ export default function ValuePropositions() {
     <section className="py-16 md:py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-text-primary mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-ink mb-4 md:mb-6">
             Why Choose SF Legacy Autos?
           </h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
@@ -63,7 +63,7 @@ export default function ValuePropositions() {
                   </div>
                 </div>
                 <div className="ml-6">
-                  <h3 className="text-xl md:text-2xl font-heading font-bold text-text-primary mb-3 group-hover:text-primary transition-colors duration-300">
+                  <h3 className="text-xl md:text-2xl font-heading font-bold text-ink mb-3 group-hover:text-primary transition-colors duration-300">
                     {prop.title}
                   </h3>
                   <p className="text-gray-600 leading-relaxed text-base md:text-lg">

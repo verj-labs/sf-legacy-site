@@ -15,7 +15,7 @@ export default function Home() {
       <SatisfactionGuarantee />
       <GoogleReviews />
       <WarrantyFinancingSection />
-      <section className="section-padding bg-background-muted">
+      <section className="section-padding bg-neutral-50">
         <PageEndBanner />
       </section>
     </>

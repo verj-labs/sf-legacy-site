@@ -53,7 +53,7 @@ export default function Contact() {
     <section id="contact" className="py-16 md:py-20 lg:py-24 bg-gradient-to-b from-gray-50 to-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-text-primary mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-ink mb-4 md:mb-6">
             Contact Us
           </h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
@@ -65,7 +65,7 @@ export default function Contact() {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-10 lg:gap-12">
           {/* Contact Form */}
           <div className="bg-white p-6 md:p-8 lg:p-10 rounded-xl shadow-lg border-2 border-gray-100">
-            <h3 className="text-xl md:text-2xl font-heading font-bold text-text-primary mb-6">
+            <h3 className="text-xl md:text-2xl font-heading font-bold text-ink mb-6">
               Send us a message
             </h3>
             <form onSubmit={handleSubmit} className="space-y-4 md:space-y-6">
@@ -187,7 +187,7 @@ export default function Contact() {
                     </div>
                   </div>
                   <div className="ml-4 md:ml-6">
-                    <h3 className="text-lg md:text-xl font-heading font-bold text-text-primary mb-2">
+                    <h3 className="text-lg md:text-xl font-heading font-bold text-ink mb-2">
                       {info.title}
                     </h3>
                     <div className="space-y-1">

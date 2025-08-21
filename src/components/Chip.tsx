@@ -22,7 +22,7 @@ export default function Chip({
   const getVariantClasses = () => {
     switch (variant) {
       case 'primary':
-        return 'bg-primary/10 text-primary hover:bg-primary/20'
+        return 'bg-neutral-200 text-neutral-8000 hover:bg-neutral-230'
       case 'secondary':
         return 'bg-gray-500/10 text-gray-700 hover:bg-gray-500/20'
       case 'success':

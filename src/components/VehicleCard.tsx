@@ -33,17 +33,17 @@ export default function VehicleCard({
     return new Intl.NumberFormat("en-US").format(mileage)
   }
 
-  const baseClasses = "group bg-white rounded-lg border shadow-sm hover:shadow-md transition-all duration-300 overflow-hidden"
+  const baseClasses = "group bg-surface rounded-lg border border-border shadow-xs hover:shadow-md transition-all duration-300 overflow-hidden"
   
   const variantClasses = {
-    default: "hover:border-brand",
-    featured: "hover:border-brand hover:shadow-xl",
-    compact: "hover:border-brand",
-    inventory: "hover:border-brand border-gray-200",
+    default: "hover:border-neutral-300",
+    featured: "hover:border-neutral-300 hover:shadow-lg",
+    compact: "hover:border-neutral-300",
+    inventory: "border-border hover:border-neutral-300",
     selectable: `cursor-pointer ${
-      isSelected 
-        ? 'border-brand bg-brand/5 shadow-lg' 
-        : 'border-border hover:border-brand hover:shadow-md'
+      isSelected
+        ? 'border-brand bg-brand/5 shadow-lg'
+        : 'border-border hover:border-neutral-300 hover:shadow-md'
     }`
   }
 
@@ -51,7 +51,7 @@ export default function VehicleCard({
     <div className={`${baseClasses} ${variantClasses[variant]} ${className}`}>
       {/* Vehicle Image */}
       <div className={`relative bg-background-muted overflow-hidden ${
-        variant === 'featured' ? 'aspect-[16/10]' : 'aspect-[4/3]'
+        variant === 'featured' ? 'aspect-[17/10]' : 'aspect-[4/3]'
       }`}>
         <img
           src={vehicle.images?.[0] || "/api/placeholder/400/300"}
@@ -96,18 +96,18 @@ export default function VehicleCard({
 
       {/* Card Content */}
       <div className={`${
-        variant === 'compact' || variant === 'inventory' ? 'p-4' : variant === 'featured' ? 'p-8' : 'p-6'
+        variant === 'compact' || variant === 'inventory' ? 'p-4' : variant === 'featured' ? 'p-5 md:p-6' : 'p-6'
       }`}>
         {/* Vehicle Title */}
-        <h3 className={`font-heading font-bold text-ink mb-2 group-hover:text-brand transition-colors ${
-          variant === 'featured' ? 'text-h4' : variant === 'compact' || variant === 'inventory' ? 'text-sm' : 'text-h5'
+        <h3 className={`font-heading font-bold text-ink mb-1.5 group-hover:text-brand transition-colors ${
+          variant === 'featured' ? 'text-h5' : variant === 'compact' || variant === 'inventory' ? 'text-sm' : 'text-h5'
         }`}>
           {vehicle.year} {vehicle.make} {vehicle.model} {vehicle.trim}
         </h3>
         
         {/* Vehicle Details */}
         <div className={`flex flex-wrap gap-1.5 ${
-          variant === 'compact' || variant === 'inventory' ? 'mb-3' : 'mb-4'
+          variant === 'featured' ? 'mb-2' : variant === 'compact' || variant === 'inventory' ? 'mb-3' : 'mb-4'
         }`}>
           <Chip variant="secondary" size="sm" className="text-xs">{formatMileage(vehicle.odometer)} miles</Chip>
           <Chip variant="secondary" size="sm" className="text-xs">{vehicle.transmission}</Chip>
@@ -119,30 +119,23 @@ export default function VehicleCard({
         
         {/* Additional Details for Featured Variant */}
         {variant === 'featured' && (
-          <div className="mb-4 space-y-3">
-            <p className="text-body-m text-body line-clamp-2">
-              {vehicle.description || `Well-maintained ${vehicle.year} ${vehicle.make} ${vehicle.model} with ${formatMileage(vehicle.odometer)} miles. This ${vehicle.bodyType.toLowerCase()} features ${vehicle.transmission} transmission and offers excellent reliability and performance.`}
+          <div className="mb-3 space-y-2">
+            <p className="text-body-s text-body/80 line-clamp-1">
+              {vehicle.description || `${vehicle.year} ${vehicle.make} ${vehicle.model} • ${formatMileage(vehicle.odometer)} mi • ${vehicle.transmission}`}
             </p>
-            
-            {/* Key Features for Featured */}
+            {/* Key Features (limit to first 3) */}
             <div className="flex flex-wrap gap-1.5">
-              {vehicle.engineDesc && (
-                <Chip variant="outline" size="sm" className="text-xs">{vehicle.engineDesc}</Chip>
-              )}
-              {vehicle.drivetrain && (
-                <Chip variant="outline" size="sm" className="text-xs uppercase">{vehicle.drivetrain}</Chip>
-              )}
-              {vehicle.exteriorColor && (
-                <Chip variant="outline" size="sm" className="text-xs">{vehicle.exteriorColor}</Chip>
-              )}
+              {[vehicle.engineDesc, vehicle.drivetrain, vehicle.exteriorColor]
+                .filter(Boolean)
+                .slice(0,3)
+                .map((val, i) => (
+                  <Chip key={i} variant="outline" size="sm" className="text-[10px] uppercase tracking-wide">
+                    {String(val)}
+                  </Chip>
+                ))}
               {vehicle.warranty?.hasWarranty && (
-                <Chip variant="outline" size="sm" className="text-xs text-green-600 border-green-200">
-                  Warranty Included
-                </Chip>
-              )}
-              {vehicle.mpgCity && vehicle.mpgHighway && (
-                <Chip variant="outline" size="sm" className="text-xs">
-                  {vehicle.mpgCity}/{vehicle.mpgHighway} MPG
+                <Chip variant="outline" size="sm" className="text-[10px] text-green-600 border-green-200">
+                  Warrantied
                 </Chip>
               )}
             </div>
@@ -155,7 +148,7 @@ export default function VehicleCard({
             {vehicle.salePrice && vehicle.salePrice < vehicle.price ? (
               <div className="space-y-1">
                 <div className="flex items-center gap-2">
-                  <span className={`font-bold text-brand ${
+                  <span className={`font-bold text-ink group-hover:text-brand transition-colors ${
                     variant === 'featured' ? 'text-h4' : variant === 'compact' || variant === 'inventory' ? 'text-base' : 'text-h5'
                   }`}>
                     {formatPrice(vehicle.salePrice)}
@@ -172,7 +165,7 @@ export default function VehicleCard({
               </div>
             ) : (
               <div className="space-y-1">
-                <span className={`font-bold text-brand ${
+                <span className={`font-bold text-ink group-hover:text-brand transition-colors ${
                   variant === 'featured' ? 'text-h4' : variant === 'compact' || variant === 'inventory' ? 'text-base' : 'text-h5'
                 }`}>
                   {formatPrice(vehicle.price)}
@@ -194,7 +187,7 @@ export default function VehicleCard({
                 <span className="text-xs font-medium">Selected</span>
               </div>
             ) : variant === 'selectable' ? (
-              <span className="text-xs text-brand font-medium group-hover:translate-x-1 transition-transform">
+              <span className="text-xs text-ink group-hover:text-brand font-medium group-hover:translate-x-1 transition-all">
                 Select →
               </span>
             ) : showActions ? (
@@ -204,14 +197,14 @@ export default function VehicleCard({
                   <div className="flex items-center gap-2">
                     <Link
                       href={`/book-test-drive?vehicleId=${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-3 py-2 bg-brand text-white text-body-s font-medium rounded-lg hover:bg-brand-dark transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-2 bg-ink text-white text-body-s font-medium rounded-lg hover:bg-ink/90 transition-colors"
                     >
                       <HiOutlineCalendar className="w-4 h-4" />
                       Test Drive
                     </Link>
                     <Link
                       href={`/inventory/${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-3 py-2 border border-brand text-brand text-body-s font-medium rounded-lg hover:bg-brand/5 transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-2 border border-border text-ink text-body-s font-medium rounded-lg hover:border-neutral-400 hover:bg-neutral-100 transition-colors"
                     >
                       <HiOutlineEye className="w-4 h-4" />
                       Details
@@ -222,14 +215,14 @@ export default function VehicleCard({
                   <div className="flex items-center gap-1">
                     <Link
                       href={`/book-test-drive?vehicleId=${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-brand hover:text-brand-dark transition-colors"
+                      className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-ink hover:text-brand transition-colors"
                     >
                       <HiOutlineCalendar className="w-3 h-3" />
                       Test
                     </Link>
                     <Link
                       href={`/inventory/${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-brand hover:text-brand-dark transition-colors"
+                      className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium text-ink hover:text-brand transition-colors"
                     >
                       <HiOutlineEye className="w-3 h-3" />
                       Details
@@ -239,14 +232,14 @@ export default function VehicleCard({
                   <div className="flex items-center gap-2">
                     <Link
                       href={`/book-test-drive?vehicleId=${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-brand hover:text-brand-dark transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-ink hover:text-brand transition-colors"
                     >
                       <HiOutlineCalendar className="w-4 h-4" />
                       Test Drive
                     </Link>
                     <Link
                       href={`/inventory/${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-brand hover:text-brand-dark transition-colors"
+                      className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-ink hover:text-brand transition-colors"
                     >
                       <HiOutlineEye className="w-4 h-4" />
                       View Details
@@ -255,7 +248,7 @@ export default function VehicleCard({
                 ) : (
                   <Link
                     href={`/inventory/${vehicle._id}`}
-                    className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-brand hover:text-brand-dark transition-colors"
+                    className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-ink hover:text-brand transition-colors"
                   >
                     <HiOutlineEye className="w-4 h-4" />
                     View Details
@@ -263,7 +256,7 @@ export default function VehicleCard({
                 )}
               </div>
             ) : (
-              <span className="text-xs text-brand font-medium group-hover:translate-x-1 transition-transform">
+              <span className="text-xs text-ink group-hover:text-brand font-medium group-hover:translate-x-1 transition-all">
                 View Details →
               </span>
             )}

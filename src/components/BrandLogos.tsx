@@ -18,7 +18,7 @@ export default function BrandLogos() {
     <section className="py-12 md:py-16 lg:py-20 bg-white border-t border-gray-100">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-8 md:mb-12">
-          <h2 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-text-primary mb-4">
+          <h2 className="text-xl md:text-2xl lg:text-3xl font-heading font-bold text-ink mb-4">
             Trusted Brands We Carry
           </h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-2xl mx-auto">

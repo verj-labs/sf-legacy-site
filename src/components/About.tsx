@@ -7,7 +7,7 @@ export default function About() {
         <div className="grid grid-cols-12 gap-8 lg:gap-16">
           {/* Main Content */}
           <div className="col-span-12 lg:col-span-8">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-text-primary mb-8">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-ink mb-8">
               About SF Legacy Motors
             </h2>
             
@@ -28,14 +28,14 @@ export default function About() {
             
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
               <div>
-                <h3 className="text-2xl font-heading font-bold text-text-primary mb-4">Our Mission</h3>
+                <h3 className="text-2xl font-heading font-bold text-ink mb-4">Our Mission</h3>
                 <p className="text-gray-600 leading-relaxed">
                   To provide exceptional automotive solutions through quality vehicles, 
                   transparent pricing, and unmatched customer service that builds lasting relationships.
                 </p>
               </div>
               <div>
-                <h3 className="text-2xl font-heading font-bold text-text-primary mb-4">Our Values</h3>
+                <h3 className="text-2xl font-heading font-bold text-ink mb-4">Our Values</h3>
                 <ul className="text-gray-600 space-y-2">
                   <li className="flex items-center">
                     <svg className="w-5 h-5 text-accent mr-3" fill="currentColor" viewBox="0 0 20 20">
@@ -84,36 +84,36 @@ export default function About() {
           {/* Stats & Highlights */}
           <div className="col-span-12 lg:col-span-4">
             <div className="bg-secondary p-8 lg:p-10 rounded-xl mb-8">
-              <h3 className="text-2xl font-heading font-bold text-text-primary mb-8">
+              <h3 className="text-2xl font-heading font-bold text-ink mb-8">
                 By the Numbers
               </h3>
               
               <div className="space-y-6">
                 <div className="text-center">
                   <div className="text-4xl font-heading font-bold text-accent mb-2">15+</div>
-                  <div className="text-text-primary font-medium">Years in Business</div>
+                  <div className="text-ink font-medium">Years in Business</div>
                 </div>
                 
                 <div className="text-center border-t border-gray-300 pt-6">
                   <div className="text-4xl font-heading font-bold text-accent mb-2">5,000+</div>
-                  <div className="text-text-primary font-medium">Happy Customers</div>
+                  <div className="text-ink font-medium">Happy Customers</div>
                 </div>
                 
                 <div className="text-center border-t border-gray-300 pt-6">
                   <div className="text-4xl font-heading font-bold text-accent mb-2">500+</div>
-                  <div className="text-text-primary font-medium">Vehicles in Stock</div>
+                  <div className="text-ink font-medium">Vehicles in Stock</div>
                 </div>
                 
                 <div className="text-center border-t border-gray-300 pt-6">
                   <div className="text-4xl font-heading font-bold text-accent mb-2">A+</div>
-                  <div className="text-text-primary font-medium">BBB Rating</div>
+                  <div className="text-ink font-medium">BBB Rating</div>
                 </div>
               </div>
             </div>
             
             {/* Awards & Certifications */}
             <div className="bg-white p-8 lg:p-10 rounded-xl border-2 border-secondary">
-              <h3 className="text-xl font-heading font-bold text-text-primary mb-6">
+              <h3 className="text-xl font-heading font-bold text-ink mb-6">
                 Awards & Recognition
               </h3>
               
@@ -121,7 +121,7 @@ export default function About() {
                 <div className="flex items-center">
                   <div className="text-2xl mr-4">🏆</div>
                   <div>
-                    <div className="font-semibold text-text-primary">Best Used Car Dealer</div>
+                    <div className="font-semibold text-ink">Best Used Car Dealer</div>
                     <div className="text-sm text-gray-600">SF Chronicle 2024</div>
                   </div>
                 </div>
@@ -129,7 +129,7 @@ export default function About() {
                 <div className="flex items-center">
                   <div className="text-2xl mr-4">⭐</div>
                   <div>
-                    <div className="font-semibold text-text-primary">5-Star Customer Service</div>
+                    <div className="font-semibold text-ink">5-Star Customer Service</div>
                     <div className="text-sm text-gray-600">Google Reviews</div>
                   </div>
                 </div>
@@ -137,7 +137,7 @@ export default function About() {
                 <div className="flex items-center">
                   <div className="text-2xl mr-4">🛡️</div>
                   <div>
-                    <div className="font-semibold text-text-primary">Certified Pre-Owned</div>
+                    <div className="font-semibold text-ink">Certified Pre-Owned</div>
                     <div className="text-sm text-gray-600">Dealer Certification</div>
                   </div>
                 </div>

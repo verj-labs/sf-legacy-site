@@ -38,7 +38,7 @@ export default function Features() {
     <section className="py-16 md:py-20 lg:py-24 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-text-primary mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-ink mb-4 md:mb-6">
             Why Choose SF Legacy Motors?
           </h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
@@ -54,7 +54,7 @@ export default function Features() {
               className="text-center p-6 md:p-8 rounded-xl hover:shadow-lg transition-all duration-300 bg-secondary group hover:bg-white border border-transparent hover:border-gray-200"
             >
               <div className="text-3xl md:text-4xl mb-4 group-hover:scale-110 transition-transform duration-300">{feature.icon}</div>
-              <h3 className="text-lg md:text-xl font-heading font-semibold text-text-primary mb-3 md:mb-4">
+              <h3 className="text-lg md:text-xl font-heading font-semibold text-ink mb-3 md:mb-4">
                 {feature.title}
               </h3>
               <p className="text-gray-600 leading-relaxed text-sm md:text-base">

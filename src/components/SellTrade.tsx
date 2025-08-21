@@ -7,7 +7,7 @@ export default function SellTrade() {
         <div className="grid grid-cols-12 gap-8 lg:gap-16">
           {/* Content */}
           <div className="col-span-12 lg:col-span-7">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-text-primary mb-6">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-ink mb-6">
               Sell or Trade Your Vehicle
             </h2>
             <p className="text-lg lg:text-xl text-gray-600 mb-8 leading-relaxed">
@@ -18,7 +18,7 @@ export default function SellTrade() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
               <div className="p-6 bg-secondary rounded-xl">
                 <div className="text-3xl mb-4">🚗</div>
-                <h3 className="text-xl font-heading font-semibold text-text-primary mb-3">
+                <h3 className="text-xl font-heading font-semibold text-ink mb-3">
                   Instant Online Quote
                 </h3>
                 <p className="text-gray-600">
@@ -27,7 +27,7 @@ export default function SellTrade() {
               </div>
               <div className="p-6 bg-secondary rounded-xl">
                 <div className="text-3xl mb-4">📋</div>
-                <h3 className="text-xl font-heading font-semibold text-text-primary mb-3">
+                <h3 className="text-xl font-heading font-semibold text-ink mb-3">
                   Professional Appraisal
                 </h3>
                 <p className="text-gray-600">
@@ -36,7 +36,7 @@ export default function SellTrade() {
               </div>
               <div className="p-6 bg-secondary rounded-xl">
                 <div className="text-3xl mb-4">💰</div>
-                <h3 className="text-xl font-heading font-semibold text-text-primary mb-3">
+                <h3 className="text-xl font-heading font-semibold text-ink mb-3">
                   Competitive Offers
                 </h3>
                 <p className="text-gray-600">
@@ -45,7 +45,7 @@ export default function SellTrade() {
               </div>
               <div className="p-6 bg-secondary rounded-xl">
                 <div className="text-3xl mb-4">⚡</div>
-                <h3 className="text-xl font-heading font-semibold text-text-primary mb-3">
+                <h3 className="text-xl font-heading font-semibold text-ink mb-3">
                   Quick Process
                 </h3>
                 <p className="text-gray-600">
@@ -79,7 +79,7 @@ export default function SellTrade() {
               <form className="space-y-6">
                 <div>
                   <label className="block text-sm font-semibold mb-3">Vehicle Year</label>
-                  <select className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-text-primary">
+                  <select className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-ink">
                     <option>Select Year</option>
                     {Array.from({length: 25}, (_, i) => 2025 - i).map(year => (
                       <option key={year} value={year}>{year}</option>
@@ -91,7 +91,7 @@ export default function SellTrade() {
                   <input 
                     type="text" 
                     placeholder="e.g., Honda, Toyota, Ford"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-text-primary"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-ink"
                   />
                 </div>
                 <div>
@@ -99,7 +99,7 @@ export default function SellTrade() {
                   <input 
                     type="text" 
                     placeholder="e.g., Civic, Camry, F-150"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-text-primary"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-ink"
                   />
                 </div>
                 <div>
@@ -107,12 +107,12 @@ export default function SellTrade() {
                   <input 
                     type="number" 
                     placeholder="Current mileage"
-                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-text-primary"
+                    className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-ink"
                   />
                 </div>
                 <div>
                   <label className="block text-sm font-semibold mb-3">Condition</label>
-                  <select className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-text-primary">
+                  <select className="w-full px-4 py-3 border-2 border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent text-ink">
                     <option>Select Condition</option>
                     <option value="excellent">Excellent</option>
                     <option value="good">Good</option>

@@ -179,12 +179,12 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
   );
 
   return (
-    <div className="max-w-6xl mx-auto px-4 ">
+    <div className="max-w-6xl mx-auto px-4">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
         {/* Vertical Stepper Sidebar */}
         <div className="lg:col-span-1">
           <div className="sticky top-8">
-            <h2 className="text-xl font-bold text-gray-900 mb-6">
+            <h2 className="text-xl font-heading font-bold text-ink mb-6">
               Trade-In Progress
             </h2>
 
@@ -193,16 +193,16 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
               <div
                 className={`flex items-start space-x-3 p-3 rounded-lg transition-colors ${
                   currentStep === 1
-                    ? "bg-primary/10 border border-primary/20"
+                    ? "bg-gray-100 border border-gray-200"
                     : currentStep > 1
                     ? "bg-green-50 border border-green-200"
-                    : "bg-gray-50 border border-gray-200"
+                    : "bg-neutral-50 border border-neutral-200"
                 }`}
               >
                 <div
                   className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                     currentStep === 1
-                      ? "bg-primary text-white"
+                      ? "bg-gray-900 text-white"
                       : currentStep > 1
                       ? "bg-green-500 text-white"
                       : "bg-gray-300 text-gray-600"
@@ -217,12 +217,12 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                 <div className="flex-1 min-w-0">
                   <p
                     className={`text-sm font-medium ${
-                      currentStep >= 1 ? "text-gray-900" : "text-gray-500"
+                      currentStep >= 1 ? "text-ink" : "text-body/60"
                     }`}
                   >
                     Vehicle Details
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-body/60 mt-1">
                     Basic vehicle information
                   </p>
                   {currentStep > 1 && (
@@ -231,7 +231,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                     </Chip>
                   )}
                   {currentStep === 1 && (
-                    <Chip variant="primary" size="sm" className="mt-2">
+                    <Chip variant="default" size="sm" className="mt-2">
                       Current
                     </Chip>
                   )}
@@ -242,16 +242,16 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
               <div
                 className={`flex items-start space-x-3 p-3 rounded-lg transition-colors ${
                   currentStep === 2
-                    ? "bg-primary/10 border border-primary/20"
+                    ? "bg-gray-100 border border-gray-200"
                     : currentStep > 2
                     ? "bg-green-50 border border-green-200"
-                    : "bg-gray-50 border border-gray-200"
+                    : "bg-neutral-50 border border-neutral-200"
                 }`}
               >
                 <div
                   className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                     currentStep === 2
-                      ? "bg-primary text-white"
+                      ? "bg-gray-900 text-white"
                       : currentStep > 2
                       ? "bg-green-500 text-white"
                       : "bg-gray-300 text-gray-600"
@@ -266,12 +266,12 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                 <div className="flex-1 min-w-0">
                   <p
                     className={`text-sm font-medium ${
-                      currentStep >= 2 ? "text-gray-900" : "text-gray-500"
+                      currentStep >= 2 ? "text-ink" : "text-body/60"
                     }`}
                   >
                     Contact Information
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-body/60 mt-1">
                     Your contact details
                   </p>
                   {currentStep > 2 && (
@@ -280,7 +280,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                     </Chip>
                   )}
                   {currentStep === 2 && (
-                    <Chip variant="primary" size="sm" className="mt-2">
+                    <Chip variant="default" size="sm" className="mt-2">
                       Current
                     </Chip>
                   )}
@@ -291,14 +291,14 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
               <div
                 className={`flex items-start space-x-3 p-3 rounded-lg transition-colors ${
                   currentStep === 3
-                    ? "bg-primary/10 border border-primary/20"
-                    : "bg-gray-50 border border-gray-200"
+                    ? "bg-gray-100 border border-gray-200"
+                    : "bg-neutral-50 border border-neutral-200"
                 }`}
               >
                 <div
                   className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
                     currentStep === 3
-                      ? "bg-primary text-white"
+                      ? "bg-gray-900 text-white"
                       : "bg-gray-300 text-gray-600"
                   }`}
                 >
@@ -307,16 +307,16 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                 <div className="flex-1 min-w-0">
                   <p
                     className={`text-sm font-medium ${
-                      currentStep >= 3 ? "text-gray-900" : "text-gray-500"
+                      currentStep >= 3 ? "text-ink" : "text-body/60"
                     }`}
                   >
                     Get Your Quote
                   </p>
-                  <p className="text-xs text-gray-500 mt-1">
+                  <p className="text-xs text-body/60 mt-1">
                     Review and get estimate
                   </p>
                   {currentStep === 3 && (
-                    <Chip variant="primary" size="sm" className="mt-2">
+                    <Chip variant="default" size="sm" className="mt-2">
                       Current
                     </Chip>
                   )}
@@ -327,11 +327,11 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
             {/* Progress Bar */}
             <div className="mt-6 bg-gray-200 rounded-full h-2">
               <div
-                className="bg-primary h-2 rounded-full transition-all duration-300"
+                className="bg-gray-900 h-2 rounded-full transition-all duration-300"
                 style={{ width: `${(currentStep / 3) * 100}%` }}
               />
             </div>
-            <p className="text-xs text-gray-500 mt-2 text-center">
+            <p className="text-xs text-body/60 mt-2 text-center">
               Step {currentStep} of 3
             </p>
           </div>
@@ -339,17 +339,17 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
 
         {/* Main Form Content */}
         <div className="lg:col-span-3">
-          <div className="bg-white rounded-lg border border-gray-200 shadow-sm">
+          <div className="bg-surface rounded-xl border border-border shadow-xs">
             {/* Form Header */}
-            <div className="px-6 py-4 border-b border-gray-200 bg-gray-50 rounded-t-lg">
+            <div className="px-6 py-4 border-b border-border bg-neutral-50 rounded-t-xl">
               <div className="flex items-center justify-between">
                 <div>
-                  <h1 className="text-lg font-semibold text-gray-900">
+                  <h1 className="text-lg font-heading font-semibold text-ink">
                     {currentStep === 1 && "Vehicle Information"}
                     {currentStep === 2 && "Contact Information"}
                     {currentStep === 3 && "Your Quote"}
                   </h1>
-                  <p className="text-sm text-gray-600 mt-1">
+                  <p className="text-sm text-body/80 mt-1">
                     {currentStep === 1 &&
                       "Tell us about your vehicle to get started"}
                     {currentStep === 2 &&
@@ -359,8 +359,8 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                   </p>
                 </div>
                 <div className="hidden sm:block">
-                  <div className="bg-primary/10 px-3 py-1 rounded-full">
-                    <span className="text-sm font-medium text-primary">
+                  <div className="bg-gray-100 px-3 py-1 rounded-full">
+                    <span className="text-sm font-medium text-ink">
                       {Math.round((currentStep / 3) * 100)}% Complete
                     </span>
                   </div>
@@ -374,7 +374,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
               {currentStep === 1 && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       Year <span className="text-red-500">*</span>
                     </label>
                     <select
@@ -382,7 +382,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("year", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       required
                     >
                       <option value="">Select Year</option>
@@ -395,7 +395,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       Make <span className="text-red-500">*</span>
                     </label>
                     <select
@@ -403,7 +403,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("make", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       required
                     >
                       <option value="">Select Make</option>
@@ -416,7 +416,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       Model <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -425,14 +425,14 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("model", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       placeholder="e.g., Camry, Accord, F-150"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       Mileage <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -441,14 +441,14 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("mileage", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       placeholder="e.g., 50000"
                       required
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       Overall Condition{" "}
                       <span className="text-red-500">*</span>
                     </label>
@@ -457,7 +457,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("condition", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       required
                     >
                       <option value="">Select Condition</option>
@@ -482,7 +482,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
               {currentStep === 2 && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       First Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -491,13 +491,13 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("firstName", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       Last Name <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -506,13 +506,13 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("lastName", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       Email <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -521,13 +521,13 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("email", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       required
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       Phone Number <span className="text-red-500">*</span>
                     </label>
                     <input
@@ -536,14 +536,14 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("phone", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       placeholder="(555) 123-4567"
                       required
                     />
                   </div>
 
                   <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                    <label className="block text-sm font-medium text-body mb-2">
                       Additional Comments
                     </label>
                     <textarea
@@ -551,7 +551,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                       onChange={(e) =>
                         handleInputChange("comments", e.target.value)
                       }
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary focus:border-transparent text-sm"
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm"
                       rows={4}
                       placeholder="Any additional information about your vehicle or trade-in preferences..."
                     />
@@ -563,34 +563,34 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
               {currentStep === 3 && (
                 <div className="space-y-6">
                   {/* Vehicle Summary Card */}
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
-                      <HiOutlineTruck className="w-5 h-5 mr-2 text-primary" />
+                  <div className="bg-neutral-50 p-4 rounded-lg border border-border">
+                    <h3 className="text-lg font-heading font-medium text-ink mb-4 flex items-center">
+                      <HiOutlineTruck className="w-5 h-5 mr-2 text-body" />
                       Vehicle Summary
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="font-medium text-gray-700">
+                        <span className="font-medium text-body">
                           Vehicle:
                         </span>
-                        <span className="ml-2">
+                        <span className="ml-2 text-ink">
                           {vehicleData.year} {vehicleData.make}{" "}
                           {vehicleData.model}
                         </span>
                       </div>
                       <div>
-                        <span className="font-medium text-gray-700">
+                        <span className="font-medium text-body">
                           Mileage:
                         </span>
-                        <span className="ml-2">
+                        <span className="ml-2 text-ink">
                           {vehicleData.mileage} miles
                         </span>
                       </div>
                       <div className="md:col-span-2">
-                        <span className="font-medium text-gray-700">
+                        <span className="font-medium text-body">
                           Condition:
                         </span>
-                        <span className="ml-2 capitalize">
+                        <span className="ml-2 capitalize text-ink">
                           {vehicleData.condition}
                         </span>
                       </div>
@@ -598,39 +598,39 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                   </div>
 
                   {/* Contact Summary Card */}
-                  <div className="bg-gray-50 p-4 rounded-lg border border-gray-200">
-                    <h3 className="text-lg font-medium text-gray-900 mb-4 flex items-center">
-                      <HiOutlineUser className="w-5 h-5 mr-2 text-primary" />
+                  <div className="bg-neutral-50 p-4 rounded-lg border border-border">
+                    <h3 className="text-lg font-heading font-medium text-ink mb-4 flex items-center">
+                      <HiOutlineUser className="w-5 h-5 mr-2 text-body" />
                       Contact Information
                     </h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
                       <div>
-                        <span className="font-medium text-gray-700">
+                        <span className="font-medium text-body">
                           Name:
                         </span>
-                        <span className="ml-2">
+                        <span className="ml-2 text-ink">
                           {vehicleData.firstName} {vehicleData.lastName}
                         </span>
                       </div>
                       <div>
-                        <span className="font-medium text-gray-700">
+                        <span className="font-medium text-body">
                           Email:
                         </span>
-                        <span className="ml-2">{vehicleData.email}</span>
+                        <span className="ml-2 text-ink">{vehicleData.email}</span>
                       </div>
                       <div className="md:col-span-2">
-                        <span className="font-medium text-gray-700">
+                        <span className="font-medium text-body">
                           Phone:
                         </span>
-                        <span className="ml-2">{vehicleData.phone}</span>
+                        <span className="ml-2 text-ink">{vehicleData.phone}</span>
                       </div>
                     </div>
                     {vehicleData.comments && (
-                      <div className="mt-4 pt-4 border-t border-gray-200">
-                        <span className="font-medium text-gray-700">
+                      <div className="mt-4 pt-4 border-t border-border">
+                        <span className="font-medium text-body">
                           Additional Comments:
                         </span>
-                        <p className="text-sm text-gray-600 mt-1">
+                        <p className="text-sm text-body/80 mt-1">
                           {vehicleData.comments}
                         </p>
                       </div>
@@ -638,20 +638,20 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                   </div>
 
                   {/* Estimated Value Card */}
-                  <div className="bg-gradient-to-r from-primary/10 to-primary/5 p-6 rounded-lg border border-primary/20">
-                    <h3 className="text-lg font-semibold text-primary mb-2 flex items-center">
+                  <div className="bg-gradient-to-r from-gray-100 to-gray-50 p-6 rounded-lg border border-gray-200">
+                    <h3 className="text-lg font-heading font-semibold text-ink mb-2 flex items-center">
                       <HiOutlineCalculator className="w-5 h-5 mr-2" />
                       Estimated Trade-In Value
                     </h3>
                     <div className="text-center">
-                      <p className="text-3xl font-bold text-primary mb-2">
+                      <p className="text-3xl font-bold text-ink mb-2">
                         {estimatedValue
                           ? `${formatCurrency(
                               estimatedValue.low
                             )} - ${formatCurrency(estimatedValue.high)}`
                           : "Calculating..."}
                       </p>
-                      <p className="text-sm text-gray-600">
+                      <p className="text-sm text-body/70">
                         This is a preliminary estimate. Final value will be
                         determined after inspection.
                       </p>
@@ -662,14 +662,14 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="px-6 py-4 bg-gray-50 border-t border-gray-200 rounded-b-lg flex justify-between items-center">
+            <div className="px-6 py-4 bg-neutral-50 border-t border-border rounded-b-xl flex justify-between items-center">
               <button
                 type="button"
                 onClick={prevStep}
                 className={`px-4 py-2 text-sm font-medium rounded-md transition-colors ${
                   currentStep === 1
                     ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    : "bg-white text-gray-700 border border-gray-300 hover:bg-gray-50"
+                    : "bg-white text-body border border-gray-300 hover:bg-gray-50"
                 }`}
                 disabled={currentStep === 1}
               >
@@ -685,7 +685,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                     : currentStep === 3
                     ? "bg-green-600 hover:bg-green-700"
                     : canProceedToNext() 
-                      ? "bg-primary hover:bg-primary-dark" 
+                      ? "bg-gray-900 hover:bg-gray-800" 
                       : "bg-gray-400 cursor-not-allowed"
                 }`}
                 disabled={isSubmitting || (currentStep < 3 && !canProceedToNext())}

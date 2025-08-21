@@ -10,7 +10,7 @@ export default function PageEndBanner({
   body = "Browse our inventory, get financing, and drive home in your new car today. Our team is here to help you every step of the way.",
 }: PageEndBannerProps) {
   return (
-    <div className="relative overflow-hidden bg-gradient-to-br from-brand via-brand-dark to-support rounded-xl shadow-xl text-white">
+    <div className="relative overflow-hidden bg-dark-carbon rounded-xl shadow-xl text-white">
       {/* Background decorative elements */}
       <div className="absolute top-0 right-0 w-64 h-64 bg-white/5 rounded-full blur-3xl transform translate-x-32 -translate-y-32"></div>
       <div className="absolute bottom-0 left-0 w-48 h-48 bg-brand-dark/20 rounded-full blur-2xl transform -translate-x-16 translate-y-16"></div>

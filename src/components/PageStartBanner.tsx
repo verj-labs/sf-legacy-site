@@ -8,25 +8,28 @@ interface PageStartBannerProps {
 
 export default function PageStartBanner({ title, description, children }: PageStartBannerProps) {
   return (
-    <section className="relative bg-gradient-to-br from-brand-dark via-brand-700 to-brand-400 text-white py-12 md:py-16 overflow-hidden">
-      {/* Background pattern/overlay */}
-      <div className="absolute inset-0 bg-black/20"></div>
-      <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/10"></div>
-      
-      {/* Decorative elements */}
-      <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl transform translate-x-24 -translate-y-24"></div>
-      <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/5 rounded-full blur-2xl transform -translate-x-12 translate-y-12"></div>
-      
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="max-w-3xl">
-          <h1 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold mb-3 text-white drop-shadow-lg">
-            {title}
+    <section className="relative overflow-hidden py-8 md:py-12">
+      {/* Neutral background gradient */}
+      <div className="absolute inset-0 bg-dark-carbon" />
+      {/* Subtle texture / radial vignette */}
+      <div className="absolute inset-0 pointer-events-none [mask-image:radial-gradient(circle_at_center,black,transparent_70%)] bg-[linear-gradient(120deg,rgba(0,0,0,0.04),transparent_35%,rgba(0,0,0,0.04))]" />
+      {/* Brand accent stripe */}
+      <div className="absolute top-0 left-0 w-full h-1.5 bg-gradient-to-r from-brand/0 via-brand/50 to-brand/0" />
+      {/* Decorative blurred brand spot */}
+      <div className="absolute -top-24 -right-24 w-80 h-80 bg-brand/10 rounded-full blur-3xl" />
+      <div className="absolute -bottom-32 -left-24 w-72 h-72 bg-ink/5 rounded-full blur-2xl" />
+
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col gap-2">
+        <div className="max-w-4xl">
+          <h1 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-neutral-100">
+              {title}
+
           </h1>
-          <p className="text-base md:text-lg mb-6 text-gray-100 max-w-2xl leading-relaxed drop-shadow-sm">
+          <p className="text-body-m text-neutral-300 max-w-2xl leading-relaxed ">
             {description}
           </p>
           {children && (
-            <div className="mt-4">
+            <div className="mt-2 flex flex-wrap gap-3">
               {children}
             </div>
           )}

@@ -48,7 +48,7 @@ export default function Testimonials() {
     <section className="py-16 md:py-20 lg:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-text-primary mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-ink mb-4 md:mb-6">
             What Our Customers Say
           </h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
@@ -76,7 +76,7 @@ export default function Testimonials() {
 
               {/* Customer Info */}
               <div className="border-t border-gray-200 pt-6">
-                <h4 className="text-xl font-heading font-bold text-text-primary mb-1">
+                <h4 className="text-xl font-heading font-bold text-ink mb-1">
                   {testimonials[currentTestimonial].name}
                 </h4>
                 <p className="text-gray-600 mb-2">{testimonials[currentTestimonial].location}</p>

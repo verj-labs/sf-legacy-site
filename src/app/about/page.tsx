@@ -12,6 +12,7 @@ import {
   HiOutlinePhone,
   HiOutlineLocationMarker
 } from "react-icons/hi";
+import { HiCheckBadge, HiSparkles, HiUserGroup, HiCog8Tooth } from "react-icons/hi2";
 
 export default function AboutPage() {
   const teamMembers = [
@@ -32,121 +33,120 @@ export default function AboutPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen relative">
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-100 pointer-events-none" />
       {/* Hero Section */}
       <PageStartBanner
         title="About SF Legacy Motors Inc"
         description="Premier auto dealership serving Ontario with transparency, quality vehicles, and unparalleled customer service."
       />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* About & Why Choose Us - Side by Side Layout */}
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        {/* Company Story */}
         <section className="mb-20">
-          <div className="flex">
-            {/* Left side - About SF Legacy Motors (2/3 width) */}
-            <div className="lg:col-span-2">
-              <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-6">
-                About SF Legacy Motors Inc
-              </h2>
-              <div className=" prose prose-lg text-gray-600 space-y-6">
-                <p className="text-xl leading-relaxed">
-                  SF Legacy Motors Inc is a premier auto dealership located at{" "}
-                  <strong>6610 Turner Valley Rd, Mississauga, Ontario</strong>.
-                  Our dealership is serving customers in Ontario, specifically
-                  the GTA, Hamilton & nearby areas and has established a
-                  reputation for delivering top-quality vehicles and
-                  unparalleled customer service.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  We believe in transparency and honesty. That's why we offer
-                  competitive pricing and no-pressure sales tactics. We
-                  understand that purchasing a vehicle can be a big investment,
-                  which is why we want to make the process as stress-free and
-                  straightforward as possible.
-                </p>
-                <p className="text-lg leading-relaxed">
-                  SF Motors have proudly been serving Houston and surrounding
-                  areas of Texas, USA, bringing our expertise and commitment to
-                  excellence to the Canadian market.
-                </p>
-              </div>
+          <div className="bg-surface rounded-2xl shadow-xs border border-border p-8 md:p-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-ink mb-8 tracking-tight">
+              About SF Legacy Motors Inc
+            </h2>
+            <div className="prose prose-lg max-w-none">
+              <p className="text-body-l md:text-body-xl leading-relaxed text-body/90 mb-6">
+                SF Legacy Motors Inc is a premier auto dealership located at{" "}
+                <strong className="text-ink">6610 Turner Valley Rd, Mississauga, Ontario</strong>.
+                Our dealership serves customers throughout Ontario, specifically
+                the GTA, Hamilton & nearby areas, and has established a
+                reputation for delivering top-quality vehicles and
+                unparalleled customer service.
+              </p>
+              <p className="text-body text-body/80 leading-relaxed mb-6">
+                We believe in transparency and honesty. That's why we offer
+                competitive pricing and no-pressure sales tactics. We
+                understand that purchasing a vehicle can be a big investment,
+                which is why we want to make the process as stress-free and
+                straightforward as possible.
+              </p>
+              <p className="text-body text-body/80 leading-relaxed">
+                SF Motors have proudly been serving Houston and surrounding
+                areas of Texas, USA, bringing our expertise and commitment to
+                excellence to the Canadian market.
+              </p>
             </div>
           </div>
         </section>
 
         {/* Our Values */}
         <section className="mb-20">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-ink mb-4 tracking-tight">
               Our Commitment to You
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl">
+            <p className="text-body-l text-body/80 max-w-3xl mx-auto">
               We're guided by core values that shape every interaction and
               decision we make.
             </p>
+            <div className="mt-6 w-40 h-px mx-auto bg-gradient-to-r from-transparent via-neutral-300 to-transparent" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="flex justify-center mb-4">
-                <HiOutlineCheckCircle className="w-8 h-8 text-primary" />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            <div className="group relative bg-surface rounded-xl border border-border shadow-xs p-6 text-center hover:shadow-md hover:border-neutral-300 transition-all duration-300 overflow-hidden">
+              <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-brand/0 via-brand/0 to-brand/5" />
+              <div className="relative flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-ink text-white flex items-center justify-center shadow-sm ring-1 ring-neutral-300 group-hover:scale-105 transition-transform">
+                  <HiCheckBadge className="w-6 h-6" />
+                </div>
               </div>
-              <h3 className="text-lg font-heading font-semibold text-gray-900 mb-2">
+              <h3 className="text-base font-heading font-semibold text-ink mb-2 group-hover:text-brand transition-colors">
                 Transparency & Honesty
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-body-sm text-body/70 leading-relaxed">
                 We believe in transparency and honesty. That's why we offer
                 competitive pricing and no-pressure sales tactics.
               </p>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="flex justify-center mb-4">
-                <HiOutlinePlay className="w-8 h-8 text-primary" />
+            <div className="group relative bg-surface rounded-xl border border-border shadow-xs p-6 text-center hover:shadow-md hover:border-neutral-300 transition-all duration-300 overflow-hidden">
+              <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-brand/0 via-brand/0 to-brand/5" />
+              <div className="relative flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-ink text-white flex items-center justify-center shadow-sm ring-1 ring-neutral-300 group-hover:scale-105 transition-transform">
+                  <HiSparkles className="w-6 h-6" />
+                </div>
               </div>
-              <h3 className="text-lg font-heading font-semibold text-gray-900 mb-2">
+              <h3 className="text-base font-heading font-semibold text-ink mb-2 group-hover:text-brand transition-colors">
                 Top-Quality Vehicles
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-body-sm text-body/70 leading-relaxed">
                 We have established a reputation for delivering top-quality
                 vehicles and unparalleled customer service.
               </p>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="flex justify-center mb-4">
-                <svg
-                  className="w-8 h-8 text-primary"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"
-                  />
-                </svg>
+            <div className="group relative bg-surface rounded-xl border border-border shadow-xs p-6 text-center hover:shadow-md hover:border-neutral-300 transition-all duration-300 overflow-hidden">
+              <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-brand/0 via-brand/0 to-brand/5" />
+              <div className="relative flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-ink text-white flex items-center justify-center shadow-sm ring-1 ring-neutral-300 group-hover:scale-105 transition-transform">
+                  <HiUserGroup className="w-6 h-6" />
+                </div>
               </div>
-              <h3 className="text-lg font-heading font-semibold text-gray-900 mb-2">
+              <h3 className="text-base font-heading font-semibold text-ink mb-2 group-hover:text-brand transition-colors">
                 Stress-Free Experience
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-body-sm text-body/70 leading-relaxed">
                 We understand that purchasing a vehicle can be a big investment,
                 which is why we want to make the process as stress-free and
                 straightforward as possible.
               </p>
             </div>
 
-            <div className="bg-white rounded-lg border border-gray-200 shadow-sm p-6 text-center hover:shadow-lg transition-shadow">
-              <div className="flex justify-center mb-4">
-                <HiOutlineOfficeBuilding className="w-8 h-8 text-primary" />
+            <div className="group relative bg-surface rounded-xl border border-border shadow-xs p-6 text-center hover:shadow-md hover:border-neutral-300 transition-all duration-300 overflow-hidden">
+              <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-brand/0 via-brand/0 to-brand/5" />
+              <div className="relative flex justify-center mb-4">
+                <div className="w-12 h-12 rounded-xl bg-ink text-white flex items-center justify-center shadow-sm ring-1 ring-neutral-300 group-hover:scale-105 transition-transform">
+                  <HiCog8Tooth className="w-6 h-6" />
+                </div>
               </div>
-              <h3 className="text-lg font-heading font-semibold text-gray-900 mb-2">
+              <h3 className="text-base font-heading font-semibold text-ink mb-2 group-hover:text-brand transition-colors">
                 Expert Team
               </h3>
-              <p className="text-gray-600 text-sm">
+              <p className="text-body-sm text-body/70 leading-relaxed">
                 Our knowledgeable and friendly team is dedicated to helping our
                 customers find the perfect vehicle to fit their needs and
                 budget.
@@ -157,44 +157,45 @@ export default function AboutPage() {
 
         {/* Team Section */}
         <section className="mb-20">
-          <div className="mb-12">
-            <h2 className="text-3xl md:text-4xl font-heading font-bold text-gray-900 mb-4">
-              The Team
+          <div className="text-center mb-12">
+            <h2 className="text-3xl md:text-4xl font-heading font-bold text-ink mb-4 tracking-tight">
+              Meet The Team
             </h2>
-            <p className="text-lg text-gray-600 max-w-3xl">
+            <p className="text-body-l text-body/80 max-w-3xl mx-auto">
               Our knowledgeable and friendly team is dedicated to helping our
               customers find the perfect vehicle to fit their needs and budget.
               Our finance team is also on hand to help you find the best
               financing options and secure the best interest rates available.
             </p>
+            <div className="mt-6 w-40 h-px mx-auto bg-gradient-to-r from-transparent via-neutral-300 to-transparent" />
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
             {teamMembers.map((member, index) => (
               <div
                 key={index}
-                className="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden hover:shadow-lg transition-shadow"
+                className="group relative bg-surface rounded-2xl border border-border shadow-xs overflow-hidden hover:shadow-md hover:border-neutral-300 transition-all duration-300"
               >
-                <div className="p-6">
-                  <div className="flex items-start space-x-4">
+                <span className="pointer-events-none absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-gradient-to-br from-brand/0 via-brand/0 to-brand/3" />
+                <div className="relative p-8">
+                  <div className="flex items-start space-x-6 mb-6">
                     <img
                       src={member.image}
                       alt={member.name}
-                      className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                      className="w-24 h-24 rounded-2xl object-cover flex-shrink-0 ring-2 ring-neutral-200 group-hover:ring-brand/20 transition-all"
                     />
                     <div className="flex-1 min-w-0">
-                      <h3 className="text-xl text-gray-900 mb-1">
+                      <h3 className="text-xl font-heading font-semibold text-ink mb-2 group-hover:text-brand transition-colors">
                         {member.name}
                       </h3>
-                      <p className="text-primary font-medium mb-3">
+                      <p className="text-neutral-600 font-medium mb-2">
                         {member.role}
                       </p>
-                      <div className="flex flex-wrap gap-2 mb-4">
+                      <div className="flex flex-wrap gap-2">
                         {member.certifications.map((cert, idx) => (
                           <Chip
                             key={idx}
                             variant="primary"
-                            // size="lg"
                             weight="bold"
                           >
                             {cert}
@@ -203,7 +204,7 @@ export default function AboutPage() {
                       </div>
                     </div>
                   </div>
-                  <p className="text-gray-600 text-sm leading-relaxed mt-4 mb-0">
+                  <p className="text-body-sm text-body/80 leading-relaxed">
                     {member.bio}
                   </p>
                 </div>

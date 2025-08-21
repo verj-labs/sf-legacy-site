@@ -73,7 +73,7 @@ export default function VehicleCategories() {
     <section className="py-16 md:py-20 lg:py-24 bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
-          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-text-primary mb-4 md:mb-6">
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-ink mb-4 md:mb-6">
             Shop by Category
           </h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
@@ -92,7 +92,7 @@ export default function VehicleCategories() {
               <div className="flex justify-center mb-4 text-gray-500 group-hover:text-primary transition-colors duration-300">
                 {category.icon}
               </div>
-              <h3 className="text-lg md:text-xl font-heading font-semibold text-text-primary group-hover:text-primary transition-colors duration-300 mb-2">
+              <h3 className="text-lg md:text-xl font-heading font-semibold text-ink group-hover:text-primary transition-colors duration-300 mb-2">
                 {category.name}
               </h3>
               <p className="text-sm md:text-base text-gray-600 group-hover:text-gray-700 transition-colors duration-300">

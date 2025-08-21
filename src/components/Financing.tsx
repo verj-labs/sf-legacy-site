@@ -6,7 +6,7 @@ export default function Financing() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-12 gap-8 mb-16">
           <div className="col-span-12 lg:col-span-8 lg:col-start-3 text-center">
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-text-primary mb-6">
+                <h2 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold text-ink mb-6">
               Auto Financing Made Easy
             </h2>
             <p className="text-lg lg:text-xl text-gray-600 leading-relaxed">
@@ -22,7 +22,7 @@ export default function Financing() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
               <div className="bg-white p-6 lg:p-8 rounded-xl shadow-md">
                 <div className="text-3xl mb-4">⚡</div>
-                <h3 className="text-xl lg:text-2xl font-heading font-bold text-text-primary mb-4">
+                    <h3 className="text-xl lg:text-2xl font-heading font-bold text-ink mb-4">
                   Quick Pre-Approval
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -33,7 +33,7 @@ export default function Financing() {
               
               <div className="bg-white p-6 lg:p-8 rounded-xl shadow-md">
                 <div className="text-3xl mb-4">💯</div>
-                <h3 className="text-xl lg:text-2xl font-heading font-bold text-text-primary mb-4">
+                    <h3 className="text-xl lg:text-2xl font-heading font-bold text-ink mb-4">
                   All Credit Welcome
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -44,7 +44,7 @@ export default function Financing() {
               
               <div className="bg-white p-6 lg:p-8 rounded-xl shadow-md">
                 <div className="text-3xl mb-4">📈</div>
-                <h3 className="text-xl lg:text-2xl font-heading font-bold text-text-primary mb-4">
+                    <h3 className="text-xl lg:text-2xl font-heading font-bold text-ink mb-4">
                   Competitive Rates
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -55,7 +55,7 @@ export default function Financing() {
               
               <div className="bg-white p-6 lg:p-8 rounded-xl shadow-md">
                 <div className="text-3xl mb-4">🤝</div>
-                <h3 className="text-xl lg:text-2xl font-heading font-bold text-text-primary mb-4">
+                    <h3 className="text-xl lg:text-2xl font-heading font-bold text-ink mb-4">
                   Flexible Terms
                 </h3>
                 <p className="text-gray-600 leading-relaxed">
@@ -69,7 +69,7 @@ export default function Financing() {
           {/* Financing Stats */}
           <div className="col-span-12 lg:col-span-4">
             <div className="bg-primary text-white p-8 lg:p-10 rounded-xl">
-              <h3 className="text-2xl lg:text-3xl font-heading font-bold mb-8">
+                  <h3 className="text-2xl lg:text-3xl font-heading font-bold text-ink mb-4">
                 Financing Options
               </h3>
               
@@ -106,7 +106,7 @@ export default function Financing() {
         <div className="grid grid-cols-12 gap-6">
           <div className="col-span-12 text-center">
             <div className="bg-white p-8 lg:p-12 rounded-xl shadow-lg">
-              <h3 className="text-2xl lg:text-3xl font-heading font-bold text-text-primary mb-4">
+              <h3 className="text-2xl lg:text-3xl font-heading font-bold text-ink mb-4">
                 Ready to Get Started?
               </h3>
               <p className="text-lg text-gray-600 mb-8 max-w-2xl mx-auto">
