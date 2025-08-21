@@ -5,7 +5,7 @@ export default function Hero() {
   return (
     <section className="relative bg-background overflow-hidden min-h-[60vh] sm:min-h-[70vh] lg:h-[75vh] flex items-center py-8 sm:py-12 lg:py-16">
       {/* Enhanced gradient background overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 via-neutral-200 to-neutral-300"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-300"></div>
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
@@ -67,7 +67,9 @@ export default function Hero() {
 
             {/* Platform Links */}
             <div className="border-t border-border pt-4 lg:pt-6">
-              <p className="text-xs sm:text-ui-meta text-body/70 mb-3 lg:mb-4 text-center lg:text-left">We are on:</p>
+              <p className="text-xs sm:text-ui-meta text-body/70 mb-3 lg:mb-4 text-center lg:text-left">
+                We are on:
+              </p>
               <div className="flex items-center justify-center lg:justify-start gap-3 sm:gap-4">
                 <a
                   href="https://www.cargurus.ca/Cars/m-SF-LEGACY-MOTORS-sp449799"
@@ -105,11 +107,15 @@ export default function Hero() {
           <div className="hidden lg:flex flex-1 justify-center items-center">
             {/* <div className="absolute h-full bg-brand-gradient w-[350px]"/> */}
 
-            <div className="absolute flex gap-2 h-full w-[350px]">
-              <div className="bg-gradient-to-r from-brand-800 to-brand-700 flex-1" />
-              <div className="bg-gradient-to-r from-brand-700 to-brand-600 flex-1" />
-              <div className="bg-gradient-to-r from-brand-600 to-brand-500 flex-1" />
-              <div className="bg-gradient-to-r from-brand-500 to-brand-400 flex-1" />
+            {/* Box that holds stuff insideclips */}
+            <div className="absolute flex gap-1 h-full w-[350px] lg:h-[75vh] ">
+              <div className="absolute flex gap-[2px] h-full w-[350px] lg:h-[1000px] rotate-12 top-[-200px]">
+                {/* <div className="bg-dark-vignette flex-1 " /> */}
+                <div className="bg-gradient-to-r from-brand-800 to-brand-700 flex-1 " />
+                <div className="bg-gradient-to-r from-brand-700 to-brand-600 flex-1" />
+                <div className="bg-gradient-to-r from-brand-600 to-brand-500 flex-1" />
+                <div className="bg-gradient-to-r from-brand-500 to-brand-400 flex-1" />
+              </div>
             </div>
 
             <div className="relative ">
