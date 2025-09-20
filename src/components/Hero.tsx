@@ -108,9 +108,6 @@ export default function Hero() {
             {/* Box that holds stuff insideclips */}
             <div className="absolute flex gap-1 h-full w-[350px] lg:h-[75vh] ">
               <div className="absolute flex gap-[2px] h-full w-[350px] lg:h-[1000px] rotate-12 top-[-200px]">
-                {/* <div className="bg-dark-vignette flex-1 " /> */}
-                {/* <div className="bg-gradient-to-r from-brand-800 to-brand-700 flex-1 " /> */}
-                {/* <div className="bg-gradient-to-r from-brand-700 to-brand-600 flex-1" /> */}
                 <div className="bg-gradient-to-r from-ink/90 to-blackContrast flex-1" />
                 <div className="bg-gradient-to-r from-primary-600 to-brand-300 flex-1" />
                 <div className="bg-gradient-to-r from-ink to-blackContrast/90 flex-1" />

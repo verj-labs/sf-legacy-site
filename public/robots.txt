@@ -1,0 +1,19 @@
+User-agent: *
+Allow: /
+
+# Sitemaps
+Sitemap: https://sf-legacy.com/sitemap.xml
+
+# Disallow admin and private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow all important pages
+Allow: /
+Allow: /inventory
+Allow: /about
+Allow: /contact
+Allow: /financing
+Allow: /warranty
+Allow: /trade-in
+Allow: /test-drive
