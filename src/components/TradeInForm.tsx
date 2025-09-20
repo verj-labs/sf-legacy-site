@@ -2,6 +2,8 @@
 
 import { useState } from "react";
 import Chip from "./Chip";
+import { MobileStepper, DesktopStepper, StepperStep } from "./Stepper";
+import { FormHeader } from "./FormHeader";
 import {
   HiOutlineCheckCircle,
   HiOutlineTruck,
@@ -88,6 +90,12 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                vehicleData.mileage && vehicleData.condition;
       case 2:
         return vehicleData.firstName && vehicleData.lastName && 
+               vehicleData.email && vehicleData.phone;
+      case 3:
+        // Step 3 is review & submit - all required data should be complete
+        return vehicleData.year && vehicleData.make && vehicleData.model && 
+               vehicleData.mileage && vehicleData.condition &&
+               vehicleData.firstName && vehicleData.lastName && 
                vehicleData.email && vehicleData.phone;
       default:
         return false;
@@ -182,243 +190,48 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
     (new Date().getFullYear() - i).toString()
   );
 
+  const steps: StepperStep[] = [
+    {
+      num: 1,
+      title: "Vehicle Details",
+      description: "Basic vehicle information",
+      subtitle: "Tell us about your vehicle to get started",
+      icon: HiOutlineTruck
+    },
+    {
+      num: 2,
+      title: "Contact Information", 
+      description: "Your contact details",
+      subtitle: "We need your contact details to provide the quote",
+      icon: HiOutlineUser
+    },
+    {
+      num: 3,
+      title: "Get Your Quote",
+      description: "Review and get estimate",
+      subtitle: "Review your information and get your trade-in estimate",
+      icon: HiOutlineCalculator
+    }
+  ];
+
   return (
     <div className="max-w-6xl mx-auto lg:px-4">
-      {/* Mobile Horizontal Stepper */}
-      <div className="lg:hidden mb-6">
-        <div className="bg-white rounded-xl border border-gray-200 p-4">
-          <div className="flex items-center justify-between mb-4">
-            {[1, 2, 3].map((step) => (
-              <div key={step} className="flex items-center">
-                <div className="flex items-center">
-                  <div
-                    className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold transition-all ${
-                      currentStep === step
-                        ? 'bg-gray-900 text-white'
-                        : currentStep > step
-                        ? 'bg-green-500 text-white'
-                        : 'bg-gray-200 text-gray-600'
-                    }`}
-                  >
-                    {currentStep > step ? (
-                      <HiOutlineCheckCircle className="w-4 h-4" />
-                    ) : (
-                      step
-                    )}
-                  </div>
-                  <div className="ml-2 hidden sm:block">
-                    <p className={`text-xs font-medium ${currentStep >= step ? 'text-gray-900' : 'text-gray-500'}`}>
-                      {step === 1 && 'Vehicle'}
-                      {step === 2 && 'Contact'}
-                      {step === 3 && 'Quote'}
-                    </p>
-                  </div>
-                </div>
-                {step < 3 && (
-                  <div className={`w-8 sm:w-12 h-0.5 mx-2 ${currentStep > step ? 'bg-green-500' : 'bg-gray-200'}`} />
-                )}
-              </div>
-            ))}
-          </div>
-          <div className="bg-gray-200 rounded-full h-2">
-            <div
-              className="bg-gray-900 h-2 rounded-full transition-all duration-300"
-              style={{ width: `${(currentStep / 3) * 100}%` }}
-            />
-          </div>
-          <p className="text-xs text-gray-600 mt-2 text-center">
-            Step {currentStep} of 3
-          </p>
-        </div>
-      </div>
+      {/* Mobile Stepper */}
+      <MobileStepper steps={steps} currentStep={currentStep} />
 
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
-        {/* Desktop Vertical Stepper Sidebar */}
-        <div className="hidden lg:block lg:col-span-1">
-          <div className="sticky top-8">
-            <h2 className="text-xl font-heading font-bold text-ink mb-6">
-              Trade-In Progress
-            </h2>
-
-            <div className="space-y-4">
-              {/* Step 1 */}
-              <div
-                className={`flex items-start space-x-3 p-3 rounded-lg transition-colors ${
-                  currentStep === 1
-                    ? "bg-gray-100 border border-gray-200"
-                    : currentStep > 1
-                    ? "bg-green-50 border border-green-200"
-                    : "bg-neutral-50 border border-neutral-200"
-                }`}
-              >
-                <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                    currentStep === 1
-                      ? "bg-gray-900 text-white"
-                      : currentStep > 1
-                      ? "bg-green-500 text-white"
-                      : "bg-gray-300 text-gray-600"
-                  }`}
-                >
-                  {currentStep > 1 ? (
-                    <HiOutlineCheckCircle className="w-5 h-5" />
-                  ) : (
-                    <HiOutlineTruck className="w-4 h-4" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p
-                    className={`text-sm font-medium ${
-                      currentStep >= 1 ? "text-ink" : "text-body/60"
-                    }`}
-                  >
-                    Vehicle Details
-                  </p>
-                  <p className="text-xs text-body/60 mt-1">
-                    Basic vehicle information
-                  </p>
-                  {currentStep > 1 && (
-                    <Chip variant="success" size="sm" className="mt-2">
-                      Complete
-                    </Chip>
-                  )}
-                  {currentStep === 1 && (
-                    <Chip variant="default" size="sm" className="mt-2">
-                      Current
-                    </Chip>
-                  )}
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div
-                className={`flex items-start space-x-3 p-3 rounded-lg transition-colors ${
-                  currentStep === 2
-                    ? "bg-gray-100 border border-gray-200"
-                    : currentStep > 2
-                    ? "bg-green-50 border border-green-200"
-                    : "bg-neutral-50 border border-neutral-200"
-                }`}
-              >
-                <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                    currentStep === 2
-                      ? "bg-gray-900 text-white"
-                      : currentStep > 2
-                      ? "bg-green-500 text-white"
-                      : "bg-gray-300 text-gray-600"
-                  }`}
-                >
-                  {currentStep > 2 ? (
-                    <HiOutlineCheckCircle className="w-5 h-5" />
-                  ) : (
-                    <HiOutlineUser className="w-4 h-4" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p
-                    className={`text-sm font-medium ${
-                      currentStep >= 2 ? "text-ink" : "text-body/60"
-                    }`}
-                  >
-                    Contact Information
-                  </p>
-                  <p className="text-xs text-body/60 mt-1">
-                    Your contact details
-                  </p>
-                  {currentStep > 2 && (
-                    <Chip variant="success" size="sm" className="mt-2">
-                      Complete
-                    </Chip>
-                  )}
-                  {currentStep === 2 && (
-                    <Chip variant="default" size="sm" className="mt-2">
-                      Current
-                    </Chip>
-                  )}
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div
-                className={`flex items-start space-x-3 p-3 rounded-lg transition-colors ${
-                  currentStep === 3
-                    ? "bg-gray-100 border border-gray-200"
-                    : "bg-neutral-50 border border-neutral-200"
-                }`}
-              >
-                <div
-                  className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center ${
-                    currentStep === 3
-                      ? "bg-gray-900 text-white"
-                      : "bg-gray-300 text-gray-600"
-                  }`}
-                >
-                  <HiOutlineCalculator className="w-4 h-4" />
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p
-                    className={`text-sm font-medium ${
-                      currentStep >= 3 ? "text-ink" : "text-body/60"
-                    }`}
-                  >
-                    Get Your Quote
-                  </p>
-                  <p className="text-xs text-body/60 mt-1">
-                    Review and get estimate
-                  </p>
-                  {currentStep === 3 && (
-                    <Chip variant="default" size="sm" className="mt-2">
-                      Current
-                    </Chip>
-                  )}
-                </div>
-              </div>
-            </div>
-
-            {/* Progress Bar */}
-            <div className="mt-6 bg-gray-200 rounded-full h-2">
-              <div
-                className="bg-gray-900 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${(currentStep / 3) * 100}%` }}
-              />
-            </div>
-            <p className="text-xs text-body/60 mt-2 text-center">
-              Step {currentStep} of 3
-            </p>
-          </div>
-        </div>
+        {/* Desktop Stepper */}
+        <DesktopStepper 
+          steps={steps} 
+          currentStep={currentStep} 
+          title="Trade-In Progress" 
+        />
 
         {/* Main Form Content */}
         <div className="col-span-1 lg:col-span-3">
           <div className="bg-surface rounded-xl border border-border shadow-xs">
             {/* Form Header */}
-            <div className="px-4 sm:px-6 py-4 border-b border-border bg-neutral-50 rounded-t-xl">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-base sm:text-lg font-heading font-semibold text-ink">
-                    {currentStep === 1 && "Vehicle Information"}
-                    {currentStep === 2 && "Contact Information"}  
-                    {currentStep === 3 && "Your Quote"}
-                  </h1>
-                  <p className="text-xs sm:text-sm text-body/80 mt-1">
-                    {currentStep === 1 &&
-                      "Tell us about your vehicle to get started"}
-                    {currentStep === 2 &&
-                      "We need your contact details to provide the quote"}
-                    {currentStep === 3 &&
-                      "Review your information and get your trade-in estimate"}
-                  </p>
-                </div>
-                <div className="hidden sm:block">
-                  <div className="bg-gray-100 px-3 py-1 rounded-full">
-                    <span className="text-sm font-medium text-ink">
-                      {Math.round((currentStep / 3) * 100)}% Complete
-                    </span>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <FormHeader steps={steps} currentStep={currentStep} />
 
             {/* Form Content */}
             <div className="p-4 sm:p-6">
@@ -690,7 +503,8 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                   </div>
 
                   {/* Estimated Value Card */}
-                  <div className="bg-gradient-to-r from-gray-100 to-gray-50 p-6 rounded-lg border border-gray-200">
+                  {/* DON'T NEED IT RIGHT NOW, COULD NEED IT LATER */}
+                  {/* <div className="bg-gradient-to-r from-gray-100 to-gray-50 p-6 rounded-lg border border-gray-200">
                     <h3 className="text-lg font-heading font-semibold text-ink mb-2 flex items-center">
                       <HiOutlineCalculator className="w-5 h-5 mr-2" />
                       Estimated Trade-In Value
@@ -708,7 +522,7 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
                         determined after inspection.
                       </p>
                     </div>
-                  </div>
+                  </div> */}
                 </div>
               )}
             </div>
@@ -718,10 +532,10 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
               <button
                 type="button"
                 onClick={prevStep}
-                className={`px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors ${
+                className={`px-3 sm:px-4 py-2 text-sm font-medium rounded-md transition-colors border ${
                   currentStep === 1
-                    ? "bg-gray-200 text-gray-400 cursor-not-allowed"
-                    : "bg-white text-body border border-gray-300 hover:bg-gray-50"
+                    ? " text-gray-400 cursor-not-allowed"
+                    : " text-body border border-gray-300 hover:bg-gray-50"
                 }`}
                 disabled={currentStep === 1}
               >
@@ -731,16 +545,16 @@ export default function TradeInForm({ compact = false }: TradeInFormProps) {
               <button
                 type="button"
                 onClick={currentStep === 3 ? handleSubmit : nextStep}
-                className={`px-4 sm:px-6 py-2 text-sm font-medium rounded-md transition-all ${
+                className={`px-4 sm:px-6 py-2 text-sm font-medium rounded-md transition-all border ${
                   isSubmitting
                     ? "bg-gray-400 cursor-not-allowed text-white"
                     : currentStep === 3
                     ? isStepComplete()
-                      ? "bg-green-600 hover:bg-green-700 text-white"
+                      ? "bg-brand-500 text-ink hover:bg-brand-600  border-border-focus  font-black "
                       : "bg-gray-200 text-gray-400 cursor-not-allowed"
                     : isStepComplete()
-                      ? "bg-neutral-800 hover:bg-neutral-700 text-white"
-                      : "bg-gray-200 text-gray-400 cursor-not-allowed"
+                      ? "bg-brand-500 text-ink hover:bg-brand-600  border-border-focus  font-black "
+                      : " text-gray-400 cursor-not-allowed"
                 }`}
                 disabled={isSubmitting || !isStepComplete()}
               >

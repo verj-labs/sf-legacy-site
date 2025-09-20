@@ -89,9 +89,14 @@ export default function TestDriveFlow() {
               name: '',
               email: '',
               customAnswers: {
-                a1: `${selectedVehicle.year} ${selectedVehicle.make} ${selectedVehicle.model} ${selectedVehicle.trim || ''}`,
-                a2: selectedVehicle.stockNum,
-                a3: selectedVehicle._id
+                // Question 1: Phone number - let user fill this
+                // a1: '', // Phone number (user fills)
+                
+                // Question 2: Car - auto-filled with vehicle details
+                a2: `${selectedVehicle.year} ${selectedVehicle.make} ${selectedVehicle.model} ${selectedVehicle.trim || ''}`.trim(),
+                
+                // Question 3: Additional notes - let user fill this
+                // a3: '', // Additional notes (user fills)
               }
             }
           })

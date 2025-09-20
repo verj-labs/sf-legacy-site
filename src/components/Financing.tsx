@@ -68,7 +68,7 @@ export default function Financing() {
           
           {/* Financing Stats */}
           <div className="col-span-12 lg:col-span-4">
-            <div className="bg-primary text-white p-8 lg:p-10 rounded-xl">
+            <div className="bg-ink text-white p-8 lg:p-10 rounded-xl border border-neutral-800">
                   <h3 className="text-2xl lg:text-3xl font-heading font-bold text-ink mb-4">
                 Financing Options
               </h3>
@@ -113,7 +113,7 @@ export default function Financing() {
                 Take the first step towards owning your next vehicle. Our financing specialists 
                 are ready to help you find the perfect loan solution.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
+        <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link 
                   href="#contact" 
                   className="bg-accent text-white px-8 py-4 rounded-lg font-heading font-semibold text-lg hover:bg-opacity-90 transition-all duration-200 shadow-md hover:shadow-lg"
@@ -122,13 +122,13 @@ export default function Financing() {
                 </Link>
                 <Link 
                   href="#contact" 
-                  className="bg-primary text-white px-8 py-4 rounded-lg font-heading font-semibold text-lg hover:bg-opacity-90 transition-all duration-200 shadow-md hover:shadow-lg"
+          className="btn-primary px-8 py-4 text-lg"
                 >
                   Calculate Payment
                 </Link>
                 <Link 
                   href="#inventory" 
-                  className="border-2 border-primary text-primary px-8 py-4 rounded-lg font-heading font-semibold text-lg hover:bg-primary hover:text-white transition-all duration-200"
+          className="border-2 border-ink text-ink px-8 py-4 rounded-lg font-heading font-semibold text-lg hover:bg-ink hover:text-white transition-all duration-200"
                 >
                   Browse Inventory
                 </Link>

@@ -5,6 +5,9 @@ export interface Vehicle {
   _id: string;
   _type: "vehicle";
 
+  // VIN field - moved to top for convenience
+  vin: string;
+
   title: string;
 
   // Basic vehicle info
@@ -12,9 +15,19 @@ export interface Vehicle {
   make: string;
   model: string;
   trim?: string;
+  series?: string; // NEW: Vehicle series (e.g., C250, LX)
+
+  // Physical specifications - NEW
+  doors?: number; // NEW: Number of doors
+  vehicleDescriptor?: string; // NEW: VIN pattern descriptor
+
+  // Manufacturing info - NEW
+  manufacturerName?: string; // NEW: Manufacturer name
+  plantCity?: string; // NEW: Plant city
+  plantCountry?: string; // NEW: Plant country
 
   // Vehicle details
-  vin: string;
+  carfaxLink?: string; // NEW: Carfax report link
   stockNum: string;
   odometer: number;
   bodyType:
@@ -28,9 +41,13 @@ export interface Vehicle {
     | "van"
     | "crossover";
 
-  // Powertrain
+  // Powertrain - ENHANCED
   engineDesc: string; // "2.5L 4-Cylinder"
-  transmission: string; // "6-Speed Automatic"
+  engineCylinders?: number; // NEW: Engine cylinders
+  displacementL?: number; // NEW: Displacement in liters
+  displacementCC?: number; // NEW: Displacement in cubic centimeters
+  engineConfiguration?: "In-Line" | "V-Type" | "W-Type" | "Boxer" | "Rotary"; // NEW: Engine configuration
+  transmission?: string; // "6-Speed Automatic" - now optional
   drivetrain: "fwd" | "rwd" | "awd" | "4wd";
   fuelType: "gasoline" | "diesel" | "hybrid" | "electric" | "plug-in-hybrid";
 
@@ -44,30 +61,35 @@ export interface Vehicle {
 
   // Description & features
   description: string;
-  highlights: string[]; // Simple array of key selling points
-  features: string; // Large text field with features separated by newlines
+  highlights?: string[]; // Key selling points - now optional
+  features?: string; // Large text field with features separated by newlines - now optional
 
   // Images - just URLs
-  images: string[];
+  images?: string[]; // Now optional
 
   // Fuel economy (optional)
   mpgCity?: number;
   mpgHighway?: number;
 
-  // Simple warranty info
+  // Warranty info
   warranty?: {
     hasWarranty: boolean;
     warrantyDescription?: string;
     extendedAvailable: boolean;
   };
 
-  // Basic financing (optional)
+  // Financing info (optional)
   financing?: {
     monthlyPayment?: number;
     downPayment?: number;
     apr?: number;
     term?: number;
   };
+
+  // VIN Decoder fields - NEW (automatically populated, hidden in forms)
+  vinDecodedRaw?: string; // NEW: Raw VIN decoded data as JSON string
+  vinDecodedAt?: string; // NEW: When VIN was decoded (datetime)
+  vinDecoderSource?: string; // NEW: Source of VIN decoding
 
   // Status
   status: "available" | "sold" | "pending";

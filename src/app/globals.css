@@ -6,19 +6,19 @@
   :root {
     /* Design System Colors from STYLE.md */
   /* Updated Professional Palette */
-  --c-bg: #F7F9FA; /* soft neutral rather than pure white */
-  --c-bg-muted: #EDF1F4;
-  --c-surface: #FAFBFC; /* off-white surface */
-  --c-surface-muted: #F7F9FA;
-  --c-border: #E1E6EB;
-  --c-ink: #14181D; /* off-black */
-  --c-body: #323942; /* body copy */
+  --c-bg: #F9FAFB; /* light canvas for comfortable reading */
+  --c-bg-muted: #F3F4F6;
+  --c-surface: #FFFFFF; /* card surface */
+  --c-surface-muted: #F9FAFB;
+  --c-border: #E5E7EB;
+  --c-ink: #0D0D0D; /* deep black */
+  --c-body: #2C2C2C; /* body copy */
 
-  --c-primary: #1F60E8;
-  --c-primary-600: #1F60E8;
-  --c-primary-800: #143D9B;
+  --c-primary: #FFC107; /* warm golden yellow */
+  --c-primary-600: #FFB300;
+  --c-primary-800: #FFA000;
 
-  --c-accent: #FF6B2C; /* keep existing accent if used */
+  --c-accent: #FFCC00; /* secondary yellow accent */
   --c-support: #14B8A6;
 
     --c-success: #16A34A;
@@ -27,15 +27,15 @@
     --c-info: #0EA5E9;
 
     /* Gradients */
-  --g-brand: linear-gradient(135deg, #1F60E8 0%, #143D9B 100%);
-  --g-brand-bright: linear-gradient(135deg, #1F60E8 0%, #4F9BFF 55%, #1F60E8 100%);
-  --g-brand-radial: radial-gradient(circle at 30% 30%, #3570F6 0%, #1F60E8 50%, #143D9B 100%);
-  --g-perf: linear-gradient(135deg, #1F60E8 0%, #22D3EE 100%);
-  --g-action: linear-gradient(135deg, #FF6B2C 0%, #F59E0B 100%);
-  --g-gray-steel: linear-gradient(135deg, #F7F9FA 0%, #C9D0D6 45%, #4B5560 100%);
-  --g-gray-smoke: linear-gradient(135deg, #FFFFFF 0%, #E1E6EB 50%, #C9D0D6 100%);
-  --g-dark-carbon: linear-gradient(135deg, #1E242B 0%, #14181D 60%, #0D1013 100%);
-  --g-dark-vignette: radial-gradient(circle at 50% 40%, #323942 0%, #14181D 70%, #0D1013 100%);
+  --g-brand: linear-gradient(135deg, #FFCC00 0%, #FFC107 60%, #FFB300 100%);
+  --g-brand-bright: linear-gradient(135deg, #FFF1B8 0%, #FFCC00 40%, #FFC107 100%);
+  --g-brand-radial: radial-gradient(circle at 30% 30%, #FFE082 0%, #FFC107 50%, #FFB300 100%);
+  --g-perf: linear-gradient(135deg, #111827 0%, #2C2C2C 50%, #FFC107 100%);
+  --g-action: linear-gradient(135deg, #0D0D0D 0%, #111827 50%, #FFCC00 100%);
+  --g-gray-steel: linear-gradient(135deg, #F9FAFB 0%, #D1D5DB 45%, #4B5563 100%);
+  --g-gray-smoke: linear-gradient(135deg, #FFFFFF 0%, #E5E7EB 50%, #D1D5DB 100%);
+  --g-dark-carbon: linear-gradient(135deg, #1A1A1A 0%, #0D0D0D 60%, #000000 100%);
+  --g-dark-vignette: radial-gradient(circle at 50% 40%, #2C2C2C 0%, #0D0D0D 70%, #000000 100%);
 
     /* Radii */
     --r-sm: 8px; 
@@ -72,12 +72,12 @@
     --dur-fast: 150ms; --dur-med: 250ms; --dur-slow: 400ms;
 
     /* Legacy variables for compatibility */
-  --primary: #1F60E8;
+  --primary: #FFC107; /* legacy mapping */
     --secondary: #F5F5F5;
-    --accent: #FF6B2C;
-  --text-primary: #14181D;
-  --background: #F7F9FA;
-  --white: #FAFBFC;
+    --accent: #FFCC00;
+  --text-primary: #0D0D0D;
+  --background: #F9FAFB;
+  --white: #FFFFFF;
   }
 
   * {
@@ -135,13 +135,15 @@
   }
 
   a {
-    color: var(--c-primary);
+    color: var(--c-ink);
+    border-bottom: 1px solid rgba(0,0,0,0.15);
     text-decoration: none;
     transition: color var(--dur-fast) var(--easing-standard);
   }
 
   a:hover {
-    text-decoration: underline;
+    color: var(--c-primary);
+    border-bottom-color: rgba(255,193,7,0.6);
   }
 }
 
@@ -178,12 +180,12 @@ html {
   /* Primary Button - Neutral (Default) */
   .btn-primary {
     font: 600 var(--body-m-size)/var(--body-m-lh) var(--font-body);
-    color: #ffffff;
-    background: var(--c-ink);
+    color: #0D0D0D;
+    background: var(--c-primary);
     padding: 8px 16px;
     border-radius: var(--r-lg);
     box-shadow: var(--sh-sm);
-    border: 1px solid rgba(0,0,0,0.6);
+    border: 1px solid rgba(0,0,0,0.05);
     cursor: pointer;
     position: relative;
     overflow: hidden;
@@ -198,24 +200,17 @@ html {
     background: linear-gradient(to top, rgba(255,255,255,0.08), rgba(255,255,255,0));
     pointer-events: none;
   }
-  .btn-primary:hover {
-    background: #1E242B; /* neutral 800 */
-    box-shadow: var(--sh-md);
-    transform: translateY(-1px);
-  }
+  .btn-primary:hover { background: var(--c-primary-800); box-shadow: var(--sh-md); transform: translateY(-1px); }
   .btn-primary:active {
     transform: translateY(0);
     box-shadow: var(--sh-sm);
   }
-  .btn-primary:focus-visible {
-    outline: 2px solid transparent;
-    box-shadow: 0 0 0 3px rgba(31,96,232,.45);
-  }
+  .btn-primary:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 3px rgba(255,193,7,.45); }
 
-  /* Brand Button (Optional explicit blue variant) */
+  /* Brand Button (Yellow on black surfaces) */
   .btn-brand {
     font: 600 var(--body-m-size)/var(--body-m-lh) var(--font-body);
-    color: #fff;
+    color: #0D0D0D;
     background: var(--c-primary);
     padding: 8px 16px;
     border-radius: var(--r-lg);
@@ -228,7 +223,7 @@ html {
   }
   .btn-brand:hover { background: var(--c-primary-800); box-shadow: var(--sh-md); transform: translateY(-1px); }
   .btn-brand:active { transform: translateY(0); box-shadow: var(--sh-sm); }
-  .btn-brand:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 3px rgba(31,96,232,.45); }
+  .btn-brand:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 3px rgba(255,193,7,.45); }
 
   /* Secondary Button - Neutral outline */
   .btn-secondary {
@@ -241,8 +236,8 @@ html {
     cursor: pointer;
     transition: background var(--dur-fast) var(--easing-standard), color var(--dur-fast) var(--easing-standard), border-color var(--dur-fast) var(--easing-standard);
   }
-  .btn-secondary:hover { background: rgba(20,24,29,0.06); }
-  .btn-secondary:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 3px rgba(20,24,29,.4); }
+  .btn-secondary:hover { background: rgba(13,13,13,0.06); }
+  .btn-secondary:focus-visible { outline: 2px solid transparent; box-shadow: 0 0 0 3px rgba(255,193,7,.35); }
 
   /* Tertiary Button - Ghost */
   .btn-tertiary {
@@ -310,11 +305,7 @@ html {
     transition: all var(--dur-fast) var(--easing-standard);
   }
 
-  .chip--active {
-    background: #EFF6FF;
-    border-color: var(--c-primary);
-    color: var(--c-primary);
-  }
+  .chip--active { background: rgba(255,193,7,0.12); border-color: var(--c-primary); color: #0D0D0D; }
 
   /* Form Elements */
   .input {
@@ -341,8 +332,8 @@ html {
 
   /* Badges */
   .badge-new {
-    background: rgba(255,107,44,0.1);
-    color: var(--c-accent);
+    background: rgba(255,204,0,0.12);
+    color: var(--c-primary);
     padding: 4px 8px;
     border-radius: var(--r-pill);
     font: 600 var(--body-s-size)/var(--body-s-lh) var(--font-body);

@@ -30,7 +30,7 @@ export default function PageEndBanner({
         <div className="flex flex-col sm:flex-row gap-4 lg:justify-end">
           <Link
             href="/inventory"
-            className="btn-primary bg-white text-brand hover:bg-white/90 text-center"
+            className="btn-primary bg-gradient-to-r from-brand to-brand-dark text-ink hover:bg-white/90 text-center"
           >
             Browse Inventory
           </Link>

@@ -5,11 +5,13 @@ export default function Hero() {
   return (
     <section className="relative bg-background overflow-hidden min-h-[60vh] sm:min-h-[70vh] lg:h-[75vh] flex items-center py-8 sm:py-12 lg:py-16">
       {/* Enhanced gradient background overlay */}
-      <div className="absolute inset-0 bg-gradient-to-br from-neutral-100 via-neutral-50 to-neutral-300"></div>
+      <div className="absolute inset-0 bg-gradient-to-br from-brand-400  to-primary-700"></div>
 
       {/* Content Container */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-16">
         <div className="flex flex-col lg:flex-row items-center justify-between gap-8 lg:gap-12">
+          
+
           {/* Left: Text Stack with beautiful typography */}
           <div className="flex-1 lg:flex-[0_0_55%] max-w-3xl text-center lg:text-left">
             {/* Main Heading with gradient text */}
@@ -18,7 +20,7 @@ export default function Hero() {
               <br />
               <span>
                 Shop With
-                <span className="ml-2 lg:ml-3 bg-gradient-to-r from-brand to-brand-800 bg-clip-text text-transparent">
+                <span className="ml-2 lg:ml-3 bg-gradient-to-r from-blackContrast to-primary-900 bg-clip-text text-transparent">
                   Confidence
                 </span>
               </span>
@@ -26,18 +28,14 @@ export default function Hero() {
 
             {/* Subcopy with enhanced typography */}
             <p className="text-base sm:text-lg lg:text-body-l text-body mb-6 lg:mb-8 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light">
-              Your trusted dealership for quality pre-owned vehicles. Find your
-              perfect car with our extensive inventory and exceptional service.
+              Your trusted dealership for quality pre-owned vehicles. Find your perfect car with our
+              extensive inventory and exceptional service.
             </p>
 
             {/* Contact Info */}
             <div className="flex items-center justify-center lg:justify-start gap-2 mb-6 lg:mb-8 text-sm sm:text-base lg:text-body-m text-body">
               <div className="p-2 bg-ink/5 rounded-full">
-                <svg
-                  className="w-4 h-4 text-ink"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
-                >
+                <svg className="w-4 h-4 text-ink" fill="currentColor" viewBox="0 0 20 20">
                   <path d="M2 3a1 1 0 011-1h2.153a1 1 0 01.986.836l.74 4.435a1 1 0 01-.54 1.06l-1.548.773a11.037 11.037 0 006.105 6.105l.774-1.548a1 1 0 011.059-.54l4.435.74a1 1 0 01.836.986V17a1 1 0 01-1 1h-2C7.82 18 2 12.18 2 5V3z" />
                 </svg>
               </div>
@@ -53,7 +51,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-8 lg:mb-12 justify-center lg:justify-start">
               <Link
                 href="/book-test-drive"
-                className="btn-primary inline-flex items-center justify-center w-full sm:w-auto"
+                className="btn-primary bg-ink text-primary-50 hover:bg-primary-900 hover:text-black transition-all duration-200 inline-flex items-center justify-center w-full sm:w-auto"
               >
                 Schedule Test Drive
               </Link>
@@ -75,7 +73,7 @@ export default function Hero() {
                   href="https://www.cargurus.ca/Cars/m-SF-LEGACY-MOTORS-sp449799"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-24 sm:w-28 h-12 sm:h-14 bg-neutral-100 border border-border rounded-md hover:bg-neutral-200 hover:border-ink/40 shadow-xs hover:shadow-md transition-all duration-fast group"
+                  className="flex items-center justify-center w-24 sm:w-28 h-12 sm:h-14 border border-ink rounded-md hover:bg-primary-700 hover:border-ink/40 shadow-xs hover:shadow-md transition-all duration-fast group"
                 >
                   <Image
                     src="/asset/hero-carguru.svg"
@@ -89,7 +87,7 @@ export default function Hero() {
                   href="https://www.kijiji.ca/b-cars-trucks/canada/c174l0"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center justify-center w-24 sm:w-28 h-12 sm:h-14 bg-neutral-100 border border-border rounded-md hover:bg-neutral-100 hover:border-ink/40 shadow-xs hover:shadow-md transition-all duration-fast group"
+                  className="flex items-center justify-center w-24 sm:w-28 h-12 sm:h-14  border border-ink rounded-md hover:bg-primary-700 hover:border-ink/40 shadow-xs hover:shadow-md transition-all duration-fast group"
                 >
                   <Image
                     src="/asset/hero-kijiji.png"
@@ -111,21 +109,22 @@ export default function Hero() {
             <div className="absolute flex gap-1 h-full w-[350px] lg:h-[75vh] ">
               <div className="absolute flex gap-[2px] h-full w-[350px] lg:h-[1000px] rotate-12 top-[-200px]">
                 {/* <div className="bg-dark-vignette flex-1 " /> */}
-                <div className="bg-gradient-to-r from-brand-800 to-brand-700 flex-1 " />
-                <div className="bg-gradient-to-r from-brand-700 to-brand-600 flex-1" />
-                <div className="bg-gradient-to-r from-brand-600 to-brand-500 flex-1" />
-                <div className="bg-gradient-to-r from-brand-500 to-brand-400 flex-1" />
+                {/* <div className="bg-gradient-to-r from-brand-800 to-brand-700 flex-1 " /> */}
+                {/* <div className="bg-gradient-to-r from-brand-700 to-brand-600 flex-1" /> */}
+                <div className="bg-gradient-to-r from-ink/90 to-blackContrast flex-1" />
+                <div className="bg-gradient-to-r from-primary-600 to-brand-300 flex-1" />
+                <div className="bg-gradient-to-r from-ink to-blackContrast/90 flex-1" />
               </div>
             </div>
 
             <div className="relative ">
               {/* Animated Car SVG */}
               <Image
-                src="/asset/hero-car-1.png"
-                alt="Hero Car"
-                width={1000}
-                height={500}
-                className=" w-[1600px] h-auto "
+              src="/asset/hero-car-4.png"
+              alt="Hero Car"
+              width={1000}
+              height={500}
+              className="w-[1600px] h-auto transform -scale-x-100 rotate"
               />
             </div>
           </div>

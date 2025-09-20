@@ -12,6 +12,9 @@ import {
   formatPrice,
   formatMileage,
   getVehicleTitle,
+  formatDrivetrain,
+  formatFuelType,
+  formatBodyType,
 } from "@/utils/vehicleHelpers";
 
 export default function VehicleDetailPage() {
@@ -38,10 +41,7 @@ export default function VehicleDetailPage() {
 
           // Load related vehicles
           setRelatedLoading(true);
-          const related = await getRelatedVehicles(
-            vehicleData.make,
-            vehicleData._id
-          );
+          const related = await getRelatedVehicles(vehicleData.make, vehicleData._id);
           setRelatedVehicles(related);
           setRelatedLoading(false);
         }
@@ -98,9 +98,7 @@ export default function VehicleDetailPage() {
       <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center py-12">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">
-              Vehicle Not Found
-            </h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">Vehicle Not Found</h1>
             <p className="text-gray-600 mb-6">
               The vehicle you're looking for doesn't exist or has been removed.
             </p>
@@ -141,13 +139,10 @@ export default function VehicleDetailPage() {
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
               <div className="aspect-[4/3] bg-gray-100">
                 <img
-                  src={
-                    vehicle.images?.[selectedImageIndex] ||
-                    "/api/placeholder/600/400"
-                  }
-                  alt={`${vehicle.year} ${vehicle.make} ${
-                    vehicle.model
-                  } - Image ${selectedImageIndex + 1}`}
+                  src={vehicle.images?.[selectedImageIndex] || "/api/placeholder/600/400"}
+                  alt={`${vehicle.year} ${vehicle.make} ${vehicle.model} - Image ${
+                    selectedImageIndex + 1
+                  }`}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -200,7 +195,7 @@ export default function VehicleDetailPage() {
               {/* Tab Content */}
               <div className="p-4 sm:p-6">
                 {activeTab === "overview" && (
-                  <div className="space-y-6">
+                  <div className="space-y-1 flex flex-col">
                     <div>
                       <h3 className="text-base sm:text-lg font-heading font-semibold text-gray-900 mb-3">
                         Description
@@ -210,32 +205,45 @@ export default function VehicleDetailPage() {
                       </p>
                     </div>
 
-                    <div>
-                      <h3 className="text-base sm:text-lg font-heading font-semibold text-gray-900 mb-3">
-                        Vehicle Highlights
-                      </h3>
-                      <ul className="space-y-3">
-                        {vehicle.highlights.map((highlight, index) => (
-                          <li
-                            key={index}
-                            className="flex items-center text-sm sm:text-base text-gray-600"
-                          >
-                            <svg
-                              className="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
+                    {vehicle.highlights && vehicle.highlights.length > 0 && (
+                      <div>
+                        <h3 className="text-base sm:text-lg font-heading font-semibold text-gray-900 mb-3">
+                          Vehicle Highlights
+                        </h3>
+                        <ul className="space-y-3">
+                          {vehicle.highlights.map((highlight, index) => (
+                            <li
+                              key={index}
+                              className="flex items-center text-sm sm:text-base text-gray-600"
                             >
-                              <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            {highlight}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
+                              <svg
+                                className="w-5 h-5 text-emerald-500 mr-3 flex-shrink-0"
+                                fill="currentColor"
+                                viewBox="0 0 20 20"
+                              >
+                                <path
+                                  fillRule="evenodd"
+                                  d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                  clipRule="evenodd"
+                                />
+                              </svg>
+                              {highlight}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+
+                    {vehicle.carfaxLink && (
+                      <a
+                        href={vehicle.carfaxLink}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-sm bg-gradient-to-br from-primary-300 to-primary-600 text-ink p-2 px-4 rounded-lg self-end"
+                      >
+                        View Carfax Report
+                      </a>
+                    )}
                   </div>
                 )}
 
@@ -245,27 +253,22 @@ export default function VehicleDetailPage() {
                       Features & Options
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {parseVehicleFeatures(vehicle.features).map(
-                        (feature, index) => (
-                          <div
-                            key={index}
-                            className="flex items-center text-sm text-gray-600"
+                      {parseVehicleFeatures(vehicle.features).map((feature, index) => (
+                        <div key={index} className="flex items-center text-sm text-gray-600">
+                          <svg
+                            className="w-4 h-4 text-gray-900 mr-3 flex-shrink-0"
+                            fill="currentColor"
+                            viewBox="0 0 20 20"
                           >
-                            <svg
-                              className="w-4 h-4 text-gray-900 mr-3 flex-shrink-0"
-                              fill="currentColor"
-                              viewBox="0 0 20 20"
-                            >
-                              <path
-                                fillRule="evenodd"
-                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                                clipRule="evenodd"
-                              />
-                            </svg>
-                            <span>{feature}</span>
-                          </div>
-                        )
-                      )}
+                            <path
+                              fillRule="evenodd"
+                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                              clipRule="evenodd"
+                            />
+                          </svg>
+                          <span>{feature}</span>
+                        </div>
+                      ))}
                       {parseVehicleFeatures(vehicle.features).length === 0 && (
                         <div className="col-span-full text-center py-8 text-gray-500">
                           No features listed for this vehicle.
@@ -282,15 +285,11 @@ export default function VehicleDetailPage() {
                     </h3>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="font-medium text-gray-900 mb-3">
-                          Engine & Performance
-                        </h4>
+                        <h4 className="font-medium text-gray-900 mb-3">Engine & Performance</h4>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Engine:</span>
-                            <span className="font-medium text-gray-900">
-                              {vehicle.engineDesc}
-                            </span>
+                            <span className="font-medium text-gray-900">{vehicle.engineDesc}</span>
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Transmission:</span>
@@ -300,32 +299,23 @@ export default function VehicleDetailPage() {
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Drivetrain:</span>
-                            <span className="font-medium text-gray-900">
-                              {vehicle.drivetrain}
-                            </span>
+                            <span className="font-medium text-gray-900">{formatDrivetrain(vehicle.drivetrain)}</span>
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Fuel Type:</span>
-                            <span className="font-medium text-gray-900">
-                              {vehicle.fuelType}
-                            </span>
+                            <span className="font-medium text-gray-900">{formatFuelType(vehicle.fuelType)}</span>
                           </div>
                           <div className="flex justify-between py-1">
-                            <span className="text-gray-600">
-                              MPG City/Highway:
-                            </span>
+                            <span className="text-gray-600">MPG City/Highway:</span>
                             <span className="font-medium text-gray-900">
-                              {vehicle.mpgCity || "N/A"}/
-                              {vehicle.mpgHighway || "N/A"}
+                              {vehicle.mpgCity || "N/A"}/{vehicle.mpgHighway || "N/A"}
                             </span>
                           </div>
                         </div>
                       </div>
 
                       <div>
-                        <h4 className="font-medium text-gray-900 mb-3">
-                          Vehicle Details
-                        </h4>
+                        <h4 className="font-medium text-gray-900 mb-3">Vehicle Details</h4>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">VIN:</span>
@@ -335,20 +325,14 @@ export default function VehicleDetailPage() {
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Stock #:</span>
-                            <span className="font-medium text-gray-900">
-                              {vehicle.stockNum}
-                            </span>
+                            <span className="font-medium text-gray-900">{vehicle.stockNum}</span>
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Body Style:</span>
-                            <span className="font-medium text-gray-900">
-                              {vehicle.bodyType}
-                            </span>
+                            <span className="font-medium text-gray-900">{formatBodyType(vehicle.bodyType)}</span>
                           </div>
                           <div className="flex justify-between py-1">
-                            <span className="text-gray-600">
-                              Exterior Color:
-                            </span>
+                            <span className="text-gray-600">Exterior Color:</span>
                             <span className="font-medium text-gray-900">
                               {vehicle.exteriorColor}
                             </span>
@@ -371,9 +355,7 @@ export default function VehicleDetailPage() {
                       Financing Information
                     </h3>
                     <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-4 sm:p-6 mb-6">
-                      <h4 className="font-medium text-gray-900 mb-4">
-                        Estimated Monthly Payment
-                      </h4>
+                      <h4 className="font-medium text-gray-900 mb-4">Estimated Monthly Payment</h4>
                       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
                         <div>
                           <div className="text-xl sm:text-2xl font-bold text-gray-900">
@@ -389,9 +371,7 @@ export default function VehicleDetailPage() {
                               ? formatPrice(vehicle.financing.downPayment)
                               : "TBD"}
                           </div>
-                          <div className="text-xs sm:text-sm text-gray-600">
-                            down payment
-                          </div>
+                          <div className="text-xs sm:text-sm text-gray-600">down payment</div>
                         </div>
                         <div>
                           <div className="text-lg sm:text-xl font-semibold text-gray-900">
@@ -410,15 +390,14 @@ export default function VehicleDetailPage() {
                       </div>
                     </div>
                     <p className="text-xs sm:text-sm text-gray-600">
-                      *Estimated payment based on price, down payment, term and
-                      rate shown. Payment may vary based on your credit
-                      approval. Final terms may vary. Contact us for
+                      *Estimated payment based on price, down payment, term and rate shown. Payment
+                      may vary based on your credit approval. Final terms may vary. Contact us for
                       personalized financing options.
                     </p>
                   </div>
                 )}
 
-                                {activeTab === "warranty" && (
+                {activeTab === "warranty" && (
                   <div>
                     <h3 className="text-base sm:text-lg font-heading font-semibold text-gray-900 mb-4">
                       Warranty Information
@@ -429,19 +408,16 @@ export default function VehicleDetailPage() {
                           Extended Warranty Available
                         </h4>
                         <p className="text-sm text-gray-600">
-                          Protect your investment with our comprehensive
-                          extended warranty options covering major components
-                          and systems.
+                          Protect your investment with our comprehensive extended warranty options
+                          covering major components and systems.
                         </p>
                       </div>
                       {vehicle.warranty && vehicle.warranty.hasWarranty ? (
                         <div className="border border-gray-200 rounded-xl p-4 sm:p-5">
-                          <h5 className="font-medium text-gray-900 mb-2">
-                            Warranty Coverage
-                          </h5>
+                          <h5 className="font-medium text-gray-900 mb-2">Warranty Coverage</h5>
                           <p className="text-sm text-gray-600 mb-3">
-                            {vehicle.warranty.warrantyDescription || 
-                             "This vehicle comes with manufacturer warranty coverage."}
+                            {vehicle.warranty.warrantyDescription ||
+                              "This vehicle comes with manufacturer warranty coverage."}
                           </p>
                           {vehicle.warranty.extendedAvailable && (
                             <div className="text-sm text-emerald-600 font-medium">
@@ -451,13 +427,10 @@ export default function VehicleDetailPage() {
                         </div>
                       ) : (
                         <div className="border border-gray-200 rounded-xl p-4 sm:p-5">
-                          <h5 className="font-medium text-gray-900 mb-2">
-                            Standard Coverage
-                          </h5>
+                          <h5 className="font-medium text-gray-900 mb-2">Standard Coverage</h5>
                           <p className="text-sm text-gray-600">
-                            This vehicle comes with manufacturer warranty.
-                            Extended warranty options are available for
-                            additional peace of mind.
+                            This vehicle comes with manufacturer warranty. Extended warranty options
+                            are available for additional peace of mind.
                           </p>
                         </div>
                       )}
@@ -481,9 +454,7 @@ export default function VehicleDetailPage() {
                   <div className="text-2xl sm:text-3xl font-heading font-bold text-gray-900">
                     {formatPrice(vehicle.price)}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-600">
-                    Stock #{vehicle.stockNum}
-                  </div>
+                  <div className="text-xs sm:text-sm text-gray-600">Stock #{vehicle.stockNum}</div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 text-sm">
@@ -495,7 +466,7 @@ export default function VehicleDetailPage() {
                   </div>
                   <div>
                     <span className="text-gray-600">Body Style:</span>
-                    <div className="font-medium text-gray-900">{vehicle.bodyType}</div>
+                    <div className="font-medium text-gray-900">{formatBodyType(vehicle.bodyType)}</div>
                   </div>
                   <div>
                     <span className="text-gray-600">Transmission:</span>
@@ -504,8 +475,7 @@ export default function VehicleDetailPage() {
                   <div>
                     <span className="text-gray-600">Fuel Economy:</span>
                     <div className="font-medium text-gray-900">
-                      {vehicle.mpgCity || "N/A"}/{vehicle.mpgHighway || "N/A"}{" "}
-                      MPG
+                      {vehicle.mpgCity || "N/A"}/{vehicle.mpgHighway || "N/A"} MPG
                     </div>
                   </div>
                 </div>
@@ -554,7 +524,10 @@ export default function VehicleDetailPage() {
                         d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"
                       />
                     </svg>
-                    <a href="tel:5551234567" className="text-gray-900 hover:text-neutral-800 transition-colors">
+                    <a
+                      href="tel:5551234567"
+                      className="text-gray-900 hover:text-neutral-800 transition-colors"
+                    >
                       (555) 123-4567
                     </a>
                   </div>
@@ -572,7 +545,10 @@ export default function VehicleDetailPage() {
                         d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
                       />
                     </svg>
-                    <a href="mailto:sales@sflegacyautos.com" className="text-gray-900 hover:text-neutral-800 transition-colors">
+                    <a
+                      href="mailto:sales@sflegacyautos.com"
+                      className="text-gray-900 hover:text-neutral-800 transition-colors"
+                    >
                       sales@sflegacyautos.com
                     </a>
                   </div>
@@ -650,17 +626,15 @@ export default function VehicleDetailPage() {
                 >
                   <div className="aspect-[4/3] bg-gray-200 overflow-hidden">
                     <img
-                      src={
-                        relatedVehicle.images?.[0] || "/api/placeholder/400/300"
-                      }
+                      src={relatedVehicle.images?.[0] || "/api/placeholder/400/300"}
                       alt={`${relatedVehicle.year} ${relatedVehicle.make} ${relatedVehicle.model}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   <div className="p-4 sm:p-5">
                     <h3 className="font-heading font-bold text-gray-900 mb-2 group-hover:text-neutral-800 transition-colors text-sm sm:text-base">
-                      {relatedVehicle.year} {relatedVehicle.make}{" "}
-                      {relatedVehicle.model} {relatedVehicle.trim}
+                      {relatedVehicle.year} {relatedVehicle.make} {relatedVehicle.model}{" "}
+                      {relatedVehicle.trim}
                     </h3>
                     <div className="flex items-center justify-between">
                       <div className="text-lg sm:text-xl font-bold text-gray-900">
@@ -704,12 +678,7 @@ export default function VehicleDetailPage() {
                 onClick={() => setShowContactForm(false)}
                 className="text-gray-400 hover:text-gray-600"
               >
-                <svg
-                  className="w-6 h-6"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -721,8 +690,7 @@ export default function VehicleDetailPage() {
             </div>
 
             <p className="text-gray-600 mb-4">
-              Get more information about this {vehicle.year} {vehicle.make}{" "}
-              {vehicle.model}
+              Get more information about this {vehicle.year} {vehicle.make} {vehicle.model}
             </p>
 
             <form className="space-y-4">

@@ -23,22 +23,22 @@ export default function ContactForm() {
     setIsSubmitting(true)
 
     try {
+      const submitData = new FormData()
+      submitData.append('name', formData.name)
+      submitData.append('email', formData.email)
+      submitData.append('phone', formData.phone)
+      submitData.append('subject', formData.subject)
+      submitData.append('message', formData.message)
+      submitData.append('preferredContact', formData.preferredContact)
+      submitData.append('interestedVehicle', formData.interestedVehicle)
+      submitData.append('_subject', `Contact Form: ${formData.subject}`)
+
       const response = await fetch(process.env.NEXT_PUBLIC_CONTACT_FORM_URL!, {
         method: 'POST',
+        body: submitData,
         headers: {
           'Accept': 'application/json',
-          'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          phone: formData.phone,
-          subject: formData.subject,
-          message: formData.message,
-          preferredContact: formData.preferredContact,
-          interestedVehicle: formData.interestedVehicle,
-          _subject: `Contact Form: ${formData.subject}`,
-        }),
       })
 
       if (response.ok) {

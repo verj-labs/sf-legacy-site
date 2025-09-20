@@ -10,7 +10,7 @@ export default function PageStartBanner({ title, description, children }: PageSt
   return (
     <section className="relative overflow-hidden py-6 sm:py-8 md:py-12">
       {/* Neutral background gradient */}
-      <div className="absolute inset-0 bg-dark-carbon" />
+      <div className="absolute inset-0 bg-gradient-to-b from-blackContrast to-ink" />
       {/* Subtle texture / radial vignette */}
       <div className="absolute inset-0 pointer-events-none [mask-image:radial-gradient(circle_at_center,black,transparent_70%)] bg-[linear-gradient(120deg,rgba(0,0,0,0.04),transparent_35%,rgba(0,0,0,0.04))]" />
       {/* Brand accent stripe */}

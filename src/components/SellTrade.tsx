@@ -72,7 +72,7 @@ export default function SellTrade() {
           
           {/* Trade-In Form */}
           <div className="col-span-12 lg:col-span-5">
-            <div className="bg-primary text-white p-8 lg:p-10 rounded-xl">
+            <div className="bg-ink text-white p-8 lg:p-10 rounded-xl border border-neutral-800">
               <h3 className="text-2xl lg:text-3xl font-heading font-bold mb-6">
                 Quick Trade-In Estimate
               </h3>
@@ -122,7 +122,7 @@ export default function SellTrade() {
                 </div>
                 <button 
                   type="submit"
-                  className="w-full bg-accent text-white py-4 px-6 rounded-lg font-heading font-semibold text-lg hover:bg-opacity-90 transition-all duration-200"
+                  className="w-full btn-primary py-4 px-6 text-center"
                 >
                   Get Instant Estimate
                 </button>

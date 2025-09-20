@@ -2,83 +2,178 @@
 
 import React, { useState } from 'react'
 import Chip from './Chip'
+import { MobileStepper, DesktopStepper, StepperStep } from './Stepper'
 import { 
   HiOutlineCheckCircle, 
-  HiOutlineCurrencyDollar, 
   HiOutlineUser, 
   HiOutlineBriefcase, 
-  HiOutlineClipboardDocumentCheck 
+  HiOutlineCreditCard,
+  HiOutlineTruck 
 } from 'react-icons/hi2'
 
 interface FormData {
-  // Step 1 - Vehicle & Payment Info
-  carPrice: string
-  desiredMonthlyPayment: string
-  downPaymentAmount: string
-  
-  // Step 2 - Personal Info
-  name: string
-  phone: string
+  // Step 1 - Personal Information
+  firstName: string
+  lastName: string
   email: string
-  address: string
-  province: string
-  city: string
-  postalCode: string
-  driversLicenseNumber: string
-  dateOfBirth: string
+  mobile: string
+  dobMonth: string
+  dobDay: string
+  dobYear: string
+  socialInsurance: string
+  maritalStatus: string
   
-  // Step 3 - Employment Info
-  employmentStatus: string
-  employerName: string
+  // Current Address
+  currentStreetAddress: string
+  currentApt: string
+  currentCity: string
+  currentProvince: string
+  currentPostalCode: string
+  currentDurationYears: string
+  currentDurationMonths: string
+  propertyType: string
+  monthlyRent: string
+  
+  // Previous Address (conditional)
+  previousStreetAddress: string
+  previousApt: string
+  previousCity: string
+  previousProvince: string
+  previousPostalCode: string
+  previousDurationYears: string
+  previousDurationMonths: string
+  
+  // Employment Information (Step 2)
+  employmentType: string
+  occupation: string
+  presentEmployer: string
   employerAddress: string
-  workPhone: string
-  jobTitle: string
-  employmentLength: string
-  grossIncome: string
-  otherIncome: string
+  monthlyGrossIncome: string
+  employerPhone: string
+  employmentYears: string
+  employmentMonths: string
+  otherMonthlyIncome: string
+  otherIncomeSource: string
   
-  // Step 4 - Additional Info
-  tradeIn: string
-  coApplicant: string
-  documentsAvailable: boolean
-  consent: boolean
+  // Previous Employment Information (conditional)
+  previousEmploymentType: string
+  previousOccupation: string
+  previousEmployerName: string
+  previousEmployerPhone: string
+  previousEmploymentYears: string
+  previousEmploymentMonths: string
+  
+  // Step 3 - Credit History & Finance Variables
+  bankruptcyHistory: string
+  vehicleRepossessed: string
+  hasCoSigner: string
+  creditRating: string
+  downPaymentAmount: string
+  purchaseTimeframe: string
+  
+  // Step 4 - Vehicle Information
+  hasTradeIn: string
+  tradeInYear: string
+  tradeInMake: string
+  tradeInModel: string
+  tradeInMileage: string
+  desiredYear: string
+  desiredMake: string
+  desiredModel: string
+  desiredTrim: string
+  desiredColor: string
+  specificVehicleInMind: string
+  financing: boolean
+  lease: boolean
+  
+  // Validation and completion tracking
+  firstStepComplete: boolean
+  secondStepComplete: boolean
+  thirdStepComplete: boolean
 }
 
 export default function FinancingForm() {
   const [currentStep, setCurrentStep] = useState(1)
-  const [isSubmitted, setIsSubmitted] = useState(false)
+  
   const [formData, setFormData] = useState<FormData>({
-    // Step 1 - Vehicle & Payment Info
-    carPrice: '',
-    desiredMonthlyPayment: '',
-    downPaymentAmount: '',
-    
-    // Step 2 - Personal Info
-    name: '',
-    phone: '',
+    // Step 1 - Personal Information
+    firstName: '',
+    lastName: '',
     email: '',
-    address: '',
-    province: '',
-    city: '',
-    postalCode: '',
-    driversLicenseNumber: '',
-    dateOfBirth: '',
+    mobile: '',
+    dobMonth: '',
+    dobDay: '',
+    dobYear: '',
+    socialInsurance: '',
+    maritalStatus: '',
     
-    // Step 3 - Employment Info
-    employmentStatus: '',
-    employerName: '',
+    // Current Address
+    currentStreetAddress: '',
+    currentApt: '',
+    currentCity: '',
+    currentProvince: '',
+    currentPostalCode: '',
+    currentDurationYears: '',
+    currentDurationMonths: '',
+    propertyType: '',
+    monthlyRent: '',
+    
+    // Previous Address (conditional)
+    previousStreetAddress: '',
+    previousApt: '',
+    previousCity: '',
+    previousProvince: '',
+    previousPostalCode: '',
+    previousDurationYears: '',
+    previousDurationMonths: '',
+    
+    // Step 2 - Employment Information
+    employmentType: '',
+    occupation: '',
+    presentEmployer: '',
     employerAddress: '',
-    workPhone: '',
-    jobTitle: '',
-    employmentLength: '',
-    grossIncome: '',
-    otherIncome: '',
+    monthlyGrossIncome: '',
+    employerPhone: '',
+    employmentYears: '',
+    employmentMonths: '',
+    otherMonthlyIncome: '',
+    otherIncomeSource: '',
     
-    // Step 4 - Additional Info
-    tradeIn: '',
-    coApplicant: '',
-    documentsAvailable: false,
-    consent: false
+    // Previous Employment (conditional)
+    previousEmploymentType: '',
+    previousOccupation: '',
+    previousEmployerName: '',
+    previousEmployerPhone: '',
+    previousEmploymentYears: '',
+    previousEmploymentMonths: '',
+    
+    // Step 3 - Credit History & Finance Variables
+    bankruptcyHistory: '',
+    vehicleRepossessed: '',
+    hasCoSigner: '',
+    creditRating: '',
+    downPaymentAmount: '',
+    purchaseTimeframe: '',
+    
+    // Step 4 - Vehicle Information
+    hasTradeIn: '',
+    tradeInYear: '',
+    tradeInMake: '',
+    tradeInModel: '',
+    tradeInMileage: '',
+    desiredYear: '',
+    desiredMake: '',
+    desiredModel: '',
+    desiredTrim: '',
+    desiredColor: '',
+    specificVehicleInMind: '',
+    financing: false,
+    lease: false,
+    
+    // Validation and completion tracking
+    firstStepComplete: false,
+    secondStepComplete: false,
+    thirdStepComplete: false
   })
 
   const canadianProvinces = [
@@ -87,8 +182,24 @@ export default function FinancingForm() {
     'Quebec', 'Saskatchewan', 'Yukon'
   ]
 
-  const employmentStatuses = [
-    'Full-Time', 'Part-Time', 'Self-Employed', 'Contract', 'Seasonal/Temporary', 'Retired', 'Unemployed'
+  const maritalStatuses = [
+    'Single', 'Married', 'Common Law', 'Separated', 'Divorced', 'Widowed'
+  ]
+
+  const employmentTypes = [
+    'Full Time', 'Part Time', 'Self Employed'
+  ]
+
+  const propertyTypes = [
+    'Own with mortgage', 'Own free and clear', 'Rent', 'Live with family', 'Other'
+  ]
+
+  const creditRatings = [
+    'Good', 'Bad', 'None'
+  ]
+
+  const purchaseTimeframes = [
+    '1 Week', '1 Month', '3 Months'
   ]
 
   const handleInputChange = (field: keyof FormData, value: string | boolean) => {
@@ -100,772 +211,1068 @@ export default function FinancingForm() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    
     try {
-      // Formspree submission using environment variable
+      // Submit to Formspree
       const response = await fetch(process.env.NEXT_PUBLIC_FINANCING_FORM_URL!, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({
-          ...formData,
-          _subject: 'New Used Car Financing Application',
-        }),
+        body: JSON.stringify(formData),
       })
 
       if (response.ok) {
-        setIsSubmitted(true)
-        setCurrentStep(5) // Move to success step
+        alert('Application submitted successfully!')
+        // Reset form or redirect
       } else {
-        alert('There was an error submitting your application. Please try again.')
+        alert('Error submitting application. Please try again.')
       }
     } catch (error) {
       console.error('Error:', error)
-      alert('There was an error submitting your application. Please try again.')
+      alert('Error submitting application. Please try again.')
     }
   }
 
-  const nextStep = () => {
-    if (currentStep < 4) setCurrentStep(currentStep + 1)
+  const handleNext = () => {
+    if (canProceedToNext(currentStep)) {
+      setCurrentStep(currentStep + 1)
+    }
   }
 
-  const prevStep = () => {
-    if (currentStep > 1) setCurrentStep(currentStep - 1)
+  const handlePrevious = () => {
+    if (currentStep > 1) {
+      setCurrentStep(currentStep - 1)
+    }
   }
 
-  const canProceedToNext = () => {
-    switch (currentStep) {
+  const canProceedToNext = (step: number) => {
+    switch (step) {
       case 1:
-        return formData.carPrice && formData.desiredMonthlyPayment && formData.downPaymentAmount
+        return formData.firstName && formData.lastName && formData.email && formData.mobile && 
+               formData.dobMonth && formData.dobDay && formData.dobYear && formData.currentStreetAddress && 
+               formData.currentCity && formData.currentProvince && formData.currentPostalCode && 
+               formData.currentDurationYears && formData.currentDurationMonths && formData.propertyType
       case 2:
-        return formData.name && formData.phone && formData.email && formData.address && 
-               formData.province && formData.city && formData.postalCode && 
-               formData.driversLicenseNumber && formData.dateOfBirth
+        // Base employment validation
+        const hasBasicEmployment = formData.employmentType && formData.occupation && formData.presentEmployer &&
+               formData.employerAddress && formData.monthlyGrossIncome
+        
+        // Check if previous employment section should be shown and is required
+        const totalCurrentEmploymentMonths = (parseInt(formData.employmentYears) * 12) + parseInt(formData.employmentMonths)
+        const needsPreviousEmployment = totalCurrentEmploymentMonths < 24
+        
+        // If previous employment is needed, validate those fields too
+        if (needsPreviousEmployment) {
+          const hasPreviousEmployment = formData.previousEmploymentType && formData.previousOccupation && 
+                                       formData.previousEmployerName
+          return hasBasicEmployment && hasPreviousEmployment
+        }
+        
+        return hasBasicEmployment
       case 3:
-        return formData.employmentStatus && formData.employerName && formData.jobTitle && 
-               formData.employmentLength && formData.grossIncome
+        return formData.creditRating && formData.downPaymentAmount && formData.purchaseTimeframe
       case 4:
-        return formData.tradeIn && formData.coApplicant && formData.documentsAvailable && formData.consent
+        return formData.desiredYear && formData.desiredMake && formData.desiredModel
       default:
         return false
     }
   }
 
-  const isStepComplete = () => {
-    return canProceedToNext()
+  const isStepComplete = (step: number) => {
+    return canProceedToNext(step)
   }
 
+  const steps: StepperStep[] = [
+    { 
+      num: 1, 
+      icon: HiOutlineUser, 
+      title: "Personal Information",
+      description: "Personal details and address"
+    },
+    { 
+      num: 2, 
+      icon: HiOutlineBriefcase, 
+      title: "Employment Information",
+      description: "Employment and income details"
+    },
+    { 
+      num: 3, 
+      icon: HiOutlineCreditCard, 
+      title: "Credit History",
+      description: "Credit and financing information"
+    },
+    { 
+      num: 4, 
+      icon: HiOutlineTruck, 
+      title: "Vehicle Information",
+      description: "Vehicle preferences and trade-in"
+    }
+  ]
+
   return (
-    <div className="p-0 lg:py-12">
+    <form onSubmit={handleSubmit} className="p-0 lg:py-12">
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-0 lg:gap-8">
-        {/* Mobile Horizontal Stepper - Only visible on mobile */}
-        <div className="lg:hidden col-span-1">
-          <div className="bg-surface-raised rounded-xl p-4 mb-2">
-            {/* Mobile Progress Bar */}
-            <div className="flex items-center justify-between mb-4">
-              <span className="text-sm font-medium text-text-ink">Step {currentStep} of 4</span>
-              <div className="flex-1 mx-4 bg-surface-secondary rounded-full h-1">
-                <div 
-                  className="bg-gray-500 h-1 rounded-full transition-all duration-300"
-                  style={{ width: `${Math.min((currentStep / 4) * 100, 100)}%` }}
-                />
-              </div>
-              <span className="text-xs text-text-muted">{Math.round((currentStep / 4) * 100)}%</span>
-            </div>
-            
-            {/* Mobile Step Indicators */}
-            <div className="flex items-center justify-between">
-              {[
-                { num: 1, icon: HiOutlineCurrencyDollar, label: "Payment" },
-                { num: 2, icon: HiOutlineUser, label: "Personal" },
-                { num: 3, icon: HiOutlineBriefcase, label: "Employment" },
-                { num: 4, icon: HiOutlineClipboardDocumentCheck, label: "Final" }
-              ].map((step, index) => {
-                const Icon = step.icon;
-                return (
-                  <div key={step.num} className="flex flex-col items-center flex-1">
-                    <div className={`w-6 h-6 rounded-full flex items-center justify-center mb-1 transition-all duration-200 ${
-                      currentStep === step.num ? 'bg-gray-500 text-white' :
-                      currentStep > step.num ? 'bg-emerald-500 text-white' : 'bg-surface-tertiary text-text-muted'
-                    }`}>
-                      {currentStep > step.num ? (
-                        <HiOutlineCheckCircle className="w-3 h-3" />
-                      ) : (
-                        <Icon className="w-3 h-3" />
-                      )}
+        {/* Mobile Stepper */}
+        <MobileStepper steps={steps} currentStep={currentStep} />
+
+        {/* Desktop Stepper */}
+        <DesktopStepper 
+          steps={steps} 
+          currentStep={currentStep} 
+          title="Application Progress" 
+        />
+
+        {/* Form Content */}
+        <div className="lg:col-span-3 bg-surface rounded-xl border border-border-subtle" >
+          <div className="bg-surface-raised rounded-xl p-6 lg:p-8">
+            {currentStep === 1 && (
+              <div className="space-y-6">
+                <div className="text-center lg:text-left">
+                  <h3 className="text-xl font-semibold text-text-ink mb-2">Personal Information</h3>
+                  <p className="text-text-muted">Please provide your personal details and address information.</p>
+                </div>
+                
+                <div className="space-y-6">
+                  {/* Personal Information Section */}
+                  <div>
+                    <h4 className="text-lg font-medium text-text-ink mb-4 border-b border-border-primary pb-2">
+                      Personal Information (As per your Driver Licence)
+                    </h4>
+                    
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            First Name *
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter your first name"
+                            value={formData.firstName}
+                            onChange={(e) => handleInputChange('firstName', e.target.value)}
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Last Name *
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter your last name"
+                            value={formData.lastName}
+                            onChange={(e) => handleInputChange('lastName', e.target.value)}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Email Address *
+                        </label>
+                        <input
+                          type="email"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter your email address"
+                          value={formData.email}
+                          onChange={(e) => handleInputChange('email', e.target.value)}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Mobile Phone *
+                        </label>
+                        <input
+                          type="tel"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter your mobile phone number"
+                          value={formData.mobile}
+                          onChange={(e) => handleInputChange('mobile', e.target.value)}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Date of Birth *
+                        </label>
+                        <div className="grid grid-cols-3 gap-4">
+                          <div>
+                            <select
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              value={formData.dobMonth}
+                              onChange={(e) => handleInputChange('dobMonth', e.target.value)}
+                            >
+                              <option value="">Month</option>
+                              {Array.from({ length: 12 }, (_, i) => (
+                                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                              ))}
+                            </select>
+                            <p className="text-xs text-text-muted mt-1">MM</p>
+                          </div>
+                          
+                          <div>
+                            <select
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              value={formData.dobDay}
+                              onChange={(e) => handleInputChange('dobDay', e.target.value)}
+                            >
+                              <option value="">Day</option>
+                              {Array.from({ length: 31 }, (_, i) => (
+                                <option key={i + 1} value={i + 1}>{i + 1}</option>
+                              ))}
+                            </select>
+                            <p className="text-xs text-text-muted mt-1">DD</p>
+                          </div>
+                          
+                          <div>
+                            <select
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              value={formData.dobYear}
+                              onChange={(e) => handleInputChange('dobYear', e.target.value)}
+                            >
+                              <option value="">Year</option>
+                              {Array.from({ length: 80 }, (_, i) => {
+                                const year = new Date().getFullYear() - 18 - i
+                                return <option key={year} value={year}>{year}</option>
+                              })}
+                            </select>
+                            <p className="text-xs text-text-muted mt-1">YYYY</p>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Social Insurance Number
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter your social insurance number (optional)"
+                          value={formData.socialInsurance}
+                          onChange={(e) => handleInputChange('socialInsurance', e.target.value)}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Marital Status
+                        </label>
+                        <select
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          value={formData.maritalStatus}
+                          onChange={(e) => handleInputChange('maritalStatus', e.target.value)}
+                        >
+                          <option value="">Select Marital Status</option>
+                          {maritalStatuses.map((status) => (
+                            <option key={status} value={status}>{status}</option>
+                          ))}
+                        </select>
+                      </div>
                     </div>
-                    <span className={`text-xs font-medium ${
-                      currentStep >= step.num ? 'text-text-ink' : 'text-text-muted'
-                    }`}>
-                      {step.label}
-                    </span>
                   </div>
-                );
-              })}
-            </div>
-          </div>
-        </div>
 
-        {/* Desktop Vertical Stepper Sidebar - Hidden on mobile */}
-        <div className="hidden lg:block lg:col-span-1">
-          <div className="sticky top-8">
-            <h2 className="text-xl font-bold text-text-ink mb-6">Application Progress</h2>
-            
-            <div className="space-y-4">
-              {/* Step 1 */}
-              <div className={`flex items-start space-x-3 p-4 rounded-lg transition-all duration-200 ${
-                currentStep === 1 ? 'bg-gray-50 border border-gray-200' : 
-                currentStep > 1 ? 'bg-emerald-50 border border-emerald-200' : 'bg-surface-secondary border border-border-primary'
-              }`}>
-                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
-                  currentStep === 1 ? 'bg-gray-500 text-white' :
-                  currentStep > 1 ? 'bg-emerald-500 text-white' : 'bg-surface-tertiary text-text-muted'
-                }`}>
-                  {currentStep > 1 ? (
-                    <HiOutlineCheckCircle className="w-5 h-5" />
-                  ) : (
-                    <HiOutlineCurrencyDollar className="w-4 h-4" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className={`text-sm font-medium ${
-                    currentStep >= 1 ? 'text-text-ink' : 'text-text-muted'
-                  }`}>
-                    Vehicle & Payment
-                  </p>
-                  <p className="text-xs text-text-muted mt-1">
-                    Car price and payment details
-                  </p>
-                  {currentStep > 1 && (
-                    <Chip variant="success" size="sm" className="mt-2">
-                      Complete
-                    </Chip>
-                  )}
-                  {currentStep === 1 && (
-                    <Chip variant="primary" size="sm" className="mt-2">
-                      Current
-                    </Chip>
-                  )}
-                </div>
-              </div>
+                  {/* Current Address Section */}
+                  <div>
+                    <h4 className="text-lg font-medium text-text-ink mb-4 border-b border-border-primary pb-2">
+                      Current Address
+                    </h4>
+                    
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-4 gap-4">
+                        <div className="col-span-3">
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Street Address *
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter your street address"
+                            value={formData.currentStreetAddress}
+                            onChange={(e) => handleInputChange('currentStreetAddress', e.target.value)}
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Apt
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Apt #"
+                            value={formData.currentApt}
+                            onChange={(e) => handleInputChange('currentApt', e.target.value)}
+                          />
+                        </div>
+                      </div>
 
-              {/* Step 2 */}
-              <div className={`flex items-start space-x-3 p-4 rounded-lg transition-all duration-200 ${
-                currentStep === 2 ? 'bg-gray-50 border border-gray-200' : 
-                currentStep > 2 ? 'bg-emerald-50 border border-emerald-200' : 'bg-surface-secondary border border-border-primary'
-              }`}>
-                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
-                  currentStep === 2 ? 'bg-gray-500 text-white' :
-                  currentStep > 2 ? 'bg-emerald-500 text-white' : 'bg-surface-tertiary text-text-muted'
-                }`}>
-                  {currentStep > 2 ? (
-                    <HiOutlineCheckCircle className="w-5 h-5" />
-                  ) : (
-                    <HiOutlineUser className="w-4 h-4" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className={`text-sm font-medium ${
-                    currentStep >= 2 ? 'text-text-ink' : 'text-text-muted'
-                  }`}>
-                    Personal Information
-                  </p>
-                  <p className="text-xs text-text-muted mt-1">
-                    Your personal details
-                  </p>
-                  {currentStep > 2 && (
-                    <Chip variant="success" size="sm" className="mt-2">
-                      Complete
-                    </Chip>
-                  )}
-                  {currentStep === 2 && (
-                    <Chip variant="primary" size="sm" className="mt-2">
-                      Current
-                    </Chip>
-                  )}
-                </div>
-              </div>
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            City *
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter your city"
+                            value={formData.currentCity}
+                            onChange={(e) => handleInputChange('currentCity', e.target.value)}
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Province *
+                          </label>
+                          <select
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            value={formData.currentProvince}
+                            onChange={(e) => handleInputChange('currentProvince', e.target.value)}
+                          >
+                            <option value="">Select Province</option>
+                            {canadianProvinces.map((province) => (
+                              <option key={province} value={province}>{province}</option>
+                            ))}
+                          </select>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Postal Code *
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter your postal code"
+                            value={formData.currentPostalCode}
+                            onChange={(e) => handleInputChange('currentPostalCode', e.target.value)}
+                          />
+                        </div>
+                      </div>
 
-              {/* Step 3 */}
-              <div className={`flex items-start space-x-3 p-4 rounded-lg transition-all duration-200 ${
-                currentStep === 3 ? 'bg-gray-50 border border-gray-200' : 
-                currentStep > 3 ? 'bg-emerald-50 border border-emerald-200' : 'bg-surface-secondary border border-border-primary'
-              }`}>
-                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
-                  currentStep === 3 ? 'bg-gray-500 text-white' :
-                  currentStep > 3 ? 'bg-emerald-500 text-white' : 'bg-surface-tertiary text-text-muted'
-                }`}>
-                  {currentStep > 3 ? (
-                    <HiOutlineCheckCircle className="w-5 h-5" />
-                  ) : (
-                    <HiOutlineBriefcase className="w-4 h-4" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className={`text-sm font-medium ${
-                    currentStep >= 3 ? 'text-text-ink' : 'text-text-muted'
-                  }`}>
-                    Employment
-                  </p>
-                  <p className="text-xs text-text-muted mt-1">
-                    Work and income details
-                  </p>
-                  {currentStep > 3 && (
-                    <Chip variant="success" size="sm" className="mt-2">
-                      Complete
-                    </Chip>
-                  )}
-                  {currentStep === 3 && (
-                    <Chip variant="primary" size="sm" className="mt-2">
-                      Current
-                    </Chip>
-                  )}
-                </div>
-              </div>
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Duration (Years) *
+                          </label>
+                          <input
+                            type="number"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="0"
+                            value={formData.currentDurationYears}
+                            onChange={(e) => handleInputChange('currentDurationYears', e.target.value)}
+                          />
+                          <p className="text-xs text-text-muted mt-1">Years at this address. If less than a year, type 0</p>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Duration (Months) *
+                          </label>
+                          <input
+                            type="number"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="0"
+                            value={formData.currentDurationMonths}
+                            onChange={(e) => handleInputChange('currentDurationMonths', e.target.value)}
+                          />
+                          <p className="text-xs text-text-muted mt-1">Months at this address</p>
+                        </div>
+                      </div>
 
-              {/* Step 4 */}
-              <div className={`flex items-start space-x-3 p-4 rounded-lg transition-all duration-200 ${
-                currentStep === 4 ? 'bg-gray-50 border border-gray-200' : 
-                currentStep > 4 ? 'bg-emerald-50 border border-emerald-200' : 'bg-surface-secondary border border-border-primary'
-              }`}>
-                <div className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center transition-all duration-200 ${
-                  currentStep === 4 ? 'bg-gray-500 text-white' :
-                  currentStep > 4 ? 'bg-emerald-500 text-white' : 'bg-surface-tertiary text-text-muted'
-                }`}>
-                  {currentStep > 4 ? (
-                    <HiOutlineCheckCircle className="w-5 h-5" />
-                  ) : (
-                    <HiOutlineClipboardDocumentCheck className="w-4 h-4" />
-                  )}
-                </div>
-                <div className="flex-1 min-w-0">
-                  <p className={`text-sm font-medium ${
-                    currentStep >= 4 ? 'text-text-ink' : 'text-text-muted'
-                  }`}>
-                    Final Details
-                  </p>
-                  <p className="text-xs text-text-muted mt-1">
-                    Terms and conditions
-                  </p>
-                  {currentStep > 4 && (
-                    <Chip variant="success" size="sm" className="mt-2">
-                      Complete
-                    </Chip>
-                  )}
-                  {currentStep === 4 && (
-                    <Chip variant="primary" size="sm" className="mt-2">
-                      Current
-                    </Chip>
-                  )}
-                </div>
-              </div>
-            </div>
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Property Type *
+                        </label>
+                        <select
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          value={formData.propertyType}
+                          onChange={(e) => handleInputChange('propertyType', e.target.value)}
+                        >
+                          <option value="">Select Property Type</option>
+                          {propertyTypes.map((type) => (
+                            <option key={type} value={type}>{type}</option>
+                          ))}
+                        </select>
+                      </div>
 
-            {/* Progress Bar */}
-            <div className="mt-6 bg-surface-secondary rounded-full h-2">
-              <div 
-                className="bg-gray-500 h-2 rounded-full transition-all duration-300"
-                style={{ width: `${Math.min((currentStep / 4) * 100, 100)}%` }}
-              />
-            </div>
-            <p className="text-xs text-text-muted mt-2 text-center">
-              Step {Math.min(currentStep, 4)} of 4
-            </p>
-          </div>
-        </div>
-
-        {/* Main Form Content */}
-        <div className="lg:col-span-3">
-          <form onSubmit={handleSubmit} className="bg-surface-primary rounded-xl border border-border-primary shadow-sm">
-            {/* Form Header */}
-            <div className="px-4 py-4 lg:px-8 lg:py-6 border-b border-border-subtle bg-surface-secondary rounded-t-xl">
-              <div className="flex items-center justify-between">
-                <div>
-                  <h1 className="text-lg font-semibold text-text-ink">
-                    {currentStep === 1 && 'Vehicle & Payment Information'}
-                    {currentStep === 2 && 'Personal Information'}
-                    {currentStep === 3 && 'Employment Information'}
-                    {currentStep === 4 && 'Final Details'}
-                    {currentStep === 5 && 'Application Complete'}
-                  </h1>
-                  <p className="text-sm text-text-body mt-1">
-                    {currentStep === 1 && 'Tell us about the car you want and your payment preferences'}
-                    {currentStep === 2 && 'We need your personal details for the financing application'}
-                    {currentStep === 3 && 'Your employment information helps us determine your financing options'}
-                    {currentStep === 4 && 'Review your information and agree to our terms'}
-                    {currentStep === 5 && 'Thank you for submitting your financing application'}
-                  </p>
-                </div>
-                <div className="hidden sm:block">
-                  <div className="bg-gray-50 px-3 py-1 rounded-full">
-                    <span className="text-sm font-medium text-gray-700">
-                      {Math.min(Math.round((currentStep / 4) * 100), 100)}% Complete
-                    </span>
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Monthly Rent
+                        </label>
+                        <input
+                          type="number"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter monthly rent (if applicable)"
+                          value={formData.monthlyRent}
+                          onChange={(e) => handleInputChange('monthlyRent', e.target.value)}
+                        />
+                      </div>
+                    </div>
                   </div>
+
+                  {/* Previous Address Section - Conditional */}
+                  {(parseInt(formData.currentDurationYears) < 2 || (parseInt(formData.currentDurationYears) === 0 && parseInt(formData.currentDurationMonths) < 24)) && (
+                    <div>
+                      <h4 className="text-lg font-medium text-text-ink mb-4 border-b border-border-primary pb-2">
+                        Previous Address
+                      </h4>
+                      <p className="text-sm text-text-muted mb-4 bg-yellow-50 p-3 rounded-md">
+                        PLEASE COMPLETE THIS SECTION IF DURATION AT CURRENT ADDRESS IS LESS THAN TWO(2) YEARS.
+                      </p>
+                      
+                      <div className="space-y-4">
+                        <div className="grid grid-cols-4 gap-4">
+                          <div className="col-span-3">
+                            <label className="block text-sm font-medium text-text-ink mb-2">
+                              Street Address *
+                            </label>
+                            <input
+                              type="text"
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              placeholder="Enter your previous street address"
+                              value={formData.previousStreetAddress}
+                              onChange={(e) => handleInputChange('previousStreetAddress', e.target.value)}
+                            />
+                          </div>
+                          
+                          <div>
+                            <label className="block text-sm font-medium text-text-ink mb-2">
+                              Apt
+                            </label>
+                            <input
+                              type="text"
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              placeholder="Apt #"
+                              value={formData.previousApt}
+                              onChange={(e) => handleInputChange('previousApt', e.target.value)}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-text-ink mb-2">
+                              City *
+                            </label>
+                            <input
+                              type="text"
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              placeholder="Enter your previous city"
+                              value={formData.previousCity}
+                              onChange={(e) => handleInputChange('previousCity', e.target.value)}
+                            />
+                          </div>
+                          
+                          <div>
+                            <label className="block text-sm font-medium text-text-ink mb-2">
+                              Province *
+                            </label>
+                            <select
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              value={formData.previousProvince}
+                              onChange={(e) => handleInputChange('previousProvince', e.target.value)}
+                            >
+                              <option value="">Select Province</option>
+                              {canadianProvinces.map((province) => (
+                                <option key={province} value={province}>{province}</option>
+                              ))}
+                            </select>
+                          </div>
+                          
+                          <div>
+                            <label className="block text-sm font-medium text-text-ink mb-2">
+                              Postal Code *
+                            </label>
+                            <input
+                              type="text"
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              placeholder="Enter your previous postal code"
+                              value={formData.previousPostalCode}
+                              onChange={(e) => handleInputChange('previousPostalCode', e.target.value)}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-text-ink mb-2">
+                              Duration (Years) *
+                            </label>
+                            <input
+                              type="number"
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              placeholder="0"
+                              value={formData.previousDurationYears}
+                              onChange={(e) => handleInputChange('previousDurationYears', e.target.value)}
+                            />
+                            <p className="text-xs text-text-muted mt-1">Years at this address. If less than a year, type 0</p>
+                          </div>
+                          
+                          <div>
+                            <label className="block text-sm font-medium text-text-ink mb-2">
+                              Duration (Months) *
+                            </label>
+                            <input
+                              type="number"
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              placeholder="0"
+                              value={formData.previousDurationMonths}
+                              onChange={(e) => handleInputChange('previousDurationMonths', e.target.value)}
+                            />
+                            <p className="text-xs text-text-muted mt-1">Months at this address</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                 </div>
               </div>
-            </div>
+            )}
 
-            {/* Form Content */}
-            <div className="p-4 lg:p-8">
-              {/* Step 1: Vehicle & Payment Info */}
-              {currentStep === 1 && (
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-2 lg:gap-6">
+            {currentStep === 2 && (
+              <div className="space-y-6">
+                <div className="text-center lg:text-left">
+                  <h3 className="text-xl font-semibold text-text-ink mb-2">Employment Information</h3>
+                  <p className="text-text-muted">Please provide your employment and income details.</p>
+                </div>
+                
+                <div className="space-y-6">
+                  {/* Employment Section */}
+                  <div>
+                    <h4 className="text-lg font-medium text-text-ink mb-4 border-b border-border-primary pb-2">
+                      Employment
+                    </h4>
+                    
+                    <div className="space-y-4">
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Employment Type *
+                        </label>
+                        <select
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          value={formData.employmentType}
+                          onChange={(e) => handleInputChange('employmentType', e.target.value)}
+                        >
+                          <option value="">Select Employment Type</option>
+                          {employmentTypes.map((type) => (
+                            <option key={type} value={type}>{type}</option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Occupation *
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter your occupation"
+                          value={formData.occupation}
+                          onChange={(e) => handleInputChange('occupation', e.target.value)}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Present Employer *
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter your current employer"
+                          value={formData.presentEmployer}
+                          onChange={(e) => handleInputChange('presentEmployer', e.target.value)}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Employer Address *
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter your employer's address"
+                          value={formData.employerAddress}
+                          onChange={(e) => handleInputChange('employerAddress', e.target.value)}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Monthly Gross Income *
+                        </label>
+                        <input
+                          type="number"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter your monthly gross income"
+                          value={formData.monthlyGrossIncome}
+                          onChange={(e) => handleInputChange('monthlyGrossIncome', e.target.value)}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Employer Phone
+                        </label>
+                        <input
+                          type="tel"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter your employer's phone number"
+                          value={formData.employerPhone}
+                          onChange={(e) => handleInputChange('employerPhone', e.target.value)}
+                        />
+                      </div>
+
+                      <div className="grid grid-cols-2 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Employment Years
+                          </label>
+                          <input
+                            type="number"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="0"
+                            value={formData.employmentYears}
+                            onChange={(e) => handleInputChange('employmentYears', e.target.value)}
+                          />
+                          <p className="text-xs text-text-muted mt-1">Years at this job. If less than a year, type 0</p>
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Employment Months
+                          </label>
+                          <input
+                            type="number"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="0"
+                            value={formData.employmentMonths}
+                            onChange={(e) => handleInputChange('employmentMonths', e.target.value)}
+                          />
+                          <p className="text-xs text-text-muted mt-1">Months at this job</p>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Other Monthly Gross Income
+                        </label>
+                        <input
+                          type="number"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter any other monthly income"
+                          value={formData.otherMonthlyIncome}
+                          onChange={(e) => handleInputChange('otherMonthlyIncome', e.target.value)}
+                        />
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Other Income Source
+                        </label>
+                        <input
+                          type="text"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter source of other income"
+                          value={formData.otherIncomeSource}
+                          onChange={(e) => handleInputChange('otherIncomeSource', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Previous Employment Section - Conditional */}
+                  {(parseInt(formData.employmentYears) < 2 || (parseInt(formData.employmentYears) === 0 && parseInt(formData.employmentMonths) < 24)) && (
+                    <div>
+                      <h4 className="text-lg font-medium text-text-ink mb-4 border-b border-border-primary pb-2">
+                        Previous Employment
+                      </h4>
+                      <p className="text-sm text-text-muted mb-4 bg-yellow-50 p-3 rounded-md">
+                        PLEASE COMPLETE THIS SECTION IF DURATION AT CURRENT JOB IS LESS THAN TWO(2) YEARS.
+                      </p>
+                      
+                      <div className="space-y-4">
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Employment Type *
+                          </label>
+                          <select
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            value={formData.previousEmploymentType}
+                            onChange={(e) => handleInputChange('previousEmploymentType', e.target.value)}
+                          >
+                            <option value="">Select Employment Type</option>
+                            {employmentTypes.map((type) => (
+                              <option key={type} value={type}>{type}</option>
+                            ))}
+                          </select>
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Occupation *
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter your previous occupation"
+                            value={formData.previousOccupation}
+                            onChange={(e) => handleInputChange('previousOccupation', e.target.value)}
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Previous Employer Name *
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter your previous employer name"
+                            value={formData.previousEmployerName}
+                            onChange={(e) => handleInputChange('previousEmployerName', e.target.value)}
+                          />
+                        </div>
+
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Employer Phone
+                          </label>
+                          <input
+                            type="tel"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter your previous employer's phone number"
+                            value={formData.previousEmployerPhone}
+                            onChange={(e) => handleInputChange('previousEmployerPhone', e.target.value)}
+                          />
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-4">
+                          <div>
+                            <label className="block text-sm font-medium text-text-ink mb-2">
+                              Employment Years
+                            </label>
+                            <input
+                              type="number"
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              placeholder="0"
+                              value={formData.previousEmploymentYears}
+                              onChange={(e) => handleInputChange('previousEmploymentYears', e.target.value)}
+                            />
+                            <p className="text-xs text-text-muted mt-1">Years at this job. If less than a year, type 0</p>
+                          </div>
+                          
+                          <div>
+                            <label className="block text-sm font-medium text-text-ink mb-2">
+                              Employment Months
+                            </label>
+                            <input
+                              type="number"
+                              className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                              placeholder="0"
+                              value={formData.previousEmploymentMonths}
+                              onChange={(e) => handleInputChange('previousEmploymentMonths', e.target.value)}
+                            />
+                            <p className="text-xs text-text-muted mt-1">Months at this job</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </div>
+            )}
+
+            {currentStep === 3 && (
+              <div className="space-y-6">
+                <div className="text-center lg:text-left">
+                  <h3 className="text-xl font-semibold text-text-ink mb-2">Credit History</h3>
+                  <p className="text-text-muted">Please provide your credit and financing information.</p>
+                </div>
+                
+                <div className="space-y-4">
                   <div>
                     <label className="block text-sm font-medium text-text-ink mb-2">
-                      Price of the Car *
+                      Credit Rating *
                     </label>
-                    <input
-                      type="number"
-                      value={formData.carPrice}
-                      onChange={(e) => handleInputChange('carPrice', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      placeholder="$25,000"
-                      required
-                    />
+                    <select
+                      className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                      value={formData.creditRating}
+                      onChange={(e) => handleInputChange('creditRating', e.target.value)}
+                    >
+                      <option value="">Select Credit Rating</option>
+                      {creditRatings.map((rating) => (
+                        <option key={rating} value={rating}>{rating}</option>
+                      ))}
+                    </select>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Desired Monthly Payment *
-                    </label>
-                    <input
-                      type="number"
-                      value={formData.desiredMonthlyPayment}
-                      onChange={(e) => handleInputChange('desiredMonthlyPayment', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      placeholder="$450"
-                      required
-                    />
-                  </div>
+
                   <div>
                     <label className="block text-sm font-medium text-text-ink mb-2">
                       Down Payment Amount *
                     </label>
                     <input
                       type="number"
+                      className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                      placeholder="Enter down payment amount"
                       value={formData.downPaymentAmount}
                       onChange={(e) => handleInputChange('downPaymentAmount', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      placeholder="$5,000"
-                      required
                     />
                   </div>
-                </div>
-              )}
 
-              {/* Step 2: Personal Information */}
-              {currentStep === 2 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-text-ink mb-2">
-                      Full Name *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.name}
-                      onChange={(e) => handleInputChange('name', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Phone *
-                    </label>
-                    <input
-                      type="tel"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange('phone', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Email *
-                    </label>
-                    <input
-                      type="email"
-                      value={formData.email}
-                      onChange={(e) => handleInputChange('email', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Address *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.address}
-                      onChange={(e) => handleInputChange('address', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Province *
+                      Purchase Timeframe *
                     </label>
                     <select
-                      value={formData.province}
-                      onChange={(e) => handleInputChange('province', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
+                      className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                      value={formData.purchaseTimeframe}
+                      onChange={(e) => handleInputChange('purchaseTimeframe', e.target.value)}
                     >
-                      <option value="">Select Province</option>
-                      {canadianProvinces.map((province) => (
-                        <option key={province} value={province}>{province}</option>
+                      <option value="">Select Purchase Timeframe</option>
+                      {purchaseTimeframes.map((timeframe) => (
+                        <option key={timeframe} value={timeframe}>{timeframe}</option>
                       ))}
                     </select>
                   </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      City *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.city}
-                      onChange={(e) => handleInputChange('city', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Postal Code *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.postalCode}  
-                      onChange={(e) => handleInputChange('postalCode', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      pattern="[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d"
-                      placeholder="A1A 1A1"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Driver's License Number *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.driversLicenseNumber}
-                      onChange={(e) => handleInputChange('driversLicenseNumber', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div className="md:col-span-2">
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Date of Birth *
-                    </label>
-                    <input
-                      type="date"
-                      value={formData.dateOfBirth}
-                      onChange={(e) => handleInputChange('dateOfBirth', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                </div>
-              )}
 
-              {/* Step 3: Employment Information */}
-              {currentStep === 3 && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-2 lg:gap-6">
                   <div>
                     <label className="block text-sm font-medium text-text-ink mb-2">
-                      Employment Status *
+                      Have you ever declared bankruptcy?
                     </label>
                     <select
-                      value={formData.employmentStatus}
-                      onChange={(e) => handleInputChange('employmentStatus', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
+                      className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                      value={formData.bankruptcyHistory}
+                      onChange={(e) => handleInputChange('bankruptcyHistory', e.target.value)}
                     >
-                      <option value="">Select Employment Status</option>
-                      {employmentStatuses.map((status) => (
-                        <option key={status} value={status}>{status}</option>
-                      ))}
+                      <option value="">Select option</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
                     </select>
                   </div>
+
                   <div>
                     <label className="block text-sm font-medium text-text-ink mb-2">
-                      Employer Name *
+                      Have you ever had a vehicle repossessed?
                     </label>
-                    <input
-                      type="text"
-                      value={formData.employerName}
-                      onChange={(e) => handleInputChange('employerName', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Employer Address *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.employerAddress}
-                      onChange={(e) => handleInputChange('employerAddress', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Work Phone *
-                    </label>
-                    <input
-                      type="tel"
-                      value={formData.workPhone}
-                      onChange={(e) => handleInputChange('workPhone', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Job Title *
-                    </label>
-                    <input
-                      type="text"
-                      value={formData.jobTitle}
-                      onChange={(e) => handleInputChange('jobTitle', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Employment Length (Years) *
-                    </label>
-                    <input
-                      type="number"
-                      value={formData.employmentLength}
-                      onChange={(e) => handleInputChange('employmentLength', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      step="0.5"
-                      min="0"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Gross Income (Monthly) *
-                    </label>
-                    <input
-                      type="number"
-                      value={formData.grossIncome}
-                      onChange={(e) => handleInputChange('grossIncome', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      placeholder="$4,500"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-2">
-                      Other Income (Optional)
-                    </label>
-                    <input
-                      type="number"
-                      value={formData.otherIncome}
-                      onChange={(e) => handleInputChange('otherIncome', e.target.value)}
-                      className="w-full px-4 py-3 bg-surface-primary border border-border-primary rounded-lg focus:outline-none focus:ring-2 focus:ring-gray-500 focus:border-gray-500 text-sm transition-all duration-200"
-                      placeholder="$0"
-                    />
+                    <select
+                      className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                      value={formData.vehicleRepossessed}
+                      onChange={(e) => handleInputChange('vehicleRepossessed', e.target.value)}
+                    >
+                      <option value="">Select option</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
                   </div>
                 </div>
-              )}
-
-              {/* Step 4: Final Details */}
-              {currentStep === 4 && (
-                <div className="space-y-6">
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-3">
-                      Will you Trade-In? *
-                    </label>
-                    <div className="flex space-x-4">
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="tradeIn"
-                          value="Yes"
-                          checked={formData.tradeIn === 'Yes'}
-                          onChange={(e) => handleInputChange('tradeIn', e.target.value)}
-                          className="mr-2 text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm">Yes</span>
-                      </label>
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="tradeIn"
-                          value="No"
-                          checked={formData.tradeIn === 'No'}
-                          onChange={(e) => handleInputChange('tradeIn', e.target.value)}
-                          className="mr-2 text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm">No</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label className="block text-sm font-medium text-text-ink mb-3">
-                      Is there a Co-Applicant? *
-                    </label>
-                    <div className="flex space-x-4">
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="coApplicant"
-                          value="Yes"
-                          checked={formData.coApplicant === 'Yes'}
-                          onChange={(e) => handleInputChange('coApplicant', e.target.value)}
-                          className="mr-2 text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm">Yes</span>
-                      </label>
-                      <label className="flex items-center">
-                        <input
-                          type="radio"
-                          name="coApplicant"
-                          value="No"
-                          checked={formData.coApplicant === 'No'}
-                          onChange={(e) => handleInputChange('coApplicant', e.target.value)}
-                          className="mr-2 text-primary focus:ring-primary"
-                        />
-                        <span className="text-sm">No</span>
-                      </label>
-                    </div>
-                  </div>
-
-                  <div className="bg-gray-50 p-4 rounded-lg">
-                    <label className="flex items-start">
-                      <input
-                        type="checkbox"
-                        checked={formData.documentsAvailable}
-                        onChange={(e) => handleInputChange('documentsAvailable', e.target.checked)}
-                        className="mr-3 mt-1 text-primary focus:ring-primary"
-                      />
-                      <div>
-                        <span className="text-sm font-medium text-text-ink">
-                          I can provide all these documents for the application *
-                        </span>
-                        <ul className="text-xs text-gray-600 mt-2 ml-4 list-disc space-y-1">
-                          <li>Proof of ID</li>
-                          <li>Proof of Residence</li>
-                          <li>SIN</li>
-                          <li>Three Paystubs</li>
-                          <li>Work letter</li>
-                          <li>Bank statement</li>
-                          <li>Three references (One from family)</li>
-                        </ul>
-                      </div>
-                    </label>
-                  </div>
-
-                  <div className="bg-blue-50 p-4 rounded-lg border border-blue-200">
-                    <label className="flex items-start">
-                      <input
-                        type="checkbox"
-                        checked={formData.consent}
-                        onChange={(e) => handleInputChange('consent', e.target.checked)}
-                        className="mr-3 mt-1 text-primary focus:ring-primary"
-                      />
-                      <span className="text-xs text-text-ink leading-relaxed">
-                        By submitting this, I consent to the collection, use and disclosure of my personal information as described in this paragraph. 
-                        I agree that the personal information provided above may be used and disclosed by SF Legacy Motors and/or its agents or service 
-                        providers (collectively, the "Dealer") as necessary to obtain credit, financial and related personal information (including a 
-                        credit or consumer information report) about me from any credit bureau or credit reporting agency, and to advise me on credit 
-                        availability in connection with product and/or service purchase financing. I further agree that the personal information provided 
-                        above may be disclosed to the provider of Dealer's website hosting or related services for the purpose of enabling Dealer to access 
-                        my personal information for marketing purposes. Personal information I provide and credit information obtained may also be retained 
-                        by Dealer and used to facilitate the application process should I subsequently choose to apply for credit through Dealer. *
-                      </span>
-                    </label>
-                  </div>
-                </div>
-              )}
-
-              {/* Success Screen */}
-              {currentStep === 5 && isSubmitted && (
-                <div className="text-center py-16">
-                  <div className="w-16 h-16 bg-emerald-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <HiOutlineCheckCircle className="w-10 h-10 text-emerald-600" />
-                  </div>
-                  <h2 className="text-2xl font-bold text-text-ink mb-4">
-                    Application Submitted Successfully!
-                  </h2>
-                  <p className="text-text-body mb-6 max-w-lg mx-auto">
-                    Thank you for your financing application. Our team will contact you shortly to discuss your financing options.
-                  </p>
-                  <div className="bg-gray-50 border border-gray-200 rounded-lg p-4 max-w-md mx-auto">
-                    <h3 className="font-medium text-gray-900 mb-2">What happens next?</h3>
-                    <ul className="text-gray-800 text-sm space-y-1 text-left">
-                      <li>• Review within 24 hours</li>
-                      <li>• Contact for financing options</li>
-                      <li>• Request additional docs if needed</li>
-                      <li>• Schedule vehicle viewing</li>
-                    </ul>
-                  </div>
-                </div>
-              )}
-            </div>
-
-            {/* Navigation Buttons */}
-            {currentStep < 5 && (
-              <div className="px-4 py-4 lg:px-8 lg:py-6 bg-surface-secondary border-t border-border-subtle rounded-b-xl flex justify-between items-center">
-                <button
-                  type="button"
-                  onClick={prevStep}
-                  className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                    currentStep === 1 
-                      ? 'bg-surface-tertiary text-text-muted cursor-not-allowed' 
-                      : 'bg-surface-primary text-text-ink border border-border-primary hover:bg-surface-secondary'
-                  }`}
-                  disabled={currentStep === 1}
-                >
-                  Previous
-                </button>
-                
-                {currentStep < 4 ? (
-                  <button
-                    type="button"
-                    onClick={nextStep}
-                    className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                      isStepComplete() 
-                        ? 'bg-neutral-800 hover:bg-neutral-700 text-white' 
-                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    }`}
-                    disabled={!isStepComplete()}
-                  >
-                    Next Step
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    className={`px-6 py-3 text-sm font-medium rounded-lg transition-all duration-200 ${
-                      isStepComplete() 
-                        ? 'bg-emerald-600 hover:bg-emerald-700 text-white' 
-                        : 'bg-gray-200 text-gray-400 cursor-not-allowed'
-                    }`}
-                    disabled={!isStepComplete()}
-                  >
-                    Submit Application
-                  </button>
-                )}
               </div>
             )}
-          </form>
+
+            {currentStep === 4 && (
+              <div className="space-y-6">
+                <div className="text-center lg:text-left">
+                  <h3 className="text-xl font-semibold text-text-ink mb-2">Vehicle Information</h3>
+                  <p className="text-text-muted">Tell us about the vehicle you're interested in.</p>
+                </div>
+                
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                      <label className="block text-sm font-medium text-text-ink mb-2">
+                        Desired Year *
+                      </label>
+                      <input
+                        type="number"
+                        className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                        placeholder="Enter year"
+                        value={formData.desiredYear}
+                        onChange={(e) => handleInputChange('desiredYear', e.target.value)}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-text-ink mb-2">
+                        Desired Make *
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                        placeholder="Enter make"
+                        value={formData.desiredMake}
+                        onChange={(e) => handleInputChange('desiredMake', e.target.value)}
+                      />
+                    </div>
+                    
+                    <div>
+                      <label className="block text-sm font-medium text-text-ink mb-2">
+                        Desired Model *
+                      </label>
+                      <input
+                        type="text"
+                        className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                        placeholder="Enter model"
+                        value={formData.desiredModel}
+                        onChange={(e) => handleInputChange('desiredModel', e.target.value)}
+                      />
+                    </div>
+                  </div>
+
+                  <div>
+                    <label className="block text-sm font-medium text-text-ink mb-2">
+                      Do you have a trade-in vehicle?
+                    </label>
+                    <select
+                      className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                      value={formData.hasTradeIn}
+                      onChange={(e) => handleInputChange('hasTradeIn', e.target.value)}
+                    >
+                      <option value="">Select option</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                    </select>
+                  </div>
+
+                  {formData.hasTradeIn === 'yes' && (
+                    <div className="space-y-4 p-4 bg-gray-50 rounded-lg">
+                      <h4 className="text-md font-medium text-text-ink">Trade-in Vehicle Details</h4>
+                      
+                      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Trade-in Year
+                          </label>
+                          <input
+                            type="number"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter year"
+                            value={formData.tradeInYear}
+                            onChange={(e) => handleInputChange('tradeInYear', e.target.value)}
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Trade-in Make
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter make"
+                            value={formData.tradeInMake}
+                            onChange={(e) => handleInputChange('tradeInMake', e.target.value)}
+                          />
+                        </div>
+                        
+                        <div>
+                          <label className="block text-sm font-medium text-text-ink mb-2">
+                            Trade-in Model
+                          </label>
+                          <input
+                            type="text"
+                            className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                            placeholder="Enter model"
+                            value={formData.tradeInModel}
+                            onChange={(e) => handleInputChange('tradeInModel', e.target.value)}
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <label className="block text-sm font-medium text-text-ink mb-2">
+                          Mileage
+                        </label>
+                        <input
+                          type="number"
+                          className="w-full px-3 py-2 border border-border-primary rounded-md focus:ring-2 focus:ring-primary focus:border-primary"
+                          placeholder="Enter mileage"
+                          value={formData.tradeInMileage}
+                          onChange={(e) => handleInputChange('tradeInMileage', e.target.value)}
+                        />
+                      </div>
+                    </div>
+                  )}
+
+                  <div>
+                    <label className="block text-sm font-medium text-text-ink mb-2">
+                      Financing Options (select all that apply)
+                    </label>
+                    <div className="space-y-2">
+                      <label className="flex items-center space-x-2">
+                        <input
+                          type="checkbox"
+                          checked={formData.financing}
+                          onChange={(e) => handleInputChange('financing', e.target.checked)}
+                        />
+                        <span className="text-sm">Financing</span>
+                      </label>
+                      
+                      <label className="flex items-center space-x-2">
+                        <input
+                          type="checkbox"
+                          checked={formData.lease}
+                          onChange={(e) => handleInputChange('lease', e.target.checked)}
+                        />
+                        <span className="text-sm">Lease</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {/* Navigation Buttons */}
+            <div className="flex justify-between mt-8 pt-6 border-t border-border-primary">
+              <button
+                type="button"
+                onClick={handlePrevious}
+                disabled={currentStep === 1}
+                className={`px-6 py-2 rounded-md transition-all duration-200 border border-blackContrast ${
+                  currentStep === 1
+                    ? 'bg-surface-secondary text-text-muted cursor-not-allowed'
+                    : 'bg-surface-secondary text-text-ink hover:bg-surface-tertiary'
+                }`}
+              >
+                Previous
+              </button>
+              
+              {currentStep < 4 ? (
+                <button
+                  type="button"
+                  onClick={handleNext}
+                  disabled={!canProceedToNext(currentStep)}
+                  className={`px-6 py-2 rounded-md transition-all duration-200 border ${
+                    canProceedToNext(currentStep)
+                      ? 'bg-brand-500 text-ink hover:bg-brand-600 font-bold border-border-focus'
+                      : 'bg-surface-secondary text-text-muted cursor-not-allowed'
+                  }`}
+                >
+                  Next
+                </button>
+              ) : (
+                <button
+                  type="submit"
+                  disabled={!canProceedToNext(currentStep)}
+                  className={`px-6 py-2 rounded-md transition-all duration-200 border ${
+                    canProceedToNext(currentStep)
+                      ? 'bg-brand-yellow text-ink hover:bg-brand-yellow-dark bg-primary-500 font-bold border-border-focus'
+                      : 'bg-surface-secondary text-text-muted cursor-not-allowed'
+                  }`}
+                >
+                  Submit Application
+                </button>
+              )}
+            </div>
+          </div>
         </div>
       </div>
-    </div>
+    </form>
   )
 }

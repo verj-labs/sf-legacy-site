@@ -1,44 +1,52 @@
-'use client'
+"use client";
 
-import Link from 'next/link'
-import { useState } from 'react'
-import Header from '@/components/Header'
-import Footer from '@/components/Footer'
+import Link from "next/link";
+import { useState } from "react";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
 
 export default function NotFound() {
-  const [searchTerm, setSearchTerm] = useState('')
+  const [searchTerm, setSearchTerm] = useState("");
 
   const quickLinks = [
-    { name: 'View Our Inventory', href: '/inventory', icon: '🚗' },
-    { name: 'Get Financing', href: '/financing', icon: '💳' },
-    { name: 'Trade-In Your Car', href: '/trade-in', icon: '🔄' },
-    { name: 'Contact Us', href: '/contact', icon: '📞' },
-    { name: 'About SF Legacy Autos', href: '/about', icon: '🏢' },
-    { name: 'Read Our Blog', href: '/blog', icon: '📝' }
-  ]
+    { name: "View Our Inventory", href: "/inventory", icon: "🚗" },
+    { name: "Get Financing", href: "/financing", icon: "💳" },
+    { name: "Trade-In Your Car", href: "/trade-in", icon: "🔄" },
+    { name: "Contact Us", href: "/contact", icon: "📞" },
+    { name: "About SF Legacy Autos", href: "/about", icon: "🏢" },
+    { name: "Read Our Blog", href: "/blog", icon: "📝" },
+  ];
 
   const handleSearch = (e: React.FormEvent) => {
-    e.preventDefault()
+    e.preventDefault();
     if (searchTerm.trim()) {
       // In a real app, this would redirect to search results
-      window.location.href = `/inventory?search=${encodeURIComponent(searchTerm)}`
+      window.location.href = `/inventory?search=${encodeURIComponent(searchTerm)}`;
     }
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header />
-      
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <div className="text-center">
           {/* Car-themed illustration */}
           <div className="mb-8">
             <div className="inline-flex items-center justify-center w-32 h-32 bg-primary/10 rounded-full mb-6">
-              <svg className="w-16 h-16 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125A1.125 1.125 0 0021.75 17.25V14.25M8.25 18.75V9a2.25 2.25 0 012.25-2.25h.75c0-.966.784-1.75 1.75-1.75s1.75.784 1.75 1.75h.75a2.25 2.25 0 012.25 2.25v9.75m-16.5 0h16.5" />
+              <svg
+                className="w-16 h-16 text-primary"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={1.5}
+                  d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125A1.125 1.125 0 0021.75 17.25V14.25M8.25 18.75V9a2.25 2.25 0 012.25-2.25h.75c0-.966.784-1.75 1.75-1.75s1.75.784 1.75 1.75h.75a2.25 2.25 0 012.25 2.25v9.75m-16.5 0h16.5"
+                />
               </svg>
             </div>
-            
+
             {/* Fun car-themed illustration */}
             <div className="relative mx-auto w-80 h-40 mb-8">
               <div className="absolute inset-0 flex items-center justify-center">
@@ -55,10 +63,10 @@ export default function NotFound() {
                     <div className="absolute top-4 -left-1 w-3 h-4 bg-accent rounded-full"></div>
                     <div className="absolute bottom-4 -left-1 w-3 h-4 bg-red-400 rounded-full"></div>
                   </div>
-                  
+
                   {/* Confused mechanic */}
                   <div className="absolute -right-16 top-2 text-4xl">🤷‍♂️</div>
-                  
+
                   {/* Road signs */}
                   <div className="absolute -top-8 -right-20 transform rotate-12">
                     <div className="w-12 h-12 bg-yellow-400 border-2 border-gray-700 flex items-center justify-center text-lg font-bold">
@@ -66,7 +74,7 @@ export default function NotFound() {
                     </div>
                     <div className="w-1 h-8 bg-gray-700 mx-auto"></div>
                   </div>
-                  
+
                   <div className="absolute -top-6 -left-16 transform -rotate-12">
                     <div className="w-12 h-12 bg-red-400 border-2 border-gray-700 flex items-center justify-center text-white text-xs font-bold">
                       404
@@ -86,9 +94,7 @@ export default function NotFound() {
             <p className="text-xl text-gray-600 mb-2">
               We can't seem to find the page you're looking for.
             </p>
-            <p className="text-gray-500">
-              Don't worry though – we'll help you get back on track!
-            </p>
+            <p className="text-gray-500">Don't worry though – we'll help you get back on track!</p>
           </div>
 
           {/* Search Bar */}
@@ -101,8 +107,18 @@ export default function NotFound() {
                 onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full px-4 py-3 pl-12 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary focus:border-transparent"
               />
-              <svg className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              <svg
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-gray-400"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
               </svg>
               <button
                 type="submit"
@@ -163,40 +179,68 @@ export default function NotFound() {
             </h3>
             <div className="space-y-4">
               <div className="flex items-start">
-                <svg className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                <svg
+                  className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <div>
                   <div className="font-medium text-gray-900">Looking for a specific vehicle?</div>
-                  <div className="text-gray-600 text-sm">Use our search bar above or browse our complete inventory.</div>
+                  <div className="text-gray-600 text-sm">
+                    Use our search bar above or browse our complete inventory.
+                  </div>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
-                <svg className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                <svg
+                  className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <div>
                   <div className="font-medium text-gray-900">Need financing information?</div>
-                  <div className="text-gray-600 text-sm">Check out our financing page for rates and pre-approval.</div>
+                  <div className="text-gray-600 text-sm">
+                    Check out our financing page for rates and pre-approval.
+                  </div>
                 </div>
               </div>
-              
+
               <div className="flex items-start">
-                <svg className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd" />
+                <svg
+                  className="w-5 h-5 text-primary mr-3 mt-0.5 flex-shrink-0"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
+                    clipRule="evenodd"
+                  />
                 </svg>
                 <div>
                   <div className="font-medium text-gray-900">Questions about our dealership?</div>
-                  <div className="text-gray-600 text-sm">Visit our About page or contact us directly for assistance.</div>
+                  <div className="text-gray-600 text-sm">
+                    Visit our About page or contact us directly for assistance.
+                  </div>
                 </div>
               </div>
             </div>
-            
+
             <div className="mt-6 pt-6 border-t border-gray-200 text-center">
-              <p className="text-gray-600 mb-4">
-                Still can't find what you're looking for?
-              </p>
+              <p className="text-gray-600 mb-4">Still can't find what you're looking for?</p>
               <div className="flex flex-col sm:flex-row gap-3 justify-center">
                 <a
                   href="tel:555-123-4567"
@@ -215,8 +259,6 @@ export default function NotFound() {
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
-  )
+  );
 }
