@@ -27,6 +27,7 @@ export default function InventoryPage() {
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 100000]);
   const [mileageRange, setMileageRange] = useState<[number, number]>([0, 400000]);
   const [sortBy, setSortBy] = useState<string>("year-desc");
+  const [showSoldVehicles, setShowSoldVehicles] = useState<boolean>(true);
 
   // Load vehicles and filter options
   useEffect(() => {
@@ -35,8 +36,14 @@ export default function InventoryPage() {
         setLoading(true);
         const vehicleData = await getAllVehicles();
 
-        setVehicles(vehicleData);
-        setFilteredVehicles(vehicleData);
+        // Sort vehicles: available first, then pending, then sold
+        const sortedVehicles = vehicleData.sort((a, b) => {
+          const statusOrder = { 'available': 0, 'pending': 1, 'sold': 2 };
+          return statusOrder[a.status] - statusOrder[b.status];
+        });
+
+        setVehicles(sortedVehicles);
+        setFilteredVehicles(sortedVehicles);
 
         // Extract makes and body types from the fetched data
         const makes = [...new Set(vehicleData.map((v) => v.make))].sort();
@@ -59,6 +66,11 @@ export default function InventoryPage() {
   // Apply filters whenever filter criteria change
   useEffect(() => {
     let filtered = [...vehicles];
+
+    // Apply sold vehicles filter
+    if (!showSoldVehicles) {
+      filtered = filtered.filter((vehicle) => vehicle.status !== "sold");
+    }
 
     // Apply make filter
     if (selectedMake) {
@@ -87,29 +99,61 @@ export default function InventoryPage() {
     // Apply sorting
     switch (sortBy) {
       case "year-desc":
-        filtered.sort((a, b) => b.year - a.year);
+        filtered.sort((a, b) => {
+          // First sort by status (available first, then pending, then sold)
+          const statusOrder = { 'available': 0, 'pending': 1, 'sold': 2 };
+          const statusDiff = statusOrder[a.status] - statusOrder[b.status];
+          if (statusDiff !== 0) return statusDiff;
+          // Then sort by year descending
+          return b.year - a.year;
+        });
         break;
       case "year-asc":
-        filtered.sort((a, b) => a.year - b.year);
+        filtered.sort((a, b) => {
+          const statusOrder = { 'available': 0, 'pending': 1, 'sold': 2 };
+          const statusDiff = statusOrder[a.status] - statusOrder[b.status];
+          if (statusDiff !== 0) return statusDiff;
+          return a.year - b.year;
+        });
         break;
       case "price-asc":
-        filtered.sort((a, b) => a.price - b.price);
+        filtered.sort((a, b) => {
+          const statusOrder = { 'available': 0, 'pending': 1, 'sold': 2 };
+          const statusDiff = statusOrder[a.status] - statusOrder[b.status];
+          if (statusDiff !== 0) return statusDiff;
+          return a.price - b.price;
+        });
         break;
       case "price-desc":
-        filtered.sort((a, b) => b.price - a.price);
+        filtered.sort((a, b) => {
+          const statusOrder = { 'available': 0, 'pending': 1, 'sold': 2 };
+          const statusDiff = statusOrder[a.status] - statusOrder[b.status];
+          if (statusDiff !== 0) return statusDiff;
+          return b.price - a.price;
+        });
         break;
       case "mileage-asc":
-        filtered.sort((a, b) => a.odometer - b.odometer);
+        filtered.sort((a, b) => {
+          const statusOrder = { 'available': 0, 'pending': 1, 'sold': 2 };
+          const statusDiff = statusOrder[a.status] - statusOrder[b.status];
+          if (statusDiff !== 0) return statusDiff;
+          return a.odometer - b.odometer;
+        });
         break;
       case "mileage-desc":
-        filtered.sort((a, b) => b.odometer - a.odometer);
+        filtered.sort((a, b) => {
+          const statusOrder = { 'available': 0, 'pending': 1, 'sold': 2 };
+          const statusDiff = statusOrder[a.status] - statusOrder[b.status];
+          if (statusDiff !== 0) return statusDiff;
+          return b.odometer - a.odometer;
+        });
         break;
       default:
         break;
     }
 
     setFilteredVehicles(filtered);
-  }, [vehicles, selectedMake, selectedBodyType, priceRange, mileageRange, sortBy]);
+  }, [vehicles, selectedMake, selectedBodyType, priceRange, mileageRange, sortBy, showSoldVehicles]);
 
   // Reset filters
   const resetFilters = () => {
@@ -118,6 +162,7 @@ export default function InventoryPage() {
     setPriceRange([0, 100000]);
     setMileageRange([0, 400000]);
     setSortBy("year-desc");
+    setShowSoldVehicles(true);
   };
 
   if (loading) {
@@ -175,7 +220,7 @@ export default function InventoryPage() {
                   </h2>
                 </div>
                 <div className="flex items-center gap-3">
-                  {(selectedMake || selectedBodyType || priceRange[0] > 0 || priceRange[1] < 100000 || mileageRange[0] > 0 || mileageRange[1] < 400000) && (
+                  {(selectedMake || selectedBodyType || priceRange[0] > 0 || priceRange[1] < 100000 || mileageRange[0] > 0 || mileageRange[1] < 400000 || !showSoldVehicles) && (
                     <span className="bg-brand text-white text-xs px-2 py-1 rounded-full">
                       Active
                     </span>
@@ -423,6 +468,24 @@ export default function InventoryPage() {
                     </select>
                   </div>
                 </div>
+
+                {/* Show Sold Vehicles Toggle */}
+                <div className="border-t border-border pt-4">
+                  <label className="flex items-center gap-2 cursor-pointer">
+                    <input
+                      type="checkbox"
+                      checked={showSoldVehicles}
+                      onChange={(e) => setShowSoldVehicles(e.target.checked)}
+                      className="w-4 h-4 text-brand bg-surface border-border rounded focus:ring-brand/20 focus:ring-2"
+                    />
+                    <span className="text-body-sm font-medium text-ink">
+                      Show sold vehicles
+                    </span>
+                  </label>
+                  <p className="text-body-xs text-body/60 mt-1 ml-6">
+                    Include vehicles that have already been sold
+                  </p>
+                </div>
                 </div>
               </div>
             </div>
@@ -439,6 +502,11 @@ export default function InventoryPage() {
                   </h3>
                   <p className="text-xs sm:text-body-sm text-body/70 mb-2 lg:mb-4 lg:block hidden">
                     Showing {filteredVehicles.length > 0 ? "1" : "0"}–{filteredVehicles.length} of {vehicles.length} total
+                    {showSoldVehicles && vehicles.filter(v => v.status === "sold").length > 0 && (
+                      <span className="ml-2 text-gray-500">
+                        ({vehicles.filter(v => v.status === "available").length} available, {vehicles.filter(v => v.status === "sold").length} sold)
+                      </span>
+                    )}
                   </p>
                 </div>
 

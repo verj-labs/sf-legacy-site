@@ -1,11 +1,11 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Contact Us | SF Legacy Autos - Visit Our Dealership',
-  description: 'Contact SF Legacy Autos for questions about our inventory, financing, or services. Visit us on Auto Row in San Francisco or call (555) 123-4567.',
+  title: 'Contact Us | SF Legacy Motors - Visit Our Dealership',
+  description: 'Contact SF Legacy Motors for questions about our inventory, financing, or services. Visit us on Auto Row in the Greater Toronto Area or call (905) 749-4061.',
   openGraph: {
-    title: 'Contact Us | SF Legacy Autos - Visit Our Dealership',
-    description: 'Contact SF Legacy Autos for questions about our inventory, financing, or services. Visit us on Auto Row in San Francisco or call (555) 123-4567.',
+    title: 'Contact Us | SF Legacy Motors - Visit Our Dealership',
+    description: 'Contact SF Legacy Motors for questions about our inventory, financing, or services. Visit us on Auto Row in the Greater Toronto Area or call (905) 749-4061.',
     type: 'website',
   },
 }

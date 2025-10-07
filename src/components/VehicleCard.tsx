@@ -1,8 +1,18 @@
 import Link from "next/link";
 import { Vehicle } from "@/types/vehicle";
 import Chip from "@/components/Chip";
-import { HiOutlineCheckCircle, HiOutlineEye, HiOutlineCalendar } from "react-icons/hi";
-import { formatPrice, formatMileage, formatDrivetrain, formatFuelType, formatBodyType } from "@/utils/vehicleHelpers";
+import {
+  HiOutlineCheckCircle,
+  HiOutlineEye,
+  HiOutlineCalendar,
+} from "react-icons/hi";
+import {
+  formatPrice,
+  formatMileage,
+  formatDrivetrain,
+  formatFuelType,
+  formatBodyType,
+} from "@/utils/vehicleHelpers";
 
 interface VehicleCardProps {
   vehicle: Vehicle;
@@ -21,7 +31,6 @@ export default function VehicleCard({
   showActions = true,
   className = "",
 }: VehicleCardProps) {
-
   const formatMileage = (mileage: number) => {
     return new Intl.NumberFormat("en-US").format(mileage);
   };
@@ -30,13 +39,27 @@ export default function VehicleCard({
     "group bg-surface rounded-lg border border-border shadow-xs hover:shadow-md transition-all duration-300 overflow-hidden";
 
   const variantClasses = {
-    default: "hover:border-neutral-300",
-    featured: "hover:border-neutral-300 hover:shadow-lg ",
-    compact: "hover:border-neutral-300",
-    inventory: "border-border hover:border-neutral-300",
+    default:
+      vehicle.status === "sold"
+        ? "opacity-75 hover:border-gray-300"
+        : "hover:border-neutral-300",
+    featured:
+      vehicle.status === "sold"
+        ? "opacity-75 hover:border-gray-300 hover:shadow-lg"
+        : "hover:border-neutral-300 hover:shadow-lg",
+    compact:
+      vehicle.status === "sold"
+        ? "opacity-75 hover:border-gray-300"
+        : "hover:border-neutral-300",
+    inventory:
+      vehicle.status === "sold"
+        ? "opacity-75 border-border hover:border-gray-300"
+        : "border-border hover:border-neutral-300",
     selectable: `cursor-pointer ${
       isSelected
         ? "border-brand bg-brand/5 shadow-lg"
+        : vehicle.status === "sold"
+        ? "opacity-75 border-border hover:border-gray-300 hover:shadow-md"
         : "border-border hover:border-neutral-300 hover:shadow-md"
     }`,
   };
@@ -52,29 +75,67 @@ export default function VehicleCard({
         <img
           src={vehicle.images?.[0] || "/api/placeholder/400/300"}
           alt={`${vehicle.year} ${vehicle.make} ${vehicle.model}`}
-          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${
+            vehicle.status === "sold" ? "grayscale-[30%]" : ""
+          }`}
         />
 
-        {/* Featured Badge */}
-        {(variant === "featured" || variant === "inventory") && vehicle.featured && (
-          <div className="absolute top-3 left-3">
-            <Chip size="sm" className="bg-primary-500 text-ink text-xs">
-              Featured
-            </Chip>
-          </div>
+        {/* Sold Overlay */}
+        {vehicle.status === "sold" && (
+          <div className="absolute inset-0 bg-black/10"></div>
         )}
+
+        {/* Featured Badge */}
+        {(variant === "featured" || variant === "inventory") &&
+          vehicle.featured &&
+          vehicle.status === "available" && (
+            <div className="absolute top-3 left-3">
+              <Chip size="sm" className="bg-primary-500 text-ink text-xs">
+                Featured
+              </Chip>
+            </div>
+          )}
 
         {/* Sale Badge */}
         {vehicle.salePrice && vehicle.salePrice < vehicle.price && (
           <div
             className={`absolute top-3 ${
-              (variant === "featured" || variant === "inventory") && vehicle.featured
+              (variant === "featured" || variant === "inventory") &&
+              vehicle.featured
                 ? "left-3 mt-8"
                 : "left-3"
             }`}
           >
-            <Chip variant="error" size="sm" className="bg-red-500 text-white text-xs">
+            <Chip
+              variant="error"
+              size="sm"
+              className="bg-red-500 text-white text-xs"
+            >
               Sale
+            </Chip>
+          </div>
+        )}
+
+        {/* Sold Badge */}
+        {vehicle.status === "sold" && (
+          <div className="absolute top-3 left-3">
+            <Chip
+              size="sm"
+              className="bg-red-500 text-white text-xs font-medium"
+            >
+              SOLD
+            </Chip>
+          </div>
+        )}
+
+        {/* Pending Badge */}
+        {vehicle.status === "pending" && (
+          <div className="absolute top-3 left-3">
+            <Chip
+              size="sm"
+              className="bg-yellow-500 text-ink  text-xs font-medium"
+            >
+              PENDING
             </Chip>
           </div>
         )}
@@ -82,7 +143,11 @@ export default function VehicleCard({
         {/* Warranty Badge */}
         {variant === "featured" && vehicle.warranty?.hasWarranty && (
           <div className="absolute top-3 right-3 mb-8">
-            <Chip variant="success" size="sm" className="bg-green-500 text-white text-xs">
+            <Chip
+              variant="success"
+              size="sm"
+              className="bg-green-500 text-white text-xs"
+            >
               Certified
             </Chip>
           </div>
@@ -139,17 +204,29 @@ export default function VehicleCard({
               : "mb-4"
           }`}
         >
-          <Chip size="sm" className="text-xs group-hover:bg-ink group-hover:text-primary-50">
+          <Chip
+            size="sm"
+            className="text-xs group-hover:bg-ink group-hover:text-primary-50"
+          >
             {formatMileage(vehicle.odometer)} km
           </Chip>
-          <Chip size="sm" className="text-xs group-hover:bg-ink group-hover:text-primary-50">
+          <Chip
+            size="sm"
+            className="text-xs group-hover:bg-ink group-hover:text-primary-50"
+          >
             {vehicle.transmission}
           </Chip>
-          <Chip size="sm" className="text-xs group-hover:bg-ink group-hover:text-primary-50">
+          <Chip
+            size="sm"
+            className="text-xs group-hover:bg-ink group-hover:text-primary-50"
+          >
             {formatBodyType(vehicle.bodyType)}
           </Chip>
           {variant === "featured" && vehicle.fuelType && (
-            <Chip size="sm" className="text-xs group-hover:bg-ink group-hover:text-primary-50">
+            <Chip
+              size="sm"
+              className="text-xs group-hover:bg-ink group-hover:text-primary-50"
+            >
               {formatFuelType(vehicle.fuelType)}
             </Chip>
           )}
@@ -160,13 +237,19 @@ export default function VehicleCard({
           <div className="mb-3 space-y-2">
             <p className="text-body-s text-body/80 line-clamp-1">
               {vehicle.description ||
-                `${vehicle.year} ${vehicle.make} ${vehicle.model} • ${formatMileage(
-                  vehicle.odometer
-                )} mi • ${vehicle.transmission}`}
+                `${vehicle.year} ${vehicle.make} ${
+                  vehicle.model
+                } • ${formatMileage(vehicle.odometer)} mi • ${
+                  vehicle.transmission
+                }`}
             </p>
             {/* Key Features (limit to first 3) */}
             <div className="flex flex-wrap gap-1.5">
-              {[vehicle.engineDesc, formatDrivetrain(vehicle.drivetrain), vehicle.exteriorColor]
+              {[
+                vehicle.engineDesc,
+                formatDrivetrain(vehicle.drivetrain),
+                vehicle.exteriorColor,
+              ]
                 .filter(Boolean)
                 .slice(0, 3)
                 .map((val, i) => (
@@ -213,11 +296,12 @@ export default function VehicleCard({
                     {formatPrice(vehicle.price)}
                   </span>
                 </div>
-                {variant === "featured" && vehicle.financing?.monthlyPayment && (
-                  <p className="text-body-xs text-body">
-                    Starting at ${vehicle.financing.monthlyPayment}/mo
-                  </p>
-                )}
+                {variant === "featured" &&
+                  vehicle.financing?.monthlyPayment && (
+                    <p className="text-body-xs text-body">
+                      Starting at ${vehicle.financing.monthlyPayment}/mo
+                    </p>
+                  )}
               </div>
             ) : (
               <div className="space-y-1">
@@ -232,11 +316,12 @@ export default function VehicleCard({
                 >
                   {formatPrice(vehicle.price)}
                 </span>
-                {variant === "featured" && vehicle.financing?.monthlyPayment && (
-                  <p className="text-body-xs text-body">
-                    Starting at ${vehicle.financing.monthlyPayment}/mo
-                  </p>
-                )}
+                {variant === "featured" &&
+                  vehicle.financing?.monthlyPayment && (
+                    <p className="text-body-xs text-body">
+                      Starting at ${vehicle.financing.monthlyPayment}/mo
+                    </p>
+                  )}
               </div>
             )}
           </div>
@@ -257,55 +342,82 @@ export default function VehicleCard({
                 {variant === "featured" ? (
                   // Featured variant: Show primary CTA buttons
                   <div className="flex items-center gap-2">
-                    <Link
-                      href={`/book-test-drive?vehicleId=${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-3 py-2 bg-ink text-white text-body-s font-medium rounded-lg hover:bg-ink/90 transition-colors"
-                    >
-                      <HiOutlineCalendar className="w-4 h-4" />
-                      Test Drive
-                    </Link>
-                    <Link
-                      href={`/inventory/${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-3 py-2 border border-border text-ink text-body-s font-medium rounded-lg hover:border-neutral-400 hover:bg-neutral-100 transition-colors"
-                    >
-                      <HiOutlineEye className="w-4 h-4" />
-                      Details
-                    </Link>
+                    {vehicle.status === "sold" ? (
+                      <div className="inline-flex items-center gap-1 px-3 py-2 bg-gray-400 text-white text-body-s font-medium rounded-lg cursor-not-allowed">
+                        <HiOutlineCalendar className="w-4 h-4" />
+                        Sold
+                      </div>
+                    ) : (
+                      <>
+                        <Link
+                          href={`/book-test-drive?vehicleId=${vehicle._id}`}
+                          className="inline-flex items-center gap-1 px-3 py-2 bg-ink text-white text-body-s font-medium rounded-lg hover:bg-ink/90 transition-colors"
+                        >
+                          <HiOutlineCalendar className="w-4 h-4" />
+                          Test Drive
+                        </Link>
+                        <Link
+                          href={`/inventory/${vehicle._id}`}
+                          className="inline-flex items-center gap-1 px-3 py-2 border border-border text-ink text-body-s font-medium rounded-lg hover:border-neutral-400 hover:bg-neutral-100 transition-colors"
+                        >
+                          <HiOutlineEye className="w-4 h-4" />
+                          Details
+                        </Link>
+                      </>
+                    )}
                   </div>
                 ) : variant === "inventory" ? (
                   // Inventory variant: Compact buttons
                   <div className="flex items-center gap-1">
-                    <Link
-                      href={`/book-test-drive?vehicleId=${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-ink text-primary-50 rounded-sm hover:text-brand transition-colors"
-                    >
-                      <HiOutlineCalendar className="w-3 h-3" />
-                      Test
-                    </Link>
-                    <Link
-                      href={`/inventory/${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-ink text-primary-50 rounded-sm hover:text-brand transition-colors"
-                    >
-                      <HiOutlineEye className="w-3 h-3" />
-                      Details
-                    </Link>
+                    {vehicle.status === "sold" ? (
+                      <div className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-gray-400 text-white rounded-sm cursor-not-allowed">
+                        Sold
+                      </div>
+                    ) : (
+                      <>
+                        <Link
+                          href={`/book-test-drive?vehicleId=${vehicle._id}`}
+                          className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-ink text-primary-50 rounded-sm hover:text-brand transition-colors"
+                        >
+                          <HiOutlineCalendar className="w-3 h-3" />
+                          Test
+                        </Link>
+                        <Link
+                          href={`/inventory/${vehicle._id}`}
+                          className="inline-flex items-center gap-1 px-2 py-1 text-xs font-medium bg-ink text-primary-50 rounded-sm hover:text-brand transition-colors"
+                        >
+                          <HiOutlineEye className="w-3 h-3" />
+                          Details
+                        </Link>
+                      </>
+                    )}
                   </div>
                 ) : variant !== "compact" ? (
-                  <div className="flex items-center gap-2">
-                    <Link
-                      href={`/book-test-drive?vehicleId=${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-ink hover:text-brand transition-colors"
-                    >
-                      <HiOutlineCalendar className="w-4 h-4" />
-                      Test Drive
-                    </Link>
-                    <Link
-                      href={`/inventory/${vehicle._id}`}
-                      className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-ink hover:text-brand transition-colors"
-                    >
-                      <HiOutlineEye className="w-4 h-4" />
-                      View Details
-                    </Link>
+                  vehicle.status === "sold" ? (
+                    <div className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-gray-500 cursor-not-allowed">
+                      Vehicle Sold
+                    </div>
+                  ) : (
+                    <div className="flex items-center gap-2">
+                      <Link
+                        href={`/book-test-drive?vehicleId=${vehicle._id}`}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-ink hover:text-brand transition-colors"
+                      >
+                        <HiOutlineCalendar className="w-4 h-4" />
+                        Test Drive
+                      </Link>
+                      <Link
+                        href={`/inventory/${vehicle._id}`}
+                        className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-ink hover:text-brand transition-colors"
+                      >
+                        <HiOutlineEye className="w-4 h-4" />
+                        View Details
+                      </Link>
+                    </div>
+                  )
+                ) : vehicle.status === "sold" ? (
+                  <div className="inline-flex items-center gap-1 px-3 py-1.5 text-body-s font-medium text-gray-500 cursor-not-allowed">
+                    Vehicle Sold
                   </div>
                 ) : (
                   <Link
@@ -317,6 +429,10 @@ export default function VehicleCard({
                   </Link>
                 )}
               </div>
+            ) : vehicle.status === "sold" ? (
+              <span className="text-xs text-gray-500 font-medium">
+                Vehicle Sold
+              </span>
             ) : (
               <span className="text-xs text-ink group-hover:text-brand font-medium group-hover:translate-x-1 transition-all">
                 View Details →
@@ -331,6 +447,11 @@ export default function VehicleCard({
   // If selectable variant with onSelect handler, make it clickable
   if (variant === "selectable" && onSelect) {
     return <div onClick={() => onSelect(vehicle)}>{cardContent}</div>;
+  }
+
+  // If vehicle is sold, don't make it clickable
+  if (vehicle.status === "sold") {
+    return <div className="cursor-not-allowed">{cardContent}</div>;
   }
 
   // If not selectable or no actions, wrap in Link to detail page

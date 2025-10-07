@@ -2,8 +2,8 @@ import PageStartBanner from '@/components/PageStartBanner'
 import PageEndBanner from '@/components/PageEndBanner'
 
 export const metadata = {
-  title: 'Warranty & Service - SF Legacy Autos',
-  description: 'Comprehensive warranty plans and service packages for your peace of mind. Protect your investment with SF Legacy Autos warranty coverage.',
+  title: 'Warranty & Service - SF Legacy Motors',
+  description: 'Comprehensive warranty plans and service packages for your peace of mind. Protect your investment with SF Legacy Motors warranty coverage.',
 }
 
 export default function WarrantyService() {

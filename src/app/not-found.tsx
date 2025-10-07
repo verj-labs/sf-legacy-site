@@ -13,7 +13,7 @@ export default function NotFound() {
     { name: "Get Financing", href: "/financing", icon: "💳" },
     { name: "Trade-In Your Car", href: "/trade-in", icon: "🔄" },
     { name: "Contact Us", href: "/contact", icon: "📞" },
-    { name: "About SF Legacy Autos", href: "/about", icon: "🏢" },
+    { name: "About SF Legacy Motors", href: "/about", icon: "🏢" },
     { name: "Read Our Blog", href: "/blog", icon: "📝" },
   ];
 

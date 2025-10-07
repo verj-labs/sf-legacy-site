@@ -7,9 +7,9 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
           {/* Company Info */}
           <div className="lg:col-span-2">
-            <h3 className="text-h4 font-heading font-semibold mb-6 text-white">SF Legacy Autos</h3>
+            <h3 className="text-h4 font-heading font-semibold mb-6 text-white">SF Legacy Motors Inc.</h3>
             <p className="text-body-m text-white/90 mb-6 leading-relaxed max-w-md">
-              Your trusted partner for quality used vehicles in San Francisco. 
+              Your trusted partner for quality used vehicles in the Greater Toronto Area. 
               We're committed to providing exceptional service and reliable cars.
             </p>
             
@@ -29,7 +29,7 @@ export default function Footer() {
                   <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z" />
                 </svg>
                 <a href="mailto:sales@starfallmotors.com" className="text-brand-300 hover:text-accent transition-colors duration-fast">
-                  sales@starfallmotors.com
+                  sflegacymotors@gmail.com
                 </a>
               </div>
             </div>
@@ -122,7 +122,7 @@ export default function Footer() {
         {/* Bottom Legal Section */}
         <div className="border-t border-white/20 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
           <p className="text-body-s text-white/70 text-center md:text-left">
-            © 2024 SF Legacy Autos. All rights reserved.
+            © 2024 SF Legacy Motors. All rights reserved.
           </p>
           <div className="flex flex-wrap justify-center md:justify-end space-x-6">
             <Link href="/faq" className="text-body-s text-white/60 hover:text-accent transition-colors duration-fast">

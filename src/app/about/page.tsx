@@ -51,7 +51,7 @@ export default function AboutPage() {
             <div className="prose prose-lg max-w-none">
               <p className="text-body-l md:text-body-xl leading-relaxed text-body/90 mb-6">
                 SF Legacy Motors Inc is a premier auto dealership located at{" "}
-                <strong className="text-ink">6610 Turner Valley Rd, Mississauga, Ontario</strong>.
+                <strong className="text-ink">Unit 25, 1400 Aimco Boulevard, Mississauga, Ontario</strong>.
                 Our dealership serves customers throughout Ontario, specifically
                 the GTA, Hamilton & nearby areas, and has established a
                 reputation for delivering top-quality vehicles and

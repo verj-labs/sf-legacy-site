@@ -5,8 +5,8 @@ import TestDriveFlow from '@/components/TestDriveFlow'
 import Chip from '@/components/Chip'
 
 export const metadata = {
-  title: 'Book a Test Drive - SF Legacy Autos',
-  description: 'Schedule a test drive for your next vehicle at SF Legacy Autos. Experience your future car in person with our easy booking system.',
+  title: 'Book a Test Drive - SF Legacy Motors',
+  description: 'Schedule a test drive for your next vehicle at SF Legacy Motors. Experience your future car in person with our easy booking system.',
 }
 
 export default function BookTestDrive() {

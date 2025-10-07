@@ -20,12 +20,12 @@ const nunito = Nunito({
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://sf-legacy.com'), // Add your actual domain here
-  title: "SF Legacy Autos - Quality Used Cars",
-  description: "Find your perfect used car at SF Legacy Autos. Quality vehicles, trusted service, and competitive prices.",
-  keywords: "used cars, quality vehicles, SF Legacy Autos, car dealership, pre-owned vehicles, automotive",
-  authors: [{ name: "SF Legacy Autos" }],
-  creator: "SF Legacy Autos",
-  publisher: "SF Legacy Autos",
+  title: "SF Legacy Motors Inc. - Quality Used Cars",
+  description: "Find your perfect used car at SF Legacy Motors Inc.. Quality vehicles, trusted service, and competitive prices.",
+  keywords: "used cars, quality vehicles, SF Legacy Motors Inc., car dealership, pre-owned vehicles, automotive",
+  authors: [{ name: "SF Legacy Motors Inc." }],
+  creator: "SF Legacy Motors Inc.",
+  publisher: "SF Legacy Motors Inc.",
   
   // Favicon configuration
   icons: {
@@ -50,16 +50,16 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     locale: "en_CA",
-    title: "SF Legacy Autos - Quality Used Cars",
-    description: "Find your perfect used car at SF Legacy Autos. Quality vehicles, trusted service, and competitive prices in Canada.",
-    siteName: "SF Legacy Autos",
-    url: "https://sf-legacy.com",
+    title: "SF Legacy Motors Inc. - Quality Used Cars",
+    description: "Find your perfect used car at SF Legacy Motors Inc.. Quality vehicles, trusted service, and competitive prices in Canada.",
+    siteName: "SF Legacy Motors Inc.",
+    url: "https://www.sflegacymotors.com/",
     images: [
       {
         url: "/og-image.png",
         width: 1200,
         height: 630,
-        alt: "SF Legacy Autos - Quality Used Cars"
+        alt: "SF Legacy Motors - Quality Used Cars"
       }
     ]
   },
@@ -69,8 +69,8 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     site: "@sflegacyautos",
     creator: "@sflegacyautos",
-    title: "SF Legacy Autos - Quality Used Cars",
-    description: "Find your perfect used car at SF Legacy Autos. Quality vehicles, trusted service, and competitive prices.",
+    title: "SF Legacy Motors - Quality Used Cars",
+    description: "Find your perfect used car at SF Legacy Motors. Quality vehicles, trusted service, and competitive prices.",
     images: ["/og-image.png"]
   },
   

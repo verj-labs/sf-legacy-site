@@ -103,8 +103,8 @@ export default function ContactPage() {
                   <div>
                     <div className="font-medium text-text.primary text-sm mb-1">Address</div>
                     <div className="text-text.muted text-sm">
-                      350 Highway #8<br />
-                      Stoney Creek, Ontario L8G 1E8
+                      Unit 25, 1400 Aimco Boulevard<br />
+                      Mississauga, ON L4W 4K2
                     </div>
                   </div>
                 </div>
@@ -116,9 +116,8 @@ export default function ContactPage() {
                   <div>
                     <div className="font-medium text-text.primary text-sm mb-1">Business Hours</div>
                     <div className="text-text.muted text-sm space-y-1">
-                      <div>Mon - Fri: 9:00 AM - 6:00 PM</div>
-                      <div>Saturday: 10:00 AM - 5:00 PM</div>
-                      <div>Sunday: Closed</div>
+                      <div>Mon - Sat: 11:00 AM - 7:00 PM</div>
+                      <div>Sunday: Appointments Only</div>
                     </div>
                   </div>
                 </div>

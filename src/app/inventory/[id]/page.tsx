@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useParams } from "next/navigation";
 import Link from "next/link";
+import Image from "next/image";
 import TestDriveModal from "@/components/TestDriveModal";
 import { VehicleCardSkeleton } from "@/components/Skeleton";
 import { Vehicle } from "@/types/vehicle";
@@ -41,7 +42,10 @@ export default function VehicleDetailPage() {
 
           // Load related vehicles
           setRelatedLoading(true);
-          const related = await getRelatedVehicles(vehicleData.make, vehicleData._id);
+          const related = await getRelatedVehicles(
+            vehicleData.make,
+            vehicleData._id
+          );
           setRelatedVehicles(related);
           setRelatedLoading(false);
         }
@@ -98,7 +102,9 @@ export default function VehicleDetailPage() {
       <div className="min-h-screen bg-gray-50">
         <div className="container mx-auto px-4 py-8">
           <div className="text-center py-12">
-            <h1 className="text-2xl font-bold text-gray-900 mb-4">Vehicle Not Found</h1>
+            <h1 className="text-2xl font-bold text-gray-900 mb-4">
+              Vehicle Not Found
+            </h1>
             <p className="text-gray-600 mb-6">
               The vehicle you're looking for doesn't exist or has been removed.
             </p>
@@ -123,7 +129,10 @@ export default function VehicleDetailPage() {
             Home
           </Link>
           <span className="mx-2">/</span>
-          <Link href="/inventory" className="hover:text-gray-900 transition-colors">
+          <Link
+            href="/inventory"
+            className="hover:text-gray-900 transition-colors"
+          >
             Inventory
           </Link>
           <span className="mx-2">/</span>
@@ -139,10 +148,13 @@ export default function VehicleDetailPage() {
             <div className="bg-white rounded-xl border border-gray-200 shadow-sm overflow-hidden">
               <div className="aspect-[4/3] bg-gray-100">
                 <img
-                  src={vehicle.images?.[selectedImageIndex] || "/api/placeholder/600/400"}
-                  alt={`${vehicle.year} ${vehicle.make} ${vehicle.model} - Image ${
-                    selectedImageIndex + 1
-                  }`}
+                  src={
+                    vehicle.images?.[selectedImageIndex] ||
+                    "/api/placeholder/600/400"
+                  }
+                  alt={`${vehicle.year} ${vehicle.make} ${
+                    vehicle.model
+                  } - Image ${selectedImageIndex + 1}`}
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -234,14 +246,21 @@ export default function VehicleDetailPage() {
                       </div>
                     )}
 
+                    {/* {console.log("vehicle", vehicle)} */}
+
                     {vehicle.carfaxLink && (
                       <a
                         href={vehicle.carfaxLink}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="text-sm bg-gradient-to-br from-primary-300 to-primary-600 text-ink p-2 px-4 rounded-lg self-end"
+                        className="text-sm  p-2 rounded-lg self-end"
                       >
-                        View Carfax Report
+                        <Image
+                          src="/asset/carfax-logo.png"
+                          alt="Carfax Logo"
+                          width={200}
+                          height={80}
+                        />
                       </a>
                     )}
                   </div>
@@ -253,22 +272,27 @@ export default function VehicleDetailPage() {
                       Features & Options
                     </h3>
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                      {parseVehicleFeatures(vehicle.features).map((feature, index) => (
-                        <div key={index} className="flex items-center text-sm text-gray-600">
-                          <svg
-                            className="w-4 h-4 text-gray-900 mr-3 flex-shrink-0"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
+                      {parseVehicleFeatures(vehicle.features).map(
+                        (feature, index) => (
+                          <div
+                            key={index}
+                            className="flex items-center text-sm text-gray-600"
                           >
-                            <path
-                              fillRule="evenodd"
-                              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                              clipRule="evenodd"
-                            />
-                          </svg>
-                          <span>{feature}</span>
-                        </div>
-                      ))}
+                            <svg
+                              className="w-4 h-4 text-gray-900 mr-3 flex-shrink-0"
+                              fill="currentColor"
+                              viewBox="0 0 20 20"
+                            >
+                              <path
+                                fillRule="evenodd"
+                                d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                clipRule="evenodd"
+                              />
+                            </svg>
+                            <span>{feature}</span>
+                          </div>
+                        )
+                      )}
                       {parseVehicleFeatures(vehicle.features).length === 0 && (
                         <div className="col-span-full text-center py-8 text-gray-500">
                           No features listed for this vehicle.
@@ -285,11 +309,15 @@ export default function VehicleDetailPage() {
                     </h3>
                     <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                       <div>
-                        <h4 className="font-medium text-gray-900 mb-3">Engine & Performance</h4>
+                        <h4 className="font-medium text-gray-900 mb-3">
+                          Engine & Performance
+                        </h4>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Engine:</span>
-                            <span className="font-medium text-gray-900">{vehicle.engineDesc}</span>
+                            <span className="font-medium text-gray-900">
+                              {vehicle.engineDesc}
+                            </span>
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Transmission:</span>
@@ -299,23 +327,32 @@ export default function VehicleDetailPage() {
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Drivetrain:</span>
-                            <span className="font-medium text-gray-900">{formatDrivetrain(vehicle.drivetrain)}</span>
+                            <span className="font-medium text-gray-900">
+                              {formatDrivetrain(vehicle.drivetrain)}
+                            </span>
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Fuel Type:</span>
-                            <span className="font-medium text-gray-900">{formatFuelType(vehicle.fuelType)}</span>
+                            <span className="font-medium text-gray-900">
+                              {formatFuelType(vehicle.fuelType)}
+                            </span>
                           </div>
                           <div className="flex justify-between py-1">
-                            <span className="text-gray-600">MPG City/Highway:</span>
+                            <span className="text-gray-600">
+                              MPG City/Highway:
+                            </span>
                             <span className="font-medium text-gray-900">
-                              {vehicle.mpgCity || "N/A"}/{vehicle.mpgHighway || "N/A"}
+                              {vehicle.mpgCity || "N/A"}/
+                              {vehicle.mpgHighway || "N/A"}
                             </span>
                           </div>
                         </div>
                       </div>
 
                       <div>
-                        <h4 className="font-medium text-gray-900 mb-3">Vehicle Details</h4>
+                        <h4 className="font-medium text-gray-900 mb-3">
+                          Vehicle Details
+                        </h4>
                         <div className="space-y-2 text-sm">
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">VIN:</span>
@@ -325,14 +362,20 @@ export default function VehicleDetailPage() {
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Stock #:</span>
-                            <span className="font-medium text-gray-900">{vehicle.stockNum}</span>
+                            <span className="font-medium text-gray-900">
+                              {vehicle.stockNum}
+                            </span>
                           </div>
                           <div className="flex justify-between py-1">
                             <span className="text-gray-600">Body Style:</span>
-                            <span className="font-medium text-gray-900">{formatBodyType(vehicle.bodyType)}</span>
+                            <span className="font-medium text-gray-900">
+                              {formatBodyType(vehicle.bodyType)}
+                            </span>
                           </div>
                           <div className="flex justify-between py-1">
-                            <span className="text-gray-600">Exterior Color:</span>
+                            <span className="text-gray-600">
+                              Exterior Color:
+                            </span>
                             <span className="font-medium text-gray-900">
                               {vehicle.exteriorColor}
                             </span>
@@ -355,7 +398,9 @@ export default function VehicleDetailPage() {
                       Financing Information
                     </h3>
                     <div className="bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-4 sm:p-6 mb-6">
-                      <h4 className="font-medium text-gray-900 mb-4">Estimated Monthly Payment</h4>
+                      <h4 className="font-medium text-gray-900 mb-4">
+                        Estimated Monthly Payment
+                      </h4>
                       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 text-center">
                         <div>
                           <div className="text-xl sm:text-2xl font-bold text-gray-900">
@@ -363,7 +408,9 @@ export default function VehicleDetailPage() {
                               ? formatPrice(vehicle.financing.monthlyPayment)
                               : "Contact for details"}
                           </div>
-                          <div className="text-xs sm:text-sm text-gray-600">per month</div>
+                          <div className="text-xs sm:text-sm text-gray-600">
+                            per month
+                          </div>
                         </div>
                         <div>
                           <div className="text-lg sm:text-xl font-semibold text-gray-900">
@@ -371,7 +418,9 @@ export default function VehicleDetailPage() {
                               ? formatPrice(vehicle.financing.downPayment)
                               : "TBD"}
                           </div>
-                          <div className="text-xs sm:text-sm text-gray-600">down payment</div>
+                          <div className="text-xs sm:text-sm text-gray-600">
+                            down payment
+                          </div>
                         </div>
                         <div>
                           <div className="text-lg sm:text-xl font-semibold text-gray-900">
@@ -379,19 +428,24 @@ export default function VehicleDetailPage() {
                               ? `${vehicle.financing.apr}%`
                               : "As low as 2.9%"}
                           </div>
-                          <div className="text-xs sm:text-sm text-gray-600">APR</div>
+                          <div className="text-xs sm:text-sm text-gray-600">
+                            APR
+                          </div>
                         </div>
                         <div>
                           <div className="text-lg sm:text-xl font-semibold text-gray-900">
                             {vehicle.financing?.term || "60"}
                           </div>
-                          <div className="text-xs sm:text-sm text-gray-600">months</div>
+                          <div className="text-xs sm:text-sm text-gray-600">
+                            months
+                          </div>
                         </div>
                       </div>
                     </div>
                     <p className="text-xs sm:text-sm text-gray-600">
-                      *Estimated payment based on price, down payment, term and rate shown. Payment
-                      may vary based on your credit approval. Final terms may vary. Contact us for
+                      *Estimated payment based on price, down payment, term and
+                      rate shown. Payment may vary based on your credit
+                      approval. Final terms may vary. Contact us for
                       personalized financing options.
                     </p>
                   </div>
@@ -408,13 +462,16 @@ export default function VehicleDetailPage() {
                           Extended Warranty Available
                         </h4>
                         <p className="text-sm text-gray-600">
-                          Protect your investment with our comprehensive extended warranty options
-                          covering major components and systems.
+                          Protect your investment with our comprehensive
+                          extended warranty options covering major components
+                          and systems.
                         </p>
                       </div>
                       {vehicle.warranty && vehicle.warranty.hasWarranty ? (
                         <div className="border border-gray-200 rounded-xl p-4 sm:p-5">
-                          <h5 className="font-medium text-gray-900 mb-2">Warranty Coverage</h5>
+                          <h5 className="font-medium text-gray-900 mb-2">
+                            Warranty Coverage
+                          </h5>
                           <p className="text-sm text-gray-600 mb-3">
                             {vehicle.warranty.warrantyDescription ||
                               "This vehicle comes with manufacturer warranty coverage."}
@@ -427,10 +484,13 @@ export default function VehicleDetailPage() {
                         </div>
                       ) : (
                         <div className="border border-gray-200 rounded-xl p-4 sm:p-5">
-                          <h5 className="font-medium text-gray-900 mb-2">Standard Coverage</h5>
+                          <h5 className="font-medium text-gray-900 mb-2">
+                            Standard Coverage
+                          </h5>
                           <p className="text-sm text-gray-600">
-                            This vehicle comes with manufacturer warranty. Extended warranty options
-                            are available for additional peace of mind.
+                            This vehicle comes with manufacturer warranty.
+                            Extended warranty options are available for
+                            additional peace of mind.
                           </p>
                         </div>
                       )}
@@ -454,7 +514,9 @@ export default function VehicleDetailPage() {
                   <div className="text-2xl sm:text-3xl font-heading font-bold text-gray-900">
                     {formatPrice(vehicle.price)}
                   </div>
-                  <div className="text-xs sm:text-sm text-gray-600">Stock #{vehicle.stockNum}</div>
+                  <div className="text-xs sm:text-sm text-gray-600">
+                    Stock #{vehicle.stockNum}
+                  </div>
                 </div>
 
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-6 text-sm">
@@ -466,16 +528,21 @@ export default function VehicleDetailPage() {
                   </div>
                   <div>
                     <span className="text-gray-600">Body Style:</span>
-                    <div className="font-medium text-gray-900">{formatBodyType(vehicle.bodyType)}</div>
+                    <div className="font-medium text-gray-900">
+                      {formatBodyType(vehicle.bodyType)}
+                    </div>
                   </div>
                   <div>
                     <span className="text-gray-600">Transmission:</span>
-                    <div className="font-medium text-gray-900">{vehicle.transmission}</div>
+                    <div className="font-medium text-gray-900">
+                      {vehicle.transmission}
+                    </div>
                   </div>
                   <div>
                     <span className="text-gray-600">Fuel Economy:</span>
                     <div className="font-medium text-gray-900">
-                      {vehicle.mpgCity || "N/A"}/{vehicle.mpgHighway || "N/A"} MPG
+                      {vehicle.mpgCity || "N/A"}/{vehicle.mpgHighway || "N/A"}{" "}
+                      l/100KM
                     </div>
                   </div>
                 </div>
@@ -493,14 +560,14 @@ export default function VehicleDetailPage() {
                   >
                     Get More Info
                   </button>
-                  <div className="grid grid-cols-2 gap-2">
+                  {/* <div className="grid grid-cols-2 gap-2">
                     <button className="bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-xs sm:text-sm font-medium hover:bg-gray-200 transition-colors">
                       Calculate Payment
                     </button>
                     <button className="bg-gray-100 text-gray-700 py-2 px-3 rounded-lg text-xs sm:text-sm font-medium hover:bg-gray-200 transition-colors">
                       Trade-In Value
                     </button>
-                  </div>
+                  </div> */}
                 </div>
               </div>
 
@@ -528,7 +595,7 @@ export default function VehicleDetailPage() {
                       href="tel:5551234567"
                       className="text-gray-900 hover:text-neutral-800 transition-colors"
                     >
-                      (555) 123-4567
+                      (905) 749-4061
                     </a>
                   </div>
                   <div className="flex items-center">
@@ -549,7 +616,7 @@ export default function VehicleDetailPage() {
                       href="mailto:sales@sflegacyautos.com"
                       className="text-gray-900 hover:text-neutral-800 transition-colors"
                     >
-                      sales@sflegacyautos.com
+                      sflegacymotors@gmail.com
                     </a>
                   </div>
                   <div className="flex items-start">
@@ -573,9 +640,9 @@ export default function VehicleDetailPage() {
                       />
                     </svg>
                     <span className="text-gray-900">
-                      123 Auto Row
+                      Unit 25, 1400 Aimco Boulevard
                       <br />
-                      San Francisco, CA 94102
+                      Mississauga, ON L4W 4K2
                     </span>
                   </div>
                 </div>
@@ -588,16 +655,17 @@ export default function VehicleDetailPage() {
                 </h3>
                 <div className="space-y-2 text-sm sm:text-base">
                   <div className="flex justify-between">
-                    <span className="text-gray-600">Monday - Friday:</span>
-                    <span className="font-medium text-gray-900">9:00 AM - 7:00 PM</span>
+                    <span className="text-gray-600">Monday - Saturday:</span>
+                    <span className="font-medium text-gray-900">
+                      11:00 AM - 7:00 PM
+                    </span>
                   </div>
-                  <div className="flex justify-between">
-                    <span className="text-gray-600">Saturday:</span>
-                    <span className="font-medium text-gray-900">9:00 AM - 6:00 PM</span>
-                  </div>
+
                   <div className="flex justify-between">
                     <span className="text-gray-600">Sunday:</span>
-                    <span className="font-medium text-gray-900">11:00 AM - 5:00 PM</span>
+                    <span className="font-medium text-gray-900">
+                      Appointments Only
+                    </span>
                   </div>
                 </div>
               </div>
@@ -626,15 +694,17 @@ export default function VehicleDetailPage() {
                 >
                   <div className="aspect-[4/3] bg-gray-200 overflow-hidden">
                     <img
-                      src={relatedVehicle.images?.[0] || "/api/placeholder/400/300"}
+                      src={
+                        relatedVehicle.images?.[0] || "/api/placeholder/400/300"
+                      }
                       alt={`${relatedVehicle.year} ${relatedVehicle.make} ${relatedVehicle.model}`}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                     />
                   </div>
                   <div className="p-4 sm:p-5">
                     <h3 className="font-heading font-bold text-gray-900 mb-2 group-hover:text-neutral-800 transition-colors text-sm sm:text-base">
-                      {relatedVehicle.year} {relatedVehicle.make} {relatedVehicle.model}{" "}
-                      {relatedVehicle.trim}
+                      {relatedVehicle.year} {relatedVehicle.make}{" "}
+                      {relatedVehicle.model} {relatedVehicle.trim}
                     </h3>
                     <div className="flex items-center justify-between">
                       <div className="text-lg sm:text-xl font-bold text-gray-900">
@@ -678,7 +748,12 @@ export default function VehicleDetailPage() {
                 onClick={() => setShowContactForm(false)}
                 className="text-gray-400 hover:text-gray-600"
               >
-                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-6 h-6"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -690,7 +765,8 @@ export default function VehicleDetailPage() {
             </div>
 
             <p className="text-gray-600 mb-4">
-              Get more information about this {vehicle.year} {vehicle.make} {vehicle.model}
+              Get more information about this {vehicle.year} {vehicle.make}{" "}
+              {vehicle.model}
             </p>
 
             <form className="space-y-4">

@@ -1,7 +1,7 @@
 // GROQ queries for vehicle data
 
 // Query to get all vehicles with essential fields
-export const ALL_VEHICLES_QUERY = `*[_type == "vehicle" && status == "available"] | order(_createdAt desc) {
+export const ALL_VEHICLES_QUERY = `*[_type == "vehicle" ] | order(_createdAt desc) {
   _id,
   _type,
   title,
@@ -84,6 +84,7 @@ export const VEHICLE_BY_ID_QUERY = `*[_type == "vehicle" && _id == $id][0] {
   engineDesc,
   transmission,
   drivetrain,
+  carfaxLink,
   fuelType,
   exteriorColor,
   interiorColor,

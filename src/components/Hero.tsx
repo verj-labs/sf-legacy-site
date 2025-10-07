@@ -83,20 +83,7 @@ export default function Hero() {
                     className="max-w-full max-h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
                   />
                 </a>
-                <a
-                  href="https://www.kijiji.ca/b-cars-trucks/canada/c174l0"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-24 sm:w-28 h-12 sm:h-14  border border-ink rounded-md hover:bg-primary-700 hover:border-ink/40 shadow-xs hover:shadow-md transition-all duration-fast group"
-                >
-                  <Image
-                    src="/asset/hero-kijiji.png"
-                    alt="Kijiji"
-                    width={88}
-                    height={36}
-                    className="max-w-full max-h-full object-contain opacity-80 group-hover:opacity-100 transition-opacity"
-                  />
-                </a>
+             
               </div>
             </div>
           </div>

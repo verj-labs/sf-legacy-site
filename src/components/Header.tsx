@@ -44,7 +44,7 @@ export default function Header() {
           >
             <Image
               src="/logo.png"
-              alt="SF Legacy Autos"
+              alt="SF Legacy Motors"
               width={isScrolled ? 60 : 80}
               height={isScrolled ? 60 : 80}
               className="transition-all duration-300 scale-125"

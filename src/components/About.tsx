@@ -13,7 +13,7 @@ export default function About() {
             
             <div className="prose prose-lg max-w-none">
               <p className="text-lg lg:text-xl text-gray-600 leading-relaxed mb-6">
-                For over 15 years, SF Legacy Motors has been San Francisco's trusted destination 
+                Since 2023, SF Legacy Motors has been GTA's trusted destination 
                 for quality used vehicles. We've built our reputation on honest dealings, 
                 exceptional customer service, and a commitment to helping our customers find 
                 the perfect vehicle for their needs and budget.

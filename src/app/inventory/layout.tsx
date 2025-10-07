@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Vehicle Inventory - SF Legacy Autos",
+  title: "Vehicle Inventory - SF Legacy Motors",
   description: "Browse our extensive inventory of quality used cars, trucks, and SUVs. Find your perfect vehicle with our advanced search and filtering options.",
 }
 

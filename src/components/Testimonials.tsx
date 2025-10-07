@@ -10,7 +10,7 @@ export default function Testimonials() {
       name: 'Sarah Johnson',
       location: 'San Francisco, CA',
       rating: 5,
-      text: 'Exceptional service from start to finish! The team at SF Legacy Autos helped me find the perfect SUV for my family. The financing process was smooth and transparent.',
+      text: 'Exceptional service from start to finish! The team at SF Legacy Motors helped me find the perfect SUV for my family. The financing process was smooth and transparent.',
       vehicle: '2021 Honda CR-V'
     },
     {
@@ -52,7 +52,7 @@ export default function Testimonials() {
             What Our Customers Say
           </h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            Don't just take our word for it. Here's what real customers have to say about their experience with SF Legacy Autos.
+            Don't just take our word for it. Here's what real customers have to say about their experience with SF Legacy Motors.
           </p>
         </div>
 

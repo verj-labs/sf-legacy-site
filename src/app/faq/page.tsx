@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Frequently Asked Questions - SF Legacy Autos',
-  description: 'Get answers to common questions about buying used cars, financing, warranties, and more at SF Legacy Autos.',
+  title: 'Frequently Asked Questions - SF Legacy Motors',
+  description: 'Get answers to common questions about buying used cars, financing, warranties, and more at SF Legacy Motors.',
 }
 
 export default function FAQ() {

@@ -43,7 +43,7 @@ export default function ValuePropositions() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12 md:mb-16">
           <h2 className="text-2xl md:text-3xl lg:text-4xl font-heading font-bold text-ink mb-4 md:mb-6">
-            Why Choose SF Legacy Autos?
+            Why Choose SF Legacy Motors?
           </h2>
           <p className="text-base md:text-lg text-gray-600 leading-relaxed max-w-3xl mx-auto">
             We're committed to providing exceptional service and quality vehicles. 
