@@ -19,7 +19,7 @@ const nunito = Nunito({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://sf-legacy.com'), // Add your actual domain here
+  metadataBase: new URL('https://www.sflegacymotors.com'),
   title: "SF Legacy Motors Inc. - Quality Used Cars",
   description: "Find your perfect used car at SF Legacy Motors Inc.. Quality vehicles, trusted service, and competitive prices.",
   keywords: "used cars, quality vehicles, SF Legacy Motors Inc., car dealership, pre-owned vehicles, automotive",
